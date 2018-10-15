@@ -34,7 +34,7 @@ jobs:
     steps:
       - checkout
 
-            # Download and cache dependencies
+            # Download and cache dependencies pip style
       - restore_cache:
           key: pip-dependency-cache
 
