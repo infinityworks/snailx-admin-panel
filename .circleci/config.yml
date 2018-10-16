@@ -35,8 +35,8 @@ jobs:
             python test_runner.py
 
       - store_test_results:
-          path: api/test-reports
+          path: test-reports
 
       - store_artifacts:
-          path: api/test-reports
-          destination: api/test-reports
+          path: test-reports
+          destination: test-reports
