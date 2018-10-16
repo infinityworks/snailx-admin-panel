@@ -1,14 +1,14 @@
+import os
 from flask import Flask, render_template
-
-# ------------------------------------------------ FLASK ---------------------------------------------------------------
 
 app = Flask(__name__)
 
 
 @app.route("/")
-def html_home():
+def index():
     return render_template("index.html")
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = os.getenv('PORT') or 5001
+    app.run(host='0.0.0.0', port=port, debug=True)
