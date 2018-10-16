@@ -28,40 +28,15 @@ jobs:
           paths:
             - api/requirements.txt
 
-  test:
-    docker:
-      - image: circleci/python:3.6.1
-    steps:
-      - checkout
-
-            # Download and cache dependencies pip style
-      - restore_cache:
-          key: pip-dependency-cache
-
       - run:
-          name: install dependencies
+          name: run tests
           command: |
-            python3 -m venv venv
             . venv/bin/activate
-            pip install -r requirements.txt
-      # - run:
-      #     name: run tests
-      #     command: |
-      #       . venv/bin/activate
-      #       cd api
-      #       python test_runner.py
-      # - store_test_results:
-      #     path: api/test-reports
+            python test_runner.py
 
-      # - store_artifacts:
-      #     path: api/test-reports
-      #     destination: api/test-reports
+      - store_test_results:
+          path: test-reports
 
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - build
-      - test:
-          requires:
-            - build
+      - store_artifacts:
+          path: test-reports
+          destination: test-reports

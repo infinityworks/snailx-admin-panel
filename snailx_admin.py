@@ -1,16 +1,8 @@
 import sys
 sys.path.insert(0, '/vagrant/repos/snailx_admin_panel')
 import os
-from flask import Flask, render_template
-
-# ------------------------------------------------ FLASK ---------------------------------------------------------------
-
-app = Flask(__name__)
-
-
-@app.route("/")
-def html_home():
-    return render_template("index.html")
+from flask import render_template
+from globals.globals import app
 
 
 if __name__ == "__main__":
