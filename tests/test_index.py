@@ -10,7 +10,6 @@ class TestIndex(unittest.TestCase):
     def test_index_page_response(self):
         with self.client as client:
             response = client.get("/")
-            print(response)
             self.assertEqual(200, response.status_code)
 
 
