@@ -17,16 +17,16 @@ jobs:
       - restore_cache:
           key: pip-dependency-cache
 
-      - run:
-          name: install dependencies
-          command: |
-            python3 -m venv venv
-            . venv/bin/activate
-            pip install -r requirements.txt
-      - save_cache:
-          key: pip-dependency-cache
-          paths:
-            - api/requirements.txt
+      # - run:
+      #     name: install dependencies
+      #     command: |
+      #       python3 -m venv venv
+      #       . venv/bin/activate
+      #       pip install -r requirements.txt
+      # - save_cache:
+      #     key: pip-dependency-cache
+      #     paths:
+      #       - api/requirements.txt
 
   test:
     docker:
@@ -38,24 +38,24 @@ jobs:
       - restore_cache:
           key: pip-dependency-cache
 
-      - run:
-          name: install dependencies
-          command: |
-            python3 -m venv venv
-            . venv/bin/activate
-            pip install -r requirements.txt
-      - run:
-          name: run tests
-          command: |
-            . venv/bin/activate
-            cd api
-            python test_runner.py
-      - store_test_results:
-          path: api/test-reports
+      # - run:
+      #     name: install dependencies
+      #     command: |
+      #       python3 -m venv venv
+      #       . venv/bin/activate
+      #       pip install -r requirements.txt
+      # - run:
+      #     name: run tests
+      #     command: |
+      #       . venv/bin/activate
+      #       cd api
+      #       python test_runner.py
+      # - store_test_results:
+      #     path: api/test-reports
 
-      - store_artifacts:
-          path: api/test-reports
-          destination: api/test-reports
+      # - store_artifacts:
+      #     path: api/test-reports
+      #     destination: api/test-reports
 
 workflows:
   version: 2
