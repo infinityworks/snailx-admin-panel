@@ -12,3 +12,4 @@ pygame==1.9.4
 quik==0.2.2
 SQLAlchemy==1.2.12
 Werkzeug==0.14.1
+xmlrunner==1.7.7
