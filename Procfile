@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath snailx_admin
+web: gunicorn --pythonpath snailx_admin:app
