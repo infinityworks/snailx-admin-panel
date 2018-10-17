@@ -1,5 +1,4 @@
 from flask import render_template, Blueprint
-from globals.globals import app
 
 index_blueprint = Blueprint('index', __name__)
 

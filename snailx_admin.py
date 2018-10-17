@@ -1,7 +1,6 @@
 import sys
 sys.path.insert(0, '/vagrant/repos/snailx_admin_panel')
 import os
-from flask import render_template
 from globals.globals import app
 
 
