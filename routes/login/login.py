@@ -19,8 +19,8 @@ def login():
         user = users.get_user_by_username(form.username.data)
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             #login_user(user, remember=True)
-            flash('Login successful! You badasses :B')
+            flash('Login successful.')
             return redirect(url_for('index.index'))
         else:
-            flash('Login Unsuccessful. Please check email and password', 'danger')
+            flash('Login Unsuccessful. Invalid Credentials.', 'danger')
     return render_template('login.html', title='Login', form=form)
