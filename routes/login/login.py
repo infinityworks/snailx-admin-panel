@@ -1,14 +1,17 @@
 from flask import render_template, Blueprint, redirect
 from forms.forms import LoginForm
+from db.models import User, Snail
 
 login_blueprint = Blueprint('login', __name__)
 
 
-@login_blueprint.route("/login")
+@login_blueprint.route("/login", methods=["GET", "POST"])
 def index():
     form = LoginForm()
 
     if form.validate_on_submit():
+        snails = Snail()
+        return str(snails.get_all_snails())
 
         # user = User.query.filter_by(username=form.username.data).first()
         #
