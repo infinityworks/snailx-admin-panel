@@ -14,12 +14,13 @@ def login():
         return redirect(url_for('home'))
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
-        print("PRINTING USER: ".format(user))
+        # TODO mak this user variable have content rather than NONE.
+        users = User()
+        user = users.get_user_by_username(form.username.data)
         if user and bcrypt.check_password_hash(user.password, form.password.data):
-            login_user(user, remember=form.remember.data)
-            next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for('home'))
+            #login_user(user, remember=True)
+            flash('Login successful! You badasses :B')
+            return redirect(url_for('index.index'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
     return render_template('login.html', title='Login', form=form)
