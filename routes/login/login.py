@@ -11,10 +11,9 @@ login_blueprint = Blueprint('login', __name__)
 @login_blueprint.route("/login", methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('home'))
+        return redirect(url_for('index.index'))
     form = LoginForm()
     if form.validate_on_submit():
-        # TODO mak this user variable have content rather than NONE.
         users = User()
         user = users.get_user_by_username(form.username.data)
         if user and bcrypt.check_password_hash(user.password, form.password.data):
