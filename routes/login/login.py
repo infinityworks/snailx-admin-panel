@@ -17,7 +17,7 @@ def login():
         users = User()
         user = users.get_user_by_username(form.username.data)
         if user and bcrypt.check_password_hash(user.password, form.password.data):
-            #login_user(user, remember=True)
+            login_user(user, remember=form.remember_me.data)       
             return redirect(url_for('index.index'))
         else:
             flash('Login Unsuccessful. Invalid Credentials.', 'danger')

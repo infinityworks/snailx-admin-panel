@@ -1,5 +1,5 @@
 import unittest
-from tests import (test_index)
+from tests import (test_index, test_login_page)
 import xmlrunner
 import sys
 
@@ -9,6 +9,7 @@ suite = unittest.TestSuite()
 
 # add tests to the test suite
 suite.addTests(loader.loadTestsFromModule(test_index))
+suite.addTests(loader.loadTestsFromModule(test_login_page))
 
 # initialize a runner, pass it your suite and run it
 # runner = unittest.TextTestRunner(verbosity=3)
