@@ -1,0 +1,17 @@
+import unittest
+from globals.globals import app
+
+
+class TestLogin(unittest.TestCase):
+
+    def setUp(self):
+        self.client = app.test_client()
+
+    def test_index_page_response(self):
+        with self.client as client:
+            response = client.get("/login")
+            self.assertEqual(200, response.status_code)
+
+
+if __name__ == '__main__':
+    unittest.main()
