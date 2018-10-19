@@ -2,7 +2,7 @@ import unittest
 from tests import (test_index, test_login_page)
 import xmlrunner
 import sys
-
+from tests import test_session_persistence
 # initialize the test suite
 loader = unittest.TestLoader()
 suite = unittest.TestSuite()
@@ -10,6 +10,7 @@ suite = unittest.TestSuite()
 # add tests to the test suite
 suite.addTests(loader.loadTestsFromModule(test_index))
 suite.addTests(loader.loadTestsFromModule(test_login_page))
+suite.addTests(loader.loadTestsFromModule(test_session_persistence))
 
 # initialize a runner, pass it your suite and run it
 # runner = unittest.TextTestRunner(verbosity=3)

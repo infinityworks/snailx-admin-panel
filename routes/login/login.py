@@ -10,15 +10,22 @@ login_blueprint = Blueprint('login', __name__)
 
 @login_blueprint.route("/login", methods=["GET", "POST"])
 def login():
-    if current_user.is_authenticated:
-        return redirect(url_for('index.index'))
+    if is_authenticated():
+        return redirect_to('index.index')
     form = LoginForm()
+    #print("PRINTING CURRENT_USER.IS_AUTHENTICATED:\n {}".format(current_user.is_authenticated))
+
     if form.validate_on_submit():
-        users = User()
-        user = users.get_user_by_username(form.username.data)
+        user = User().get_user_by_username(form.username.data)
         if user and bcrypt.check_password_hash(user.password, form.password.data):
-            login_user(user, remember=form.remember_me.data)       
-            return redirect(url_for('index.index'))
+            login_user(user, remember=form.remember_me.data)      
+            return redirect_to('index.index')
         else:
             flash('Login Unsuccessful. Invalid Credentials.', 'danger')
     return render_template('login.html', title='Login', form=form)
+
+def is_authenticated():
+    return current_user.is_authenticated
+
+def redirect_to(path):
+    return redirect(url_for(path))
