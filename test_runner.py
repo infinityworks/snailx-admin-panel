@@ -2,7 +2,6 @@ import unittest
 from tests import (test_index, test_login, test_session_persistence)
 import xmlrunner
 import sys
-from tests import 
 # initialize the test suite
 loader = unittest.TestLoader()
 suite = unittest.TestSuite()
