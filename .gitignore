@@ -105,5 +105,5 @@ venv.bak/
 
 .idea/
 
-#ignore vscode files
+# VS code settings
 .vscode/
