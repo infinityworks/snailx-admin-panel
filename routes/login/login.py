@@ -16,7 +16,7 @@ def login():
     #print("PRINTING CURRENT_USER.IS_AUTHENTICATED:\n {}".format(current_user.is_authenticated))
 
     if form.validate_on_submit():
-        user = User().get_user_by_username(form.username.data)
+        user = get_username(form.username.data)
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember_me.data)      
             return redirect_to('index.index')
@@ -29,3 +29,6 @@ def is_authenticated():
 
 def redirect_to(path):
     return redirect(url_for(path))
+
+def get_username(username):
+    return User().get_user_by_username(username)
