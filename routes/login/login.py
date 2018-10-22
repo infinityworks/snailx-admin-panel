@@ -15,11 +15,14 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         # TODO mak this user variable have content rather than NONE.
-        users = User()
-        user = users.get_user_by_username(form.username.data)
+        user = get_username(form.username.data)
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             #login_user(user, remember=True)
             return redirect(url_for('index.index'))
         else:
             flash('Login Unsuccessful. Invalid Credentials.', 'danger')
     return render_template('login.html', title='Login', form=form)
+
+def get_username(username):
+    return User().get_user_by_username(username)
+    
