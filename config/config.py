@@ -5,6 +5,7 @@ class Config(object):
     DEBUG = False
     TESTING = False
     SECRET_KEY = os.getenv('SECRET_KEY') or 'shh-its-secret'
+    WTF_CSRF_ENABLED = True
 
 
 class ProductionConfig(Config):
@@ -27,3 +28,4 @@ class DevelopmentConfig(Config):
     SQLALCHEMY_DATABASE_URI = DB_URL
     DEVELOPMENT = True
     DEBUG = True
+    WTF_CSRF_ENABLED = False

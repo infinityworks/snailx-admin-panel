@@ -16,6 +16,10 @@ def login():
     #print("PRINTING CURRENT_USER.IS_AUTHENTICATED:\n {}".format(current_user.is_authenticated))
 
     if form.validate_on_submit():
+<<<<<<< HEAD
+=======
+        # TODO mak this user variable have content rather than NONE.
+>>>>>>> origin/login-page-test
         user = get_username(form.username.data)
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember_me.data)      
@@ -24,6 +28,7 @@ def login():
             flash('Login Unsuccessful. Invalid Credentials.', 'danger')
     return render_template('login.html', title='Login', form=form)
 
+<<<<<<< HEAD
 def is_authenticated():
     return current_user.is_authenticated
 
@@ -32,3 +37,8 @@ def redirect_to(path):
 
 def get_username(username):
     return User().get_user_by_username(username)
+=======
+def get_username(username):
+    return User().get_user_by_username(username)
+    
+>>>>>>> origin/login-page-test
