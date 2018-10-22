@@ -17,8 +17,9 @@ login_manager = LoginManager(app)
 
 from routes.index import index_blueprint, home_blueprint
 from routes.login.login import login_blueprint
-
+from routes.login.logout import logout_blueprint
 
 app.register_blueprint(index_blueprint)
 app.register_blueprint(login_blueprint)
 app.register_blueprint(home_blueprint)
+app.register_blueprint(logout_blueprint)
