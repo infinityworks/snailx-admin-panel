@@ -23,4 +23,3 @@ def login():
 
 def get_username(username):
     return User().get_user_by_username(username)
-    

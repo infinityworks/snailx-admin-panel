@@ -13,26 +13,23 @@
     </tr>
   </thead>
     <tbody>
+    {% if active_round %}
+        <tr class="active">
+          <td class="table-primary">{{active_round.id}}</td>
+          <td class="table-primary">{{active_round.name}}</td>
+          <td class="table-primary">{{active_round.start_date}}</td>
+          <td class="table-primary">{{active_round.end_date}}</td>
+        </tr>
+    {% endif %}
     {% for round in rounds %}
-      {% if round.active_round is defined %}
-        <tr>
-          <td>{{round.id}}</td>
-          <td>{{round.name}}</td>
-          <td>{{round.start_date}}</td>
-          <td>{{round.end_date}}</td>
-        </tr>
-      {% else %}
-        <tr>
-          <td>{{round.id}}</td>
-          <td>{{round.name}}</td>
-          <td>{{round.start_date}}</td>
-          <td>{{round.end_date}}</td>
-        </tr>
-      {% endif %}
+      <tr>
+        <td>{{round.id}}</td>
+        <td>{{round.name}}</td>
+        <td>{{round.start_date}}</td>
+        <td>{{round.end_date}}</td>
+      </tr>
     {% endfor %}
   </tbody>
 </table>
-
-{{active_round.id}}
 
 {% endblock %}

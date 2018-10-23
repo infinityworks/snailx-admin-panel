@@ -80,7 +80,6 @@ class Round(db.Model):
     name = db.Column(db.String(12), nullable=False)
     start_date = db.Column(db.DateTime(), nullable=False)
     end_date = db.Column(db.DateTime(), nullable=False)
-    active_round = db.Column(db.Boolean(), nullable=True)
 
     def __repr__(self):
         return "<Round\nid: {}\n name: {}\n start_date: {}>".format(self.id, self.name, self.start_date)

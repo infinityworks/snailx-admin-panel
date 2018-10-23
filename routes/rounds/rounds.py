@@ -15,12 +15,11 @@ def rounds():
     all_rounds = Round().get_all_rounds()
     present = datetime.now()
 
+    active_round = None
+
     for curr_round in all_rounds:
         if present > curr_round.start_date and present < curr_round.end_date:
-            print("test")
-            curr_round.active_round = True
-            print("test2")
+            active_round = curr_round
             break
 
-    print(all_rounds)
-    return render_template('rounds.html', title='Rounds', rounds=all_rounds)
+    return render_template('rounds.html', title='Rounds', rounds=all_rounds, active_round=active_round)
