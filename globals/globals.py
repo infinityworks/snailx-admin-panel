@@ -12,6 +12,7 @@ db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 
+
 from routes.index import index_blueprint, home_blueprint
 from routes.login.login import login_blueprint
 
