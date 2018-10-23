@@ -9,7 +9,7 @@ logout_blueprint = Blueprint('logout', __name__)
 
 @logout_blueprint.route("/logout")
 def logout():
-    if is_authenticated():
+    if is_active():
         logout_user()
         flash('Logout successful.')
         return redirect(url_for('login.login')) 
@@ -17,5 +17,5 @@ def logout():
         flash('No user currently logged in.')
         return redirect(url_for('login.login'))
 
-def is_authenticated():
-    return current_user.is_authenticated
+def is_active():
+    return current_user.is_active
