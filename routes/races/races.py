@@ -6,7 +6,7 @@ from db.models import Race
 races_blueprint = Blueprint('races', __name__)
 
 
-@races_blueprint.route('/races/<int:round_id>', methods=['GET'])
+@races_blueprint.route('/rounds/<int:round_id>/races', methods=['GET'])
 def races(round_id):
     if current_user.is_authenticated:  # TODO: not
         return redirect(url_for('login.login'))

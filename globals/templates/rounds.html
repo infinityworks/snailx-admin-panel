@@ -22,7 +22,7 @@
     </tr>
     {% endif %}
     {% for round in rounds %}
-      <tr style="cursor: pointer;" onclick="clicked(1)">
+      <tr style="cursor: pointer;" onclick="clicked({{round.id}})">
       <td>{{round.id}}</td>
       <td>{{round.name}}</td>
       <td>{{round.start_date}}</td>
@@ -35,7 +35,7 @@
 <script>
 function clicked(round_id) {
 console.log(round_id);
-    window.document.location = "races/" + round_id;
+    window.document.location = "rounds/" + round_id + "/races";
 }
 </script>
 
