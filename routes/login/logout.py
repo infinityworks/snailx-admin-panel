@@ -7,8 +7,9 @@ from db.models import User
 logout_blueprint = Blueprint('logout', __name__)
 
 
-@login_required
+
 @logout_blueprint.route("/logout")
+@login_required
 def logout():
     logout_user()
     flash('Logout successful.')
