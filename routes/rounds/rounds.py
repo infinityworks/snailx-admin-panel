@@ -1,7 +1,7 @@
 from flask import render_template, Blueprint, url_for, redirect
 from flask_login import current_user
 from db.models import Round
-from datetime import datetime, timedelta
+from datetime import datetime
 
 
 rounds_blueprint = Blueprint('rounds', __name__)

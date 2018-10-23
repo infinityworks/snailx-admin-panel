@@ -14,22 +14,29 @@
   </thead>
     <tbody>
     {% if active_round %}
-        <tr class="active">
-          <td class="table-primary">{{active_round.id}}</td>
-          <td class="table-primary">{{active_round.name}}</td>
-          <td class="table-primary">{{active_round.start_date}}</td>
-          <td class="table-primary">{{active_round.end_date}}</td>
-        </tr>
+    <tr class="table-primary" style="cursor: pointer;" onclick="clicked({{active_round.id}})">
+      <td>{{active_round.id}}</td>
+        <td>{{active_round.name}}</td>
+        <td>{{active_round.start_date}}</td>
+        <td>{{active_round.end_date}}</td>
+    </tr>
     {% endif %}
     {% for round in rounds %}
-      <tr>
-        <td>{{round.id}}</td>
-        <td>{{round.name}}</td>
-        <td>{{round.start_date}}</td>
-        <td>{{round.end_date}}</td>
+      <tr style="cursor: pointer;" onclick="clicked(1)">
+      <td>{{round.id}}</td>
+      <td>{{round.name}}</td>
+      <td>{{round.start_date}}</td>
+      <td>{{round.end_date}}</td>
       </tr>
     {% endfor %}
   </tbody>
 </table>
+
+<script>
+function clicked(round_id) {
+console.log(round_id);
+    window.document.location = "races/" + round_id;
+}
+</script>
 
 {% endblock %}

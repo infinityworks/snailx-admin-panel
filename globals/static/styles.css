@@ -6,8 +6,3 @@ html, body {
 background-color: white;
 border-bottom: 1px solid #DADADA;
 }
-
-
-.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
-  background-color: #color;
-}
