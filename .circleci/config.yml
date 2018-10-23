@@ -15,7 +15,7 @@ jobs:
 
       # Download and cache dependencies
       - restore_cache:
-          key: pip-dependency-cache
+          key: pip-dependency-cache-v1
 
       - run:
           name: install dependencies
@@ -24,7 +24,7 @@ jobs:
             . venv/bin/activate
             pip install -r requirements.txt
       - save_cache:
-          key: pip-dependency-cache
+          key: pip-dependency-cache-v1
           paths:
             - api/requirements.txt
 
