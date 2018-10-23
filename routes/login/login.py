@@ -13,8 +13,6 @@ def login():
     if is_authenticated():
         return redirect_to('index.index')
     form = LoginForm()
-    #print("PRINTING CURRENT_USER.IS_AUTHENTICATED:\n {}".format(current_user.is_authenticated))
-
     if form.validate_on_submit():
         user = get_username(form.username.data)
         if user and bcrypt.check_password_hash(user.password, form.password.data):
