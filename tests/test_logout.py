@@ -24,12 +24,13 @@ class TestLogout(unittest.TestCase):
             response = client.get("/login")
             self.assertEqual(200, response.status_code)
     
-    @mock.patch("routes.login.login.get_username", MagicMock(return_value=MockUser(1, "Bob", "bob@bob.com", bcrypt.generate_password_hash("bob").decode("utf-8"))))
-    @mock.patch("routes.login.login.login_user", MagicMock(return_value=True))    
-    @mock.patch("flask_login.login_user", MagicMock(return_value=True))
+    
+    @mock.patch('routes.login.logout.is_authenticated', MagicMock(return_value=True))
     def test_successful_logout(self):  
         with self.client as client:
+            client.post("/login", data=dict(username="Bob", password="bob", remember_me=True), follow_redirects=True)
             response = client.get("/logout", follow_redirects=True)
+            self.assertFalse(current_user.is_active)
             self.assertIn(b"Logout successful.", response.data)
 
 
@@ -37,7 +38,7 @@ class TestLogout(unittest.TestCase):
     def test_login_required_for_logout(self):  
         with self.client as client:
             response = client.get("/logout", follow_redirects=True)
-            self.assertIn(b"Unauthorized", response.data)
+            self.assertIn(b"No user currently logged in.", response.data)
 
 
 if __name__ == '__main__':
