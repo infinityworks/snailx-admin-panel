@@ -1,5 +1,9 @@
 import unittest
+<<<<<<< HEAD
 from tests import (test_index, test_login, test_session_persistence, test_logout)
+=======
+from tests import (test_index, test_login, test_session_persistence, test_rounds, test_rounds_races)
+>>>>>>> round-page
 import xmlrunner
 import sys
 
@@ -11,7 +15,12 @@ suite = unittest.TestSuite()
 suite.addTests(loader.loadTestsFromModule(test_index))
 suite.addTests(loader.loadTestsFromModule(test_session_persistence))
 suite.addTests(loader.loadTestsFromModule(test_login))
+<<<<<<< HEAD
 suite.addTests(loader.loadTestsFromModule(test_logout))
+=======
+suite.addTests(loader.loadTestsFromModule(test_rounds))
+suite.addTests(loader.loadTestsFromModule(test_rounds_races))
+>>>>>>> round-page
 
 # initialize a runner, pass it your suite and run it
 # runner = unittest.TextTestRunner(verbosity=3)
