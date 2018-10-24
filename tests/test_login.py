@@ -3,6 +3,8 @@ from globals.globals import app
 from unittest import mock
 from unittest.mock import MagicMock
 from globals.globals import bcrypt
+from flask import url_for
+from urllib.parse import urlparse
 
 class MockUser:
     def __init__(self, id, username, email, password):
@@ -26,8 +28,8 @@ class TestLogin(unittest.TestCase):
     @mock.patch("routes.login.login.login_user", MagicMock(return_value=False))
     def test_successful_login(self):  
         with self.client as client:
-            response = self.client.post("/login", data=dict(username="Bob", password="bob"), follow_redirects=True)
-            self.assertIn(b"Hello World", response.data)
+            response = self.client.post("/login", data=dict(username="Bob", password="bob"), follow_redirects=False)
+            self.assertEqual(urlparse(response.location).path, url_for('rounds.rounds'))
 
     @mock.patch("routes.login.login.get_username", MagicMock(return_value=MockUser(1, "Bob", "bob@bob.com", "bob")))
     @mock.patch("routes.login.login.bcrypt.check_password_hash", MagicMock(return_value=False))
