@@ -1,5 +1,7 @@
 from globals.globals import db, login_manager
 from flask_login import UserMixin
+import datetime
+from sqlalchemy.sql import func, distinct
 
 
 class Trainer(db.Model):
@@ -90,6 +92,9 @@ class Round(db.Model):
     def get_all_rounds(self):
         return self.query.all()
 
+    def get_num_rounds_between_dates(self, start_date, end_date):
+        return db.session.query(func.count(distinct(Round.id))).filter(Round.end_date.between(start_date, end_date)).first()
+
 
 class RaceResult(db.Model):
     id = db.Column(db.Integer(), primary_key=True, autoincrement=True)
@@ -114,6 +119,7 @@ class RaceResult(db.Model):
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer(), primary_key=True, autoincrement=True)
