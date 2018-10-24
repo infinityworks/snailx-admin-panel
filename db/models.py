@@ -61,11 +61,6 @@ class Race(db.Model):
     status = db.Column(db.String(), nullable=False)
     id_round = db.Column(db.Integer(), db.ForeignKey("round.id"))
 
-    def __init__(self, date=None, status=None, id_round=None):
-        self.date = date
-        self.status = status
-        self.id_round = id_round
-
     def __repr__(self):
         return "<Race\nid: {}\n date: {}\n status: {}\n round_id: {}>".format(self.id, self.date, self.status,
                                                                               self.id_round)
