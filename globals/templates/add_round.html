@@ -2,7 +2,10 @@
 
 {% block content %}
 
-<form action="" class="needs-validation" method="post" novalidate>
+<link rel="stylesheet" href="../static/add_round.css">
+
+
+<form action="" class="add-round-form needs-validation" method="post" novalidate>
     {{ form.csrf_token }}
     {{ form.hidden_tag() }}
     <div class="container">
@@ -11,43 +14,40 @@
         <div class="row">
             <div class='col-sm-6'>
                 <div class="form-group">
-                    <div>
-                        {{ form.name.label }}<br>
+
+                    {{ form.name.label }}<br>
+                    <div class="add-round-field">
+
                         {{ form.name(size=32, class_='form-control form-control-lg') }}
                         <div class="invalid-feedback">
                             Please enter a name.
                         </div>
                     </div>
 
-                    <br>
-
                     {{ form.start_date.label }}<br>
-
-                    <div class='input-group date datetime'>
+                    <div class='input-group date datetime add-round-field'>
                         {{ form.start_date(class_='form-control form-control-lg') }}
                         <div class="invalid-feedback">
                             Please select a start date.
                         </div>
-                        <span class="input-group-addon">
+                        <span class="
+                            input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
                     </div>
-                    <br>
 
                     {{ form.end_date.label }}<br>
-
-                    <div>
-                        <div class='input-group date datetime'>
-                            {{ form.end_date(class_='form-control form-control-lg') }}
-                            <div class="invalid-feedback">
-                                Please select an end date.
-                            </div>
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
+                    <div class='input-group date datetime add-round-field'>
+                        {{ form.end_date(class_='form-control form-control-lg') }}
+                        <div class="invalid-feedback">
+                            Please select an end date.
                         </div>
+                        <span class="
+                                input-group-addon"">
+                                <span class="
+                            glyphicon glyphicon-calendar"></span>
+                        </span>
                     </div>
-                    <br>
 
                     <p>{{ form.submit(class_='btn btn-success btn-lg') }}</p>
                 </div>

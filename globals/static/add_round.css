@@ -1,0 +1,12 @@
+.add-round-form .add-round-field {
+    padding-bottom: 25px;
+}
+
+.datetime .invalid-feedback {
+    position: absolute;
+    padding-top: 34px;
+}
+
+.add-round-form .btn-success {
+    margin-top: 15px;
+}
