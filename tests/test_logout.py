@@ -10,12 +10,10 @@ class TestLogout(unittest.TestCase):
     def setUp(self):
         self.client = app.test_client()
 
-
     def test_logout_page_response(self):
         with self.client as client:
             response = client.get("/login")
             self.assertEqual(200, response.status_code)
-    
     
     @mock.patch('routes.login.logout.is_active', MagicMock(return_value=True))
     def test_successful_logout(self):  
@@ -24,7 +22,6 @@ class TestLogout(unittest.TestCase):
             response = client.get("/logout", follow_redirects=True)
             self.assertFalse(current_user.is_active)
             self.assertIn(b"Logout successful.", response.data)
-
 
     def test_login_required_for_logout(self):  
         with self.client as client:
