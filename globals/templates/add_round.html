@@ -3,6 +3,7 @@
 {% block content %}
 
 <form action="" method="post" novalidate>
+    {{ form.csrf_token }}
     {{ form.hidden_tag() }}
     <div class="container">
         <h1>Add Round</h1>
@@ -18,7 +19,7 @@
 
                     {{ form.start_date.label }}<br>
 
-                    <div class='input-group date' id='datetimepicker1'>
+                    <div class='input-group date datetime'>
                         {{ form.start_date(class_='form-control form-control-lg') }}
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
@@ -28,7 +29,7 @@
 
                     {{ form.end_date.label }}<br>
 
-                    <div class='input-group date' id='datetimepicker2'>
+                    <div class='input-group date datetime'>
                         {{ form.end_date(class_='form-control form-control-lg') }}
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
@@ -42,8 +43,7 @@
         </div>
         <script type="text/javascript">
             $(function () {
-                $('#datetimepicker1').datetimepicker();
-                $('#datetimepicker2').datetimepicker();
+                $('.datetime').datetimepicker();
             });
         </script>
     </div>
