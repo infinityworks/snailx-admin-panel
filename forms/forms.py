@@ -14,4 +14,4 @@ class AddRoundForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     start_date = DateField('Start Date', validators=[DataRequired()])
     end_date = DateField('End Date', validators=[DataRequired()])
-    submit = SubmitField('Save Round')
+    submit = SubmitField('Create Round')
