@@ -8,7 +8,7 @@ races_blueprint = Blueprint('races', __name__)
 
 @races_blueprint.route('/rounds/<int:round_id>/races', methods=['GET'])
 def races(round_id):
-    if current_user.is_authenticated:  # TODO: not
+    if not current_user.is_authenticated:
         return redirect(url_for('login.login'))
 
     races = Race().get_races_by_round(round_id)
