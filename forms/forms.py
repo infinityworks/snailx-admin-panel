@@ -8,3 +8,9 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
+
+
+class AddRaceForm(FlaskForm):
+    race_date = StringField('Date', validators=[DataRequired()])
+    race_status = StringField('Status', validators=[DataRequired()])
+    submit = SubmitField('Add Race')

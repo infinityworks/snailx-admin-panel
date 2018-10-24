@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>Add Race</h1>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.race_status.label }}<br>
+            {{ form.race_status(size=32) }}
+        </p>
+        <p>
+            {{ form.race_date.label }}<br>
+            {{ form.race_date(size=32) }}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}
