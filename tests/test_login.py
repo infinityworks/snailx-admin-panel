@@ -43,7 +43,7 @@ class TestLogin(unittest.TestCase):
     def test_check_login_with_password(self):
         with self.client as client:
             response = self.client.post("/login", data=dict(username="Bob", password="bob"), follow_redirects=True)
-            self.assertIn(b"Hello World", response.data)
+            self.assertEqual(urlparse(response.location).path, url_for('rounds.rounds'))
 
     @mock.patch("routes.login.login.get_username", MagicMock(return_value=MockUser(1, "Bob", "bob@bob.com", bcrypt.generate_password_hash("fish").decode("utf-8"))))
     def test_check_login_with_incorrect_password(self):
