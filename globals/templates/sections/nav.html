@@ -1,12 +1,51 @@
-<div id="nav">
-<div id="titlenav">
-    <p>Admin Title</p>
-</div>
+<style>
+    .container {
+    width: 100%;
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: 0;
+    margin-left: 0;
+}
+</style>
 
-<div id="navlinks">
+<div id="snailXNavi" class="noselect">
+<div id="links">
 <ul>
-    <li>Link1</li>
+    <li onclick="displaySnailXSidebar()"><i class="fas fa-bars"></i></li>
+    <li><img style="width: 28px;" src= "{{ url_for('static', filename='snailx.png') }}"/> <span style="font-size: 18px;">SNAIL X</span></li>
 </ul>
 </div>
+<div id="user">
 
+        <i onclick="displaySnailXUserInfo()" class="XuserIcon fa fa-user-circle"></i>
+</div>
+</div>
+
+<div id="snailXSidebar" class="noselect" style="display:none;">
+            <div class="XsidebarSection">
+            <h3>ADMIN</h3>
+            <div class="separator"></div>
+            <ul>
+            <li>Race</li>
+            <li>Round</li>
+            <li>Snail</li>
+            <li>Race Results</li>
+            </ul>
+        </div>
+
+        <div class="XsidebarSection">
+            <h3>USER</h3>
+            <div class="separator"></div>
+            <ul>
+            <li>Logout</li>
+            </ul>
+        </div>
+    </div>
+
+<div id="popup" class="popup noselect" style="display:none;">
+    <div style="flex:5;" id="userinfo">
+    <i style="color: #C2C2C2; font-size: 60px" class="fa fa-user-circle"></i>
+    <p>Junaid</p>
+</div>
+    <div class="logoutButton">Logout</div>
 </div>
