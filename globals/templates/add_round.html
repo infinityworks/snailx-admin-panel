@@ -11,16 +11,23 @@
         <div class="row">
             <div class='col-sm-6'>
                 <div class="form-group">
-                    <p>
+                    <div>
                         {{ form.name.label }}<br>
                         {{ form.name(size=32, class_='form-control form-control-lg') }}
-                    </p>
+                        <div class="invalid-feedback">
+                            Please enter a name.
+                        </div>
+                    </div>
+
                     <br>
 
                     {{ form.start_date.label }}<br>
 
                     <div class='input-group date datetime'>
                         {{ form.start_date(class_='form-control form-control-lg') }}
+                        <div class="invalid-feedback">
+                            Please select a start date.
+                        </div>
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -29,11 +36,16 @@
 
                     {{ form.end_date.label }}<br>
 
-                    <div class='input-group date datetime'>
-                        {{ form.end_date(class_='form-control form-control-lg') }}
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
+                    <div>
+                        <div class='input-group date datetime'>
+                            {{ form.end_date(class_='form-control form-control-lg') }}
+                            <div class="invalid-feedback">
+                                Please select an end date.
+                            </div>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
                     </div>
                     <br>
 
