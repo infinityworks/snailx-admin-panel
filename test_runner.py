@@ -1,9 +1,5 @@
 import unittest
-<<<<<<< HEAD
-from tests import (test_index, test_login, test_session_persistence, test_logout)
-=======
-from tests import (test_index, test_login, test_session_persistence, test_rounds, test_rounds_races)
->>>>>>> round-page
+from tests import (test_index, test_login, test_session_persistence, test_rounds, test_rounds_races, test_logout)
 import xmlrunner
 import sys
 
