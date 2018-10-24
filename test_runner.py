@@ -15,12 +15,9 @@ suite = unittest.TestSuite()
 suite.addTests(loader.loadTestsFromModule(test_index))
 suite.addTests(loader.loadTestsFromModule(test_session_persistence))
 suite.addTests(loader.loadTestsFromModule(test_login))
-<<<<<<< HEAD
 suite.addTests(loader.loadTestsFromModule(test_logout))
-=======
 suite.addTests(loader.loadTestsFromModule(test_rounds))
 suite.addTests(loader.loadTestsFromModule(test_rounds_races))
->>>>>>> round-page
 
 # initialize a runner, pass it your suite and run it
 # runner = unittest.TextTestRunner(verbosity=3)
