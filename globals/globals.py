@@ -15,20 +15,14 @@ login_manager = LoginManager(app)
 
 from routes.index import index_blueprint, home_blueprint
 from routes.login.login import login_blueprint
-<<<<<<< HEAD
 from routes.login.logout import logout_blueprint
-=======
 from routes.rounds.rounds import rounds_blueprint
 from routes.races.races import races_blueprint
 
->>>>>>> round-page
 
 app.register_blueprint(index_blueprint)
 app.register_blueprint(login_blueprint)
 app.register_blueprint(home_blueprint)
-<<<<<<< HEAD
 app.register_blueprint(logout_blueprint)
-=======
 app.register_blueprint(rounds_blueprint)
 app.register_blueprint(races_blueprint)
->>>>>>> round-page
