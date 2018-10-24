@@ -1,7 +1,5 @@
-from flask import render_template, Blueprint, redirect, url_for, flash
-from flask_login import logout_user, login_required, current_user
-from globals.globals import login_manager
-from db.models import User
+from flask import Blueprint, redirect, url_for, flash
+from flask_login import logout_user, current_user
 
 
 logout_blueprint = Blueprint('logout', __name__)
@@ -16,6 +14,7 @@ def logout():
     else:
         flash('No user currently logged in.')
         return redirect(url_for('login.login'))
+
 
 def is_active():
     return current_user.is_active
