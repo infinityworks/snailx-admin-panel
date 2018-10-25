@@ -12,5 +12,6 @@ class LoginForm(FlaskForm):
 class RaceResultsForm(FlaskForm):
     time_to_finish = IntegerField('Time to Finish', validators=[DataRequired()])
     position = IntegerField('Position', validators=[DataRequired()])
-    did_not_finish = BooleanField('Did Not Finish', validators=[DataRequired()])
+    id_race_participants = IntegerField('Participant ID')
+    did_not_finish = BooleanField('Did Not Finish')
     submit = SubmitField('Submit Result')

@@ -5,7 +5,7 @@
 <table class="table table-hover">
     <thead>
         <tr>
-          <th scope="col">Snail</th>
+          <th scope="col">Participant ID</th>
           <th scope="col">Time to Finish</th>
           <th scope="col">Position</th>
           <th scope="col">Did Not Finish</th>
@@ -15,16 +15,14 @@
     <tbody>
     {% for participant in participants %}
       <tr style="cursor: pointer;" onclick="clicked({{participant.id}})">
-        <td>{{participant.id}}</td>
         <form method="POST" action="">
-            {{ race_results_form.csrf_token }}
+            {{ race_results_form.csrf_token }}  
+            <td>{{race_results_form.id_race_participants(value=participant.id)}}</td>
             <td>{{ race_results_form.time_to_finish() }}</td>
             <td>{{ race_results_form.position() }}</td>
             <td>{{ race_results_form.did_not_finish() }}</td>
             <td>{{ race_results_form.submit() }}</td>    
         </form>
-        
-        
     </tr>
     {% endfor %}
     </tbody>
