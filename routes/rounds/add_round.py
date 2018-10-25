@@ -24,7 +24,7 @@ def add_round():
                 name=form.name.data, start_date=start, end_date=end)
             db.session.add(new_round)
             db.session.commit()
-            return redirect(url_for('login.login'))
+            return redirect(url_for('rounds.rounds'))
         except:
             flash(
                 'Failed to create new round. Check that round details are valid and try again.', 'danger')
