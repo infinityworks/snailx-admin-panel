@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+          <th scope="col">Snail</th>
+          <th scope="col">Time</th>
+          <th scope="col">Position</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for participant in participants %}
+      <tr style="cursor: pointer;" onclick="clicked({{participant.id}})">
+        <td>{{participant.id}}</td>
+        <td></td>
+        <td></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<!-- <script>
+function clicked(race_id) {
+console.log(race_id);
+    window.document.location = "races/" + race_id;
+}
+</script> -->
+
+{% endblock content %}
+
+
+
