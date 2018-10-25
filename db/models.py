@@ -1,7 +1,7 @@
 from globals.globals import db, login_manager
 from flask_login import UserMixin
 import datetime
-from sqlalchemy.sql import func, distinct
+from sqlalchemy.sql import func, distinct, between
 
 
 class Trainer(db.Model):
@@ -97,6 +97,9 @@ class Round(db.Model):
 
     def get_num_rounds_between_dates(self, start_date, end_date):
         return db.session.query(func.count(distinct(Round.id))).filter(Round.end_date.between(start_date, end_date)).first()
+
+    def get_active_round(self):
+        return db.session.query(Round).filter(between(datetime.datetime.now(), Round.start_date, Round.end_date)).first()
 
 
 class RaceResult(db.Model):
