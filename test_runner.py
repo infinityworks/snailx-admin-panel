@@ -8,7 +8,6 @@ loader = unittest.TestLoader()
 suite = unittest.TestSuite()
 
 # add tests to the test suite
-suite.addTests(loader.loadTestsFromModule(test_index))
 suite.addTests(loader.loadTestsFromModule(test_session_persistence))
 suite.addTests(loader.loadTestsFromModule(test_login))
 suite.addTests(loader.loadTestsFromModule(test_logout))
