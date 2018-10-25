@@ -6,16 +6,25 @@
     <thead>
         <tr>
           <th scope="col">Snail</th>
-          <th scope="col">Time</th>
+          <th scope="col">Time to Finish</th>
           <th scope="col">Position</th>
+          <th scope="col">Did Not Finish</th>
+          <th scope="col">Submit</th>
         </tr>
     </thead>
     <tbody>
     {% for participant in participants %}
       <tr style="cursor: pointer;" onclick="clicked({{participant.id}})">
         <td>{{participant.id}}</td>
-        <td></td>
-        <td></td>
+        <form method="POST" action="">
+            {{ race_results_form.csrf_token }}
+            <td>{{ race_results_form.time_to_finish() }}</td>
+            <td>{{ race_results_form.position() }}</td>
+            <td>{{ race_results_form.did_not_finish() }}</td>
+            <td>{{ race_results_form.submit() }}</td>    
+        </form>
+        
+        
     </tr>
     {% endfor %}
     </tbody>
