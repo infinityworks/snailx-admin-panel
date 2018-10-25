@@ -2,22 +2,22 @@
 
 {% block content %}
 
+<link rel="stylesheet" href="../static/login.css">
 
 <img style="width: 80px;" src="{{ url_for('static', filename='finiteworks_slash.png') }}" />
 <p style="font-family: Avenir; font-size: 30px; color: #333F48; letter-spacing: 10px;">FINITEWORKS</p>
 
-<h1>Sign In</h1>
-<form action="" method="post" novalidate>
+<form action="" method="post" class="login-form" novalidate>
     {{ form.hidden_tag() }}
     <p>
         {{ form.username.label }}<br>
-        {{ form.username(size=38) }}
+        {{ form.username(size=38, class_='form-control form-control-lg') }}
     </p>
     <p>
         {{ form.password.label }}<br>
-        {{ form.password(size=38) }}
+        {{ form.password(size=38, class_='form-control form-control-lg') }}
     </p>
     <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-    <p>{{ form.submit() }}</p>
+    <p>{{ form.submit(class_='btn btn-primary btn-lg') }}</p>
 </form>
 {% endblock %}
