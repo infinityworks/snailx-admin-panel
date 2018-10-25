@@ -17,7 +17,7 @@
       <tr style="cursor: pointer;" onclick="clicked({{participant.id}})">
         <form method="POST" action="">
             {{ race_results_form.csrf_token }}  
-            <td>{{race_results_form.id_race_participants(value=participant.id)}}</td>
+            <td>{{participant.id}} {{race_results_form.id_race_participants(value=participant.id)}}</td>
             <td>{{ race_results_form.time_to_finish() }}</td>
             <td>{{ race_results_form.position() }}</td>
             <td>{{ race_results_form.did_not_finish() }}</td>
