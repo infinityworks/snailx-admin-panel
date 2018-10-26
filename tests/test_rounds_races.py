@@ -17,8 +17,10 @@ class TestRoundsRaces(unittest.TestCase):
     def setUp(self):
         self.client = app.test_client()
 
-    def test_rounds_races_page_response_is_200(self):
+    @mock.patch('flask_login.utils._get_user')
+    def test_rounds_races_page_response_is_200(self, current_user):
         with self.client as client:
+            current_user.is_authenticated = True
             response = client.get("/rounds/1/races")
             self.assertEqual(200, response.status_code)
 
@@ -26,13 +28,17 @@ class TestRoundsRaces(unittest.TestCase):
         MockRace(1, datetime.datetime.now(), 'TEST_STATUS', 1),
         MockRace(2, datetime.datetime.now(), 'TEST_STATUS', 1),
         MockRace(3, datetime.datetime.now(), 'TEST_STATUS', 1)]))
-    def test_races_are_displayed(self):
+    @mock.patch('flask_login.utils._get_user')
+    def test_races_are_displayed(self, current_user):
         with self.client as client:
+            current_user.is_authenticated = True
             response = client.get("/rounds/1/races")
             self.assertIn(b"TEST_STATUS", response.data)
 
     @mock.patch("db.models.Race.get_races_by_round", MagicMock(return_value=[]))
-    def test_no_races_are_displayed(self):
+    @mock.patch('flask_login.utils._get_user')
+    def test_no_races_are_displayed(self, current_user):
         with self.client as client:
+            current_user.is_authenticated = True
             response = client.get('/round/5/races')
             self.assertNotIn(b"TEST_STATUS", response.data)
