@@ -43,8 +43,9 @@ class TestAddRace(unittest.TestCase):
         with self.client as client:
             username.is_authenticated = True
             response = client.post('/rounds/1/races/add', data=dict(race_status="TEST STATUS",
-                                                                    race_date="10/25/2018 12:00 AM"))
-            self.assertIn(b"rounds.rounds", response.data)
+                                                                    race_date="10/25/2018 12:00 AM"),
+                                                follow_redirects=True)
+            self.assertIn(b"Start Date", response.data)
 
     @mock.patch('flask_login.utils._get_user')
     @mock.patch('db.models.Race.get_races_by_round', MagicMock(return_value=[MockRace(1, datetime.datetime.now()),
