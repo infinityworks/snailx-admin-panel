@@ -24,5 +24,7 @@ def race(round_id, race_id):
         else:
             flash("Race Result Failed. Race Result already exists for for Race Participant ID {}.".format(race_results_form.id_race_participants.data))
         return redirect(url_for('result.race', round_id=round_id, race_id=race_id))  
-        
+    elif race_results_form.submit.data and not race_results_form.validate():
+        flash("Form submission not valid. Please resubmit.")
+        return redirect(url_for('result.race', round_id=round_id, race_id=race_id))
     return render_template('results.html', race=race, participants=participants, race_results_form=race_results_form)
