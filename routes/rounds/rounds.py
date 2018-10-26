@@ -14,6 +14,5 @@ def rounds():
 
     all_rounds = Round().get_all_rounds()
     active_round = Round().get_active_round()
-    print(active_round)
 
     return render_template('rounds.html', title='Rounds', rounds=all_rounds, active_round=active_round)

@@ -15,6 +15,11 @@ def add_round():
         start = form.start_date.data
         end = form.end_date.data
 
+        if len(form.name.data) > 12:
+            flash(
+                'Failed to create new round. The maximum name length is 12 characters.', 'danger')
+            return render_template('add_round.html', title='Add Round', form=form)
+
         if not validate_dates(start, end):
             flash(
                 'Failed to create new round. One or more of the supplied dates are in the past, please enter valid dates.', 'danger')
