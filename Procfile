@@ -1,0 +1,1 @@
+ web: gunicorn snailx_admin:app
