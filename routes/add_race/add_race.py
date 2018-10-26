@@ -4,6 +4,7 @@ from forms.forms import AddRaceForm
 from db.models import Race, Round
 from globals.globals import db
 from dateutil import parser
+from routes.login.login import redirect_to
 
 add_race_blueprint = Blueprint('add_race', __name__)
 
@@ -11,30 +12,27 @@ add_race_blueprint = Blueprint('add_race', __name__)
 @add_race_blueprint.route('/rounds/<int:round_id>/races/add', methods=["GET", "POST"])
 def add_race(round_id):
     if not current_user.is_authenticated:
-        return redirect(url_for('login.login'))
+        return redirect_to('login.login')
 
     form = AddRaceForm()
 
     if form.validate_on_submit():
-        print("\n\n\nvalidated\n\n\n")
         races = Race().get_races_by_round(round_id)
 
         if len(races) >= 5:
             flash("Can't add race to round with 5 or more races.")
-            print("\n\n\ntoo many races\n\n\n")
-            return redirect(url_for('rounds.rounds'))
+            return redirect_to('rounds.rounds')
 
         race_date, race_status = form.race_date.data, form.race_status.data
         current_round = Round().get_round(round_id)
 
         if parser.parse(race_date) < current_round.start_date or parser.parse(race_date) > current_round.end_date:
-            print("\n\n\nrace doesn't take place within round dates\n\n\n")
             flash("Can't add race that doesn't take place within round dates.")
+            return redirect_to('rounds.rounds')
 
         add_race_to_db(race_date, race_status, round_id)
 
-        print("\n\n\nredirecting to rounds.rounds\n\n\n")
-        return redirect(url_for('rounds.rounds'))
+        return redirect_to('rounds.rounds')
 
     return render_template('add_race.html', form=form)
 
