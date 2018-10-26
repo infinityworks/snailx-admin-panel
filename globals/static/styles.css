@@ -177,3 +177,25 @@ input {
 th {
     text-align: center
 }
+
+.form-controls {
+  padding: 10px 10px;
+  font-size: 16px;
+  color: #333F48;
+  background-color: white;
+  background-clip: padding-box;
+  border: 1px solid #C2C2C2;
+  margin-bottom: 15px;
+  }
+
+.finite-orange-button {
+
+padding: 12px;
+background-color: #E35205;
+color: white;
+border: 0;
+ box-shadow: none;
+ border-radius: 0px;
+
+
+}
