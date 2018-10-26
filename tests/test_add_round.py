@@ -62,7 +62,7 @@ class TestAddRound(unittest.TestCase):
         with self.client as client:
             response = client.post(
                 '/rounds/add', data=dict(name="test", start_date="01/01/2001 12:00 AM", end_date="02/02/2002 12:00 PM"), follow_redirects=True)
-            self.assertIn(b'Current Active Round', response.data)
+            self.assertIn(b'All Rounds', response.data)
 
     @mock.patch('routes.rounds.add_round.db.session.add', MagicMock(return_value=None))
     @mock.patch('routes.rounds.add_round.db.session.commit', MagicMock(return_value=None))
