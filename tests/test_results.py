@@ -84,3 +84,17 @@ class TestResult(unittest.TestCase):
             response = client.post("/rounds/1/races/1", 
                 data=dict(id_race_participants=1, position=1, time_to_finish="string", did_not_finish=False), follow_redirects=True)
             self.assertIn(b"Form submission not valid. Please resubmit.", response.data)
+
+    @mock.patch("routes.results.results.validation", MagicMock(return_value=True))
+    @mock.patch("db.models.RaceResult.get_race_result",MagicMock(return_value=True))
+    @mock.patch("db.models.RaceParticipants.get_race_participants_race_id", MagicMock(return_value=[MockRaceParticipants(1,1,1), MockRaceParticipants(3,3,1)]))
+    @mock.patch("db.models.Race.get_race", MagicMock(return_value=MockRace(1, datetime.datetime.now(), 'TEST_STATUS', 1)))
+    @mock.patch('flask_login.utils._get_user')
+    @mock.patch("forms.forms.RaceResultsForm")
+    def test_results_repeated_result_posted(self, current_user, race_results_form):
+        with self.client as client:
+            current_user.is_authenticated = True
+            race_results_form.submit.data = True
+            response = client.post("/rounds/1/races/1", 
+                data=dict(id_race_participants=1, position=1, time_to_finish=200, did_not_finish=False), follow_redirects=True)
+            self.assertIn(b"Race Result Failed. Race Result already exists for for Race Participant ID 1.", response.data)
