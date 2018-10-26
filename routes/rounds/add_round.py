@@ -21,7 +21,7 @@ def add_round():
         end = form.end_date.data
         cur_datetime = datetime.datetime.now()
 
-        if validate_name_length(form.name.data):
+        if not validate_name_length(form.name.data):
             flash(
                 'Failed to create new round. The maximum name length is 12 characters.', 'danger')
             return render_template('add_round.html', title='Add Round', form=form)

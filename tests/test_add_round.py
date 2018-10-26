@@ -16,9 +16,7 @@ class MockRound():
 
 class TestAddRound(unittest.TestCase):
 
-    @mock.patch('flask_login.utils._get_user')
-    def setUp(self, current_user):
-        current_user.is_authenticated = True
+    def setUp(self):
         self.client = app.test_client()
 
     @mock.patch("db.models.Round.get_num_rounds_between_dates", MagicMock(return_value=(0,)))
@@ -52,14 +50,80 @@ class TestAddRound(unittest.TestCase):
     def test_add_round_name_length_greater_than_max_validation(self):
         self.assertFalse(validate_name_length("12345678910111213"))
 
-    def test_add_round_data_required_validation(self):
-        pass
+    @mock.patch('flask_login.utils._get_user')
+    @mock.patch('routes.rounds.add_round.db.session.add', MagicMock(return_value=None))
+    @mock.patch('routes.rounds.add_round.db.session.commit', MagicMock(return_value=None))
+    @mock.patch('routes.rounds.add_round.validate_date_interval', MagicMock(return_value=True))
+    @mock.patch('routes.rounds.add_round.validate_dates', MagicMock(return_value=True))
+    @mock.patch('routes.rounds.add_round.validate_start_before_end', MagicMock(return_value=True))
+    @mock.patch('routes.rounds.add_round.validate_name_length', MagicMock(return_value=True))
+    def test_add_round_valid_round_logged_in(self, current_user):
+        current_user.is_authenticated = True
+        with self.client as client:
+            response = client.post(
+                '/rounds/add', data=dict(name="test", start_date="01/01/2001 12:00 AM", end_date="02/02/2002 12:00 PM"), follow_redirects=True)
+            self.assertIn(b'Current Active Round', response.data)
 
-    def test_add_round_success(self):
-        pass
+    @mock.patch('routes.rounds.add_round.db.session.add', MagicMock(return_value=None))
+    @mock.patch('routes.rounds.add_round.db.session.commit', MagicMock(return_value=None))
+    @mock.patch('routes.rounds.add_round.validate_date_interval', MagicMock(return_value=True))
+    @mock.patch('routes.rounds.add_round.validate_dates', MagicMock(return_value=True))
+    @mock.patch('routes.rounds.add_round.validate_start_before_end', MagicMock(return_value=True))
+    @mock.patch('routes.rounds.add_round.validate_name_length', MagicMock(return_value=True))
+    def test_add_round_valid_round_not_logged_in(self):
+        with self.client as client:
+            response = client.post(
+                '/rounds/add', data=dict(name="test", start_date="01/01/2001 12:00 AM", end_date="02/02/2002 12:00 PM"), follow_redirects=True)
+            self.assertIn(b'Sign In', response.data)
 
-    def test_add_round_not_logged_in(self):
-        pass
+    @mock.patch('flask_login.utils._get_user')
+    @mock.patch('routes.rounds.add_round.validate_date_interval', MagicMock(return_value=False))
+    @mock.patch('routes.rounds.add_round.validate_dates', MagicMock(return_value=True))
+    @mock.patch('routes.rounds.add_round.validate_start_before_end', MagicMock(return_value=True))
+    @mock.patch('routes.rounds.add_round.validate_name_length', MagicMock(return_value=True))
+    def test_add_round_date_interval_validation_invalid_date_interval_flash(self, current_user):
+        current_user.is_authenticated = True
+        with self.client as client:
+            response = client.post(
+                '/rounds/add', data=dict(name="test", start_date="01/01/2001 12:00 AM", end_date="02/02/2002 12:00 PM"))
+            self.assertIn(
+                b'Failed to create new round. A round already exists between the given dates, please enter valid dates.', response.data)
 
-    def test_add_round_logged_in(self):
-        pass
+    @mock.patch('flask_login.utils._get_user')
+    @mock.patch('routes.rounds.add_round.validate_date_interval', MagicMock(return_value=True))
+    @mock.patch('routes.rounds.add_round.validate_dates', MagicMock(return_value=False))
+    @mock.patch('routes.rounds.add_round.validate_start_before_end', MagicMock(return_value=True))
+    @mock.patch('routes.rounds.add_round.validate_name_length', MagicMock(return_value=True))
+    def test_add_round_date_in_past_validation_dates_in_past_flash(self, current_user):
+        current_user.is_authenticated = True
+        with self.client as client:
+            response = client.post(
+                '/rounds/add', data=dict(name="test", start_date="01/01/2001 12:00 AM", end_date="02/02/2002 12:00 PM"))
+            self.assertIn(
+                b'Failed to create new round. One or more of the supplied dates are in the past, please enter valid dates.', response.data)
+
+    @mock.patch('flask_login.utils._get_user')
+    @mock.patch('routes.rounds.add_round.validate_date_interval', MagicMock(return_value=True))
+    @mock.patch('routes.rounds.add_round.validate_dates', MagicMock(return_value=True))
+    @mock.patch('routes.rounds.add_round.validate_start_before_end', MagicMock(return_value=False))
+    @mock.patch('routes.rounds.add_round.validate_name_length', MagicMock(return_value=True))
+    def test_add_round_start_date_after_end_date_validation_flash(self, current_user):
+        current_user.is_authenticated = True
+        with self.client as client:
+            response = client.post(
+                '/rounds/add', data=dict(name="test", start_date="01/01/2001 12:00 AM", end_date="02/02/2002 12:00 PM"))
+            self.assertIn(
+                b'Failed to create new round. A round cannot be created with an end date before the start date, please enter valid dates.', response.data)
+
+    @mock.patch('flask_login.utils._get_user')
+    @mock.patch('routes.rounds.add_round.validate_date_interval', MagicMock(return_value=True))
+    @mock.patch('routes.rounds.add_round.validate_dates', MagicMock(return_value=True))
+    @mock.patch('routes.rounds.add_round.validate_start_before_end', MagicMock(return_value=True))
+    @mock.patch('routes.rounds.add_round.validate_name_length', MagicMock(return_value=False))
+    def test_add_round_name_length_greater_than_max_validation_flash(self, current_user):
+        current_user.is_authenticated = True
+        with self.client as client:
+            response = client.post(
+                '/rounds/add', data=dict(name="test", start_date="01/01/2001 12:00 AM", end_date="02/02/2002 12:00 PM"))
+            self.assertIn(
+                b'Failed to create new round. The maximum name length is 12 characters.', response.data)
