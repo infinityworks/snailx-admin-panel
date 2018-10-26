@@ -3,6 +3,8 @@ from forms.forms import AddRoundForm
 from db.models import Round
 from globals.globals import db
 import datetime
+from dateutil import parser
+import pytz
 from flask_login import current_user
 
 
@@ -19,7 +21,10 @@ def add_round():
     if form.validate_on_submit():
         start = form.start_date.data
         end = form.end_date.data
-        cur_datetime = datetime.datetime.utcnow()
+
+        bst = pytz.timezone('Europe/London')
+        cur_datetime = datetime.datetime.now()
+        cur_datetime = bst.localize(cur_datetime)
 
         if not validate_name_length(form.name.data):
             flash(
@@ -65,10 +70,10 @@ def validate_date_interval(start_date, end_date):
 def validate_dates(start_date, end_date, cur_datetime):
     print(start_date)
     print(cur_datetime)
-    print(datetime.datetime.strptime(start_date, '%m/%d/%Y %I:%M %p'))
-    return (datetime.datetime.strptime(start_date, '%m/%d/%Y %I:%M %p') > cur_datetime
-            or datetime.datetime.strptime(end_date, '%m/%d/%Y %I:%M %p') > cur_datetime)
+    print(parser.parse(start_date))
+    return (parser.parse(start_date) > cur_datetime
+            or parser.parse(end_date) > cur_datetime)
 
 
 def validate_start_before_end(start_date, end_date):
-    return datetime.datetime.strptime(start_date, '%m/%d/%Y %I:%M %p') < datetime.datetime.strptime(end_date, '%m/%d/%Y %I:%M %p')
+    return parser.parse(start_date) < parser.parse(end_date)
