@@ -55,4 +55,4 @@ class TestResult(unittest.TestCase):
         with self.client as client:
             current_user.is_authenticated = True
             response = client.get("/rounds/1/races/1")
-            self.assertIn(b"\"id_race_participants\" type=\"hidden\" value=\"2", response.data)
+            self.assertNotIn(b"\"id_race_participants\" type=\"hidden\" value=\"2", response.data)
