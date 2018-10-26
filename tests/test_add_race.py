@@ -2,6 +2,23 @@ import unittest
 from globals.globals import app
 from unittest import mock
 from unittest.mock import MagicMock
+import datetime
+
+
+class MockRace:
+    def __init__(self, id, date):
+        self.id = id
+        self.date = date
+        self.status = "TEST PLAYED"
+        self.id_round = 1
+
+
+class MockRound:
+    def __init__(self, start_date, end_date):
+        self.id = 1
+        self.name = "Test Round"
+        self.start_date = start_date
+        self.end_date = end_date
 
 
 class TestAddRace(unittest.TestCase):
@@ -16,9 +33,15 @@ class TestAddRace(unittest.TestCase):
             self.assertEqual(200, response.status_code)
 
     @mock.patch('flask_login.utils._get_user')
+    @mock.patch('db.models.Race.get_races_by_round', MagicMock(return_value=[MockRace(1, datetime.datetime.now()),
+                                                                             MockRace(2, datetime.datetime.now())]))
+    @mock.patch('db.models.Round.get_round', MagicMock(return_value=MockRound(datetime.datetime(2017, 10, 5, 18, 00),
+                                                                               datetime.datetime(2019, 10, 5, 18, 00))))
+    @mock.patch('routes.add_race.add_race.add_race_to_db', MagicMock(return_value=None))
     def test_add_race_form_redirects_to_rounds(self, username):
         with self.client as client:
             username.is_authenticated = True
-            response = client.post('/rounds/1/races/add', data=dict(status="TEST STATUS", date="10/25/2018 12:00 AM"),
+            response = client.post('/rounds/1/races/add', data=dict(race_status="TEST STATUS",
+                                                                    race_date="10/25/2018 12:00 AM"),
                                    follow_redirects=True)
             self.assertIn("Start Date", str(response.data))

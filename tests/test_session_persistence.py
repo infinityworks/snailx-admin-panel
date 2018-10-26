@@ -21,7 +21,7 @@ class TestSessionPersistence(unittest.TestCase):
     def test_current_user_is_authenticated(self, redirectMock):
         with self.client as client:
             client.get("/login")
-        redirectMock.assert_called_once_with("index.index")
+        redirectMock.assert_called_once_with("rounds.rounds")
 
     @mock.patch('routes.login.login.redirect_to', return_value="")
     @mock.patch('routes.login.login.is_authenticated', MagicMock(return_value=False))
