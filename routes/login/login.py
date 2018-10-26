@@ -8,7 +8,7 @@ from globals.globals import bcrypt, login_manager, db
 login_blueprint = Blueprint('login', __name__)
 
 
-@login_blueprint.route("/login", methods=["GET", "POST"])
+@login_blueprint.route("/", methods=["GET", "POST"])
 def login():
     if is_authenticated():
         return redirect_to('rounds.rounds')
