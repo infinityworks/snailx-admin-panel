@@ -29,14 +29,14 @@ body {
     font-stretch: ultra-expanded;
 }
 
-ul {
+.snailx-nav ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
 }
 
-li {
+.snailx-nav li {
     display: block;
     float: left;
     padding: 10px;
@@ -179,23 +179,23 @@ th {
 }
 
 .form-controls {
-  padding: 10px 10px;
-  font-size: 16px;
-  color: #333F48;
-  background-color: white;
-  background-clip: padding-box;
-  border: 1px solid #C2C2C2;
-  margin-bottom: 15px;
-  }
+    padding: 10px 10px;
+    font-size: 16px;
+    color: #333F48;
+    background-color: white;
+    background-clip: padding-box;
+    border: 1px solid #C2C2C2;
+    margin-bottom: 15px;
+}
 
 .finite-orange-button {
 
-padding: 12px;
-background-color: #E35205;
-color: white;
-border: 0;
- box-shadow: none;
- border-radius: 0px;
+    padding: 12px;
+    background-color: #E35205;
+    color: white;
+    border: 0;
+    box-shadow: none;
+    border-radius: 0px;
 
 
 }
