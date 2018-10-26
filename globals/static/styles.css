@@ -110,7 +110,7 @@ div#snailXSidebar h3 {
     margin-top: 18px;
 }
 
-.separator {
+.snailx-nav .separator {
     width: 100%;
     display: block;
     border-bottom: 1px solid grey;
@@ -130,21 +130,6 @@ div#snailXSidebar h3 {
     margin-top: 6px;
 }
 
-.noselect {
-    -webkit-touch-callout: none;
-    /* iOS Safari */
-    -webkit-user-select: none;
-    /* Safari */
-    -khtml-user-select: none;
-    /* Konqueror HTML */
-    -moz-user-select: none;
-    /* Firefox */
-    -ms-user-select: none;
-    /* Internet Explorer/Edge */
-    user-select: none;
-    /* Non-prefixed version, currently
-                                  supported by Chrome and Opera */
-}
 
 .popup {
     right: 0;
@@ -196,6 +181,5 @@ th {
     border: 0;
     box-shadow: none;
     border-radius: 0px;
-
 
 }
