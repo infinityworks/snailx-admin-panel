@@ -14,7 +14,6 @@
     </thead>
     <tbody>
     {% for participant in participants %}
-      <tr style="cursor: pointer;" onclick="clicked({{participant.id}})">
         <form method="POST" action="", autocomplete="off">
             {{ race_results_form.csrf_token }}  
             <td>{{participant.id}} {{race_results_form.id_race_participants(value=participant.id)}}</td>
@@ -23,17 +22,9 @@
             <td>{{ race_results_form.did_not_finish() }}</td>
             <td>{{ race_results_form.submit() }}</td>    
         </form>
-    </tr>
     {% endfor %}
     </tbody>
 </table>
-
-<!-- <script>
-function clicked(race_id) {
-console.log(race_id);
-    window.document.location = "races/" + race_id;
-}
-</script> -->
 
 {% endblock content %}
 
