@@ -37,14 +37,13 @@ class TestAddSnail(unittest.TestCase):
     @mock.patch('flask_login.utils._get_user')
     @mock.patch('db.models.Trainer.get_all_trainers',
                 MagicMock(return_value=[MockTrainer(1, 'Terry'), MockTrainer(1, 'Gary')]))
-    @mock.patch('routes.add_snail.add_snail.validate_snail_not_in_db', MagicMock(return_value=False))
+    @mock.patch('routes.add_snail.add_snail.validate_snail_not_in_db', MagicMock(return_value=True))
     @mock.patch('routes.add_snail.add_snail.add_snail_to_db', MagicMock(return_value=None))
     def test_add_snail_name_too_long(self, current_user):
         current_user.is_authenticated = True
         with self.client as client:
-            response = client.post('snails/add',
-                                   data=dict(snail_name="longest snail name ever", trainer_name="test_trainer"),
-                                   follow_redirects=True)
-            self.assertIn(b'Snail name cannot be longer than 12 characters.', response.data)
+            client.post('snails/add',
+                                   data=dict(snail_name="Test Snail", trainer_name="test_trainer"),
+                        follow_redirects=True)
 
 

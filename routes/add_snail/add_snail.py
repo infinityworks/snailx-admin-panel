@@ -15,7 +15,6 @@ def add_snail():
     trainer_model = Trainer()
     form = AddSnailForm()
     form.trainer_name.choices = [(str(t.id), t.name) for t in trainer_model.get_all_trainers()]
-
     if form.validate_on_submit():
         if validate_snail_not_in_db(form.snail_name.data):
             flash('Snail already exists')
