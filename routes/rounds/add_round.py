@@ -69,7 +69,7 @@ def validate_dates(start_date, end_date, cur_datetime):
     print(parser.parse(start_date))
     print(parser.parse(end_date))
     valid = (parser.parse(start_date) > cur_datetime
-             or parser.parse(end_date) > cur_datetime)
+             and parser.parse(end_date) > cur_datetime)
     print(valid)
     return valid
 

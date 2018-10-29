@@ -4,6 +4,7 @@ from unittest import mock
 from unittest.mock import MagicMock
 import datetime
 from routes.rounds.add_round import validate_date_interval, validate_dates, validate_start_before_end, validate_name_length
+from dateutil import parser
 
 
 class MockRound():
@@ -31,17 +32,15 @@ class TestAddRound(unittest.TestCase):
         self.assertFalse(validate_date_interval(
             new_round.start_date, new_round.end_date))
 
-    def test_add_round_date_in_past_validation_dates_in_past(self):
-        fake_date = datetime.datetime(2010, 10, 10, 10, 10, 0)
-        new_round = MockRound(start_date="01/01/2001 12:00 AM",
-                              end_date="02/02/2002 12:00 PM")
-        self.assertFalse(validate_dates(
-            new_round.start_date, new_round.end_date, fake_date))
-
     def test_add_round_date_in_past_validation_dates_in_future(self):
-        fake_cur_date = datetime.datetime(2000, 10, 10, 10, 10, 0)
+        fake_date = parser.parse("01/01/1999 12:00 PM")
         self.assertTrue(validate_dates(
-            "01/01/2001 12:00 AM", "02/02/2002 12:00 PM", fake_cur_date))
+            "01/01/2000 11:00 AM", "02/02/2000 12:00 PM", fake_date))
+
+    def test_add_round_date_in_past_validation_dates_in_past(self):
+        fake_date = parser.parse("01/01/2010 4:00 PM")
+        self.assertFalse(validate_dates(
+            "01/01/2010 3:30 PM", "02/02/2010 12:00 PM", fake_date))
 
     def test_add_round_start_date_after_end_date_validation(self):
         self.assertFalse(validate_start_before_end(
