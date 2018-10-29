@@ -8,12 +8,13 @@ add_snail_blueprint = Blueprint('add_snail', __name__)
 
 @add_snail_blueprint.route("/snails/add", methods=["GET", "POST"])
 def add_snail():
-    if not current_user.is_authenticated: #TODO: not
+    if not current_user.is_authenticated:  # TODO: not
         return redirect(url_for('login.login'))
 
     form = AddSnailForm()
 
     if form.validate_on_submit():
+        print(form.trainer_name.data)
         return 'validated'
 
     trainer_model = Trainer()

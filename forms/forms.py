@@ -21,4 +21,3 @@ class AddSnailForm(FlaskForm):
     snail_name = StringField('Snail Name', validators=[DataRequired()])
     trainer_name = StringField('Trainer Name', validators=[DataRequired()])
     submit = SubmitField('Add Snail')
-
