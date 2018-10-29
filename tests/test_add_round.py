@@ -7,14 +7,6 @@ from routes.rounds.add_round import validate_date_interval, validate_dates, vali
 from dateutil import parser
 
 
-# class MockRound():
-#     def __init__(self, name="test", start_date=datetime.datetime.now(), end_date=datetime.datetime.now() + datetime.timedelta(days=1)):
-#         self.id = 1
-#         self.name = name
-#         self.start_date = start_date
-#         self.end_date = end_date
-
-
 class TestAddRound(unittest.TestCase):
 
     def setUp(self):
