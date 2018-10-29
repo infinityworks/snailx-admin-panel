@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, DateField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField
 from wtforms.validators import DataRequired
 
 
@@ -19,5 +19,5 @@ class AddRoundForm(FlaskForm):
 
 class AddSnailForm(FlaskForm):
     snail_name = StringField('Snail Name', validators=[DataRequired()])
-    trainer_name = StringField('Trainer Name', validators=[DataRequired()])
+    trainer_name = SelectField('Trainer Name')
     submit = SubmitField('Add Snail')

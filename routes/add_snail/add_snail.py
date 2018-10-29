@@ -11,13 +11,12 @@ def add_snail():
     if not current_user.is_authenticated:  # TODO: not
         return redirect(url_for('login.login'))
 
+    trainer_model = Trainer()
     form = AddSnailForm()
+    form.trainer_name.choices = [(str(t.id), t.name) for t in trainer_model.get_all_trainers()]
 
     if form.validate_on_submit():
         print(form.trainer_name.data)
         return 'validated'
 
-    trainer_model = Trainer()
-    trainer_names = [t.name for t in trainer_model.get_all_trainers()]
-
-    return render_template('add_snail.html', title='Add Snail', form=form, trainers=trainer_names)
+    return render_template('add_snail.html', title='Add Snail', form=form)
