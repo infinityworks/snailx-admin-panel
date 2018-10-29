@@ -10,6 +10,12 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Sign In')
 
 
+class AddRaceForm(FlaskForm):
+    race_date = StringField('Date', validators=[DataRequired()])
+    race_status = StringField('Status', validators=[DataRequired()])
+    submit = SubmitField('Add Race')
+
+
 class AddRoundForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     start_date = StringField('Start Date', validators=[DataRequired()])
