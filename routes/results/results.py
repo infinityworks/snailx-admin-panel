@@ -36,7 +36,7 @@ def race(round_id, race_id):
                 race_results_form.id_race_participants.data))
 
         else:
-            flash("Race Result Failed. Race Result already exists for Race"
+            flash("Race Result Failed. Race Result already exists for Race "
                   "Participant ID {}.".format(race_results_form.
                                               id_race_participants.data))
         return redirect(url_for('result.race', 
