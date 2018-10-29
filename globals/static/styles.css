@@ -43,17 +43,18 @@ li {
     cursor: pointer;
 }
 
+
 li:hover {
     color: white;
     background-color: #E35205;
 }
 
 #links {
-flex: 4;
+    flex: 4;
 }
 
 #user {
-flex: 2;
+    flex: 2;
 }
 
 #content {

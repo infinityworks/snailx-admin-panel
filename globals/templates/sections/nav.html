@@ -1,59 +1,58 @@
-
-
 <style>
     .container {
-    width: 100%;
-    padding-right: 0px;
-    padding-left: 0px;
-    margin-right: 0;
-    margin-left: 0;
-}
+        width: 100%;
+        padding-right: 0px;
+        padding-left: 0px;
+        margin-right: 0;
+        margin-left: 0;
+    }
 </style>
 
 <div id="snailXNavi" class="noselect">
-<div id="links">
-<ul>
+    <div id="links">
+        <ul>
+            {% if current_user.is_authenticated %}
+            <li onclick="displaySnailXSidebar()"><i class="fas fa-bars"></i></li>
+            {% endif %}
+            <li><img style="text-align: center; width: 28px;" src="{{ url_for('static', filename='snailx.png') }}" />
+                <span style="font-family: Arial; font-size: 18px; letter-spacing: 5px;">SNAIL X</span></li>
+        </ul>
+    </div>
     {% if current_user.is_authenticated %}
-    <li onclick="displaySnailXSidebar()"><i class="fas fa-bars"></i></li>
-    {% endif %}
-    <li><img style="text-align: center; width: 28px;" src= "{{ url_for('static', filename='snailx.png') }}"/> <span style="font-family: Arial; font-size: 18px; letter-spacing: 5px;">SNAIL X</span></li>
-</ul>
-</div>
-        {% if current_user.is_authenticated %}
-<div id="user">
+    <div id="user">
 
         <i onclick="displaySnailXUserInfo()" class="XuserIcon fa fa-user-circle"></i>
-</div>
-         {% endif %}
+    </div>
+    {% endif %}
 </div>
 
 <div id="snailXSidebar" class="noselect" style="display:none;">
-            <img style="width: 80px;" src= "{{ url_for('static', filename='snailx.png') }}"/>
-        <p style="font-family: Arial; font-size: 30px; color: #333F48; letter-spacing: 10px;">SNAIL X</p>
-            <div class="XsidebarSection">
-            <h3 padding="5px">ADMIN</h3>
-            <div class="separator"></div>
-            <ul>
+    <img style="width: 80px;" src="{{ url_for('static', filename='snailx.png') }}" />
+    <p style="font-family: Arial; font-size: 30px; color: #333F48; letter-spacing: 10px;">SNAIL X</p>
+    <div class="XsidebarSection">
+        <h3 padding="5px">ADMIN</h3>
+        <div class="separator"></div>
+        <ul>
             <li onclick="location.href='races';">Race</li>
             <li onclick="location.href='rounds';">Round</li>
             <li onclick="location.href='snails';">Snail</li>
             <li onclick="location.href='results';">Race Results</li>
-            </ul>
-        </div>
-
-        <div class="XsidebarSection">
-            <h3>USER</h3>
-            <div class="separator"></div>
-            <ul>
-            <li onclick="location.href='logout';">Logout</li>
-            </ul>
-        </div>
+        </ul>
     </div>
+
+    <div class="XsidebarSection">
+        <h3>USER</h3>
+        <div class="separator"></div>
+        <ul>
+            <li onclick="location.href='/logout';">Logout</li>
+        </ul>
+    </div>
+</div>
 
 <div id="popup" class="popup noselect" style="display:none;">
     <div style="flex:5;" id="userinfo">
-    <i style="color: #C2C2C2; font-size: 60px" class="fa fa-user-circle"></i>
-    <p>{{ current_user.username }}</p>
-</div>
-    <div onclick="location.href='logout';" class="logoutButton">Logout</div>
+        <i style="color: #C2C2C2; font-size: 60px" class="fa fa-user-circle"></i>
+        <p>{{ current_user.username }}</p>
+    </div>
+    <div onclick="location.href='/logout';" class="logoutButton">Logout</div>
 </div>
