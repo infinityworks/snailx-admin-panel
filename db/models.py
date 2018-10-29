@@ -32,6 +32,9 @@ class Snail(db.Model):
     def get_all_snails(self):
         return self.query.all()
 
+    def get_snail_by_name(self, name):
+        return self.query.filter_by(name=name).first()
+
 
 class RaceParticipants(db.Model):
     id = db.Column(db.Integer(), primary_key=True, autoincrement=True)
