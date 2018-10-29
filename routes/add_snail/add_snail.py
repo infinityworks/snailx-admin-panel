@@ -16,7 +16,6 @@ def add_snail():
     form = AddSnailForm()
     form.trainer_name.choices = [(str(t.id), t.name) for t in trainer_model.get_all_trainers()]
     if form.validate_on_submit():
-        print("validating\n\n\n\n")
         if validate_snail_not_in_db(form.snail_name.data):
             flash_message('Snail already exists')
             return redirect(url_for('add_snail.add_snail'))
@@ -29,7 +28,7 @@ def add_snail():
             add_snail_to_db(form.snail_name.data.capitalize(), int(form.trainer_name.data))
 
         except:
-            flash_message('Failed to create new snail, please check provided details are correct and try again.', 'error')
+            flash_message('Failed to create new snail, please check provided details are correct and try again.')
             return redirect(url_for('add_snail.add_snail'))
 
         flash_message('Snail successfully added.')

@@ -47,8 +47,20 @@ class TestAddSnail(unittest.TestCase):
         current_user.is_authenticated = True
         with self.client as client:
             response = client.post(
-                '/snails/add', data=dict(snail_name="test super long snail name", trainer_name=1))
+                '/snails/add', data=dict(snail_name="test super long snail name", trainer_name=1), follow_redirects=True)
 
-            self.assertIn(b'name cannot be longer than 12 characters', response.data)
+            self.assertIn(b'Snail Name', response.data)  # TODO: improve this test
 
+    @mock.patch('flask_login.utils._get_user')
+    @mock.patch('db.models.Trainer.get_all_trainers',
+                MagicMock(return_value=[MockTrainer(1, 'Terry'), MockTrainer(1, 'Gary')]))
+    @mock.patch('routes.add_snail.add_snail.validate_snail_not_in_db', MagicMock(return_value=True))
+    @mock.patch('routes.add_snail.add_snail.add_snail_to_db', MagicMock(return_value=None))
+    @mock.patch('routes.add_snail.add_snail.flash_message', MagicMock(return_value=None))
+    def test_add_snail_alredy_in_db(self, current_user):
+        current_user.is_authenticated = True
+        with self.client as client:
+            response = client.post(
+                '/snails/add', data=dict(snail_name="test name", trainer_name=1), follow_redirects=True)
 
+            self.assertIn(b'Snail Name', response.data) # TODO: improve this test
