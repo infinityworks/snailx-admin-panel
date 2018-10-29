@@ -105,6 +105,9 @@ class Round(db.Model):
     def get_active_round(self):
         return db.session.query(Round).filter(between(datetime.datetime.utcnow(), Round.start_date, Round.end_date)).first()
 
+    def get_round_by_name(self, name):
+        return db.session.query(Round).filter_by(name=name).first()
+
 
 class RaceResult(db.Model):
     id = db.Column(db.Integer(), primary_key=True, autoincrement=True)
