@@ -7,12 +7,12 @@ from routes.rounds.add_round import validate_date_interval, validate_dates, vali
 from dateutil import parser
 
 
-class MockRound():
-    def __init__(self, name="test", start_date=datetime.datetime.now(), end_date=datetime.datetime.now() + datetime.timedelta(days=1)):
-        self.id = 1
-        self.name = name
-        self.start_date = start_date
-        self.end_date = end_date
+# class MockRound():
+#     def __init__(self, name="test", start_date=datetime.datetime.now(), end_date=datetime.datetime.now() + datetime.timedelta(days=1)):
+#         self.id = 1
+#         self.name = name
+#         self.start_date = start_date
+#         self.end_date = end_date
 
 
 class TestAddRound(unittest.TestCase):
@@ -22,15 +22,13 @@ class TestAddRound(unittest.TestCase):
 
     @mock.patch("db.models.Round.get_num_rounds_between_dates", MagicMock(return_value=(0,)))
     def test_add_round_date_interval_validation_valid_date_interval(self):
-        new_round = MockRound()
         self.assertTrue(validate_date_interval(
-            new_round.start_date, new_round.end_date))
+            datetime.datetime.utcnow(), datetime.datetime.now() + datetime.timedelta(days=1)))
 
     @mock.patch("db.models.Round.get_num_rounds_between_dates", MagicMock(return_value=(1,)))
     def test_add_round_date_interval_validation_invalid_date_interval(self):
-        new_round = MockRound()
         self.assertFalse(validate_date_interval(
-            new_round.start_date, new_round.end_date))
+            datetime.datetime.utcnow(), datetime.datetime.now() + datetime.timedelta(days=1)))
 
     def test_add_round_date_in_past_validation_dates_in_future(self):
         fake_date = parser.parse("01/01/1999 12:00 PM")

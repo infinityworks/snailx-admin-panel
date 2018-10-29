@@ -57,10 +57,11 @@ def add_round():
 
 
 def validate_name_length(name):
-    return len(name) < 12
+    return len(name) <= 12
 
 
 def validate_date_interval(start_date, end_date):
+    print(Round().get_num_rounds_between_dates(start_date, end_date)[0])
     return Round().get_num_rounds_between_dates(start_date, end_date)[0] == 0
 
 
