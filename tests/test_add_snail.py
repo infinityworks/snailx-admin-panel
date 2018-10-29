@@ -31,7 +31,7 @@ class TestAddSnail(unittest.TestCase):
     def test_add_snail_creates_snail(self, current_user):
         current_user.is_authenticated = True
         with self.client as client:
-            response = client.post('snails/add',
+            response = client.post('/snails/add',
                                    data=dict(snail_name="test snail", trainer_name=1),
                                    follow_redirects=True)
 
@@ -63,4 +63,4 @@ class TestAddSnail(unittest.TestCase):
             response = client.post(
                 '/snails/add', data=dict(snail_name="test name", trainer_name=1), follow_redirects=True)
 
-            self.assertIn(b'Snail Name', response.data) # TODO: improve this test
+            self.assertIn(b'Snail Name', response.data)  # TODO: improve this test
