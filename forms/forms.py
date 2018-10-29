@@ -32,3 +32,9 @@ class AddRoundForm(FlaskForm):
     start_date = StringField('Start Date', validators=[DataRequired()])
     end_date = StringField('End Date', validators=[DataRequired()])
     submit = SubmitField('Create Round')
+
+
+class AddSnailToRace(FlaskForm):
+    snail_id = IntegerField('Name', validators=[DataRequired()])
+    race_id = IntegerField('race_id', validators=[DataRequired()])
+    submit = SubmitField('Add Snail')
