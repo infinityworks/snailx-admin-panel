@@ -13,13 +13,6 @@ def rounds():
         return redirect(url_for('login.login'))
 
     all_rounds = Round().get_all_rounds()
-    present = datetime.now()
-
-    active_round = None
-
-    for curr_round in all_rounds:
-        if present > curr_round.start_date and present < curr_round.end_date:
-            active_round = curr_round
-            break
+    active_round = Round().get_active_round()
 
     return render_template('rounds.html', title='Rounds', rounds=all_rounds, active_round=active_round)

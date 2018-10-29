@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, DateField
+from wtforms.validators import DataRequired
 
 
 class LoginForm(FlaskForm):
@@ -8,3 +8,16 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
+
+
+class AddRaceForm(FlaskForm):
+    race_date = StringField('Date', validators=[DataRequired()])
+    race_status = StringField('Status', validators=[DataRequired()])
+    submit = SubmitField('Add Race')
+
+
+class AddRoundForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
+    start_date = StringField('Start Date', validators=[DataRequired()])
+    end_date = StringField('End Date', validators=[DataRequired()])
+    submit = SubmitField('Create Round')
