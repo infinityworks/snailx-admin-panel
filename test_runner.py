@@ -1,6 +1,6 @@
 import unittest
-from tests import (test_index, test_login, test_session_persistence,
-                   test_rounds, test_rounds_races, test_logout, test_add_round)
+from tests import (test_login, test_session_persistence,
+                   test_rounds, test_rounds_races, test_logout, test_add_round, test_add_snail)
 import xmlrunner
 import sys
 
@@ -15,6 +15,7 @@ suite.addTests(loader.loadTestsFromModule(test_logout))
 suite.addTests(loader.loadTestsFromModule(test_rounds))
 suite.addTests(loader.loadTestsFromModule(test_rounds_races))
 suite.addTests(loader.loadTestsFromModule(test_add_round))
+suite.addTests(loader.loadTestsFromModule(test_add_snail))
 
 # initialize a runner, pass it your suite and run it
 runner = xmlrunner.XMLTestRunner(verbosity=3, output='test-reports/unittest')

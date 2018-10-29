@@ -26,10 +26,7 @@ def add_snail():
             return redirect(url_for('add_snail.add_snail'))
 
         try:
-            new_snail = Snail(name=form.snail_name.data.capitalize(), trainer_id=int(form.trainer_name.data))
-            print(new_snail)
-            db.session.add(new_snail)
-            db.session.commit()
+            add_snail_to_db(form.snail_name.data.capitalize(), int(form.trainer_name.data))
 
         except:
             flash('Failed to create new snail, please check provided details are correct and try again.', 'error')
@@ -43,3 +40,9 @@ def add_snail():
 
 def validate_snail_not_in_db(name):
     return Snail().get_snail_by_name(name.capitalize())
+
+
+def add_snail_to_db(snail_name, trainer_id):
+    new_snail = Snail(name=snail_name, trainer_id=trainer_id)
+    db.session.add(new_snail)
+    db.session.commit()
