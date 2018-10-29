@@ -65,13 +65,13 @@ def validate_date_interval(start_date, end_date):
 
 
 def validate_dates(start_date, end_date, cur_datetime):
-    print(cur_datetime)
     print(parser.parse(start_date))
+    print(cur_datetime)
+
     print(parser.parse(end_date))
-    valid = (parser.parse(start_date) > cur_datetime
-             and parser.parse(end_date) > cur_datetime)
-    print(valid)
-    return valid
+    print(cur_datetime)
+    return (parser.parse(start_date) >= cur_datetime
+            and parser.parse(end_date) >= cur_datetime)
 
 
 def validate_start_before_end(start_date, end_date):

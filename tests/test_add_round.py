@@ -44,7 +44,7 @@ class TestAddRound(unittest.TestCase):
 
     def test_add_round_start_date_after_end_date_validation(self):
         self.assertFalse(validate_start_before_end(
-            "01/01/2003 12:00 AM", "02/02/2002 12:00 PM"))
+            "01/01/2003 12:00 PM", "02/02/2002 12:00 PM"))
 
     def test_add_round_name_length_greater_than_max_validation(self):
         self.assertFalse(validate_name_length("12345678910111213"))
