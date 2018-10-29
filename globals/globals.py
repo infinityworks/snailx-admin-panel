@@ -18,10 +18,11 @@ from routes.rounds.add_round import add_round_blueprint
 from routes.login.logout import logout_blueprint
 from routes.rounds.rounds import rounds_blueprint
 from routes.races.races import races_blueprint
-
+from routes.add_snail.add_snail import add_snail_blueprint
 
 app.register_blueprint(login_blueprint)
 app.register_blueprint(add_round_blueprint)
 app.register_blueprint(logout_blueprint)
 app.register_blueprint(rounds_blueprint)
 app.register_blueprint(races_blueprint)
+app.register_blueprint(add_snail_blueprint)

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form action="" method="post" novalidate>
+    {{ form.csrf_token }}
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.snail_name.label }}<br>
+        {{ form.snail_name(size=36, class_='form-controls form-control-lg') }}
+    </p>
+    <p>
+        {{ form.trainer_name.label }}<br>
+        {{ form.trainer_name(size=36, class_='form-controls form-control-lg') }}
+    </p>
+    <p>
+        <select name="option">
+        {% for trainer in trainers %}
+            <option value="{{ trainer }}">{{ trainer }}</option>
+        {% endfor %}
+        </select>
+    </p>
+    <p>{{ form.submit(class_='finite-orange-button') }}</p>
+</form>
+
+{% endblock %}
