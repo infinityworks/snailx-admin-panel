@@ -3,7 +3,7 @@ from globals.globals import app
 from unittest import mock
 from unittest.mock import MagicMock
 import datetime
-from routes.rounds.add_round import validate_date_interval, validate_dates, validate_start_before_end, validate_name_length
+from routes.rounds.add_round import validate_date_interval, validate_dates, validate_start_before_end, validate_name_length, validate_unique_name
 from dateutil import parser
 
 
@@ -47,6 +47,10 @@ class TestAddRound(unittest.TestCase):
     def test_add_round_name_length_greater_than_max_validation(self):
         self.assertFalse(validate_name_length("12345678910111213"))
 
+    @mock.patch("db.models.Round.get_round_by_name", MagicMock(return_value=True))
+    def test_add_round_name_unique_validation(self):
+        self.assertFalse(validate_unique_name("unqiuename"))
+
     @mock.patch('flask_login.utils._get_user')
     @mock.patch('routes.rounds.add_round.db.session.add', MagicMock(return_value=None))
     @mock.patch('routes.rounds.add_round.db.session.commit', MagicMock(return_value=None))
@@ -54,6 +58,7 @@ class TestAddRound(unittest.TestCase):
     @mock.patch('routes.rounds.add_round.validate_dates', MagicMock(return_value=True))
     @mock.patch('routes.rounds.add_round.validate_start_before_end', MagicMock(return_value=True))
     @mock.patch('routes.rounds.add_round.validate_name_length', MagicMock(return_value=True))
+    @mock.patch('routes.rounds.add_round.validate_unique_name', MagicMock(return_value=True))
     def test_add_round_valid_round_logged_in(self, current_user):
         current_user.is_authenticated = True
         with self.client as client:
@@ -67,6 +72,7 @@ class TestAddRound(unittest.TestCase):
     @mock.patch('routes.rounds.add_round.validate_dates', MagicMock(return_value=True))
     @mock.patch('routes.rounds.add_round.validate_start_before_end', MagicMock(return_value=True))
     @mock.patch('routes.rounds.add_round.validate_name_length', MagicMock(return_value=True))
+    @mock.patch('routes.rounds.add_round.validate_unique_name', MagicMock(return_value=True))
     def test_add_round_valid_round_not_logged_in(self):
         with self.client as client:
             response = client.post(
@@ -78,6 +84,7 @@ class TestAddRound(unittest.TestCase):
     @mock.patch('routes.rounds.add_round.validate_dates', MagicMock(return_value=True))
     @mock.patch('routes.rounds.add_round.validate_start_before_end', MagicMock(return_value=True))
     @mock.patch('routes.rounds.add_round.validate_name_length', MagicMock(return_value=True))
+    @mock.patch('routes.rounds.add_round.validate_unique_name', MagicMock(return_value=True))
     def test_add_round_date_interval_validation_invalid_date_interval_flash(self, current_user):
         current_user.is_authenticated = True
         with self.client as client:
@@ -91,6 +98,7 @@ class TestAddRound(unittest.TestCase):
     @mock.patch('routes.rounds.add_round.validate_dates', MagicMock(return_value=False))
     @mock.patch('routes.rounds.add_round.validate_start_before_end', MagicMock(return_value=True))
     @mock.patch('routes.rounds.add_round.validate_name_length', MagicMock(return_value=True))
+    @mock.patch('routes.rounds.add_round.validate_unique_name', MagicMock(return_value=True))
     def test_add_round_date_in_past_validation_dates_in_past_flash(self, current_user):
         current_user.is_authenticated = True
         with self.client as client:
@@ -104,6 +112,7 @@ class TestAddRound(unittest.TestCase):
     @mock.patch('routes.rounds.add_round.validate_dates', MagicMock(return_value=True))
     @mock.patch('routes.rounds.add_round.validate_start_before_end', MagicMock(return_value=False))
     @mock.patch('routes.rounds.add_round.validate_name_length', MagicMock(return_value=True))
+    @mock.patch('routes.rounds.add_round.validate_unique_name', MagicMock(return_value=True))
     def test_add_round_start_date_after_end_date_validation_flash(self, current_user):
         current_user.is_authenticated = True
         with self.client as client:
@@ -117,6 +126,7 @@ class TestAddRound(unittest.TestCase):
     @mock.patch('routes.rounds.add_round.validate_dates', MagicMock(return_value=True))
     @mock.patch('routes.rounds.add_round.validate_start_before_end', MagicMock(return_value=True))
     @mock.patch('routes.rounds.add_round.validate_name_length', MagicMock(return_value=False))
+    @mock.patch('routes.rounds.add_round.validate_unique_name', MagicMock(return_value=True))
     def test_add_round_name_length_greater_than_max_validation_flash(self, current_user):
         current_user.is_authenticated = True
         with self.client as client:
@@ -124,3 +134,17 @@ class TestAddRound(unittest.TestCase):
                 '/rounds/add', data=dict(name="test", start_date="01/01/2001 12:00 AM", end_date="02/02/2002 12:00 PM"))
             self.assertIn(
                 b'Failed to create new round. The maximum name length is 12 characters.', response.data)
+
+    @mock.patch('flask_login.utils._get_user')
+    @mock.patch('routes.rounds.add_round.validate_date_interval', MagicMock(return_value=True))
+    @mock.patch('routes.rounds.add_round.validate_dates', MagicMock(return_value=True))
+    @mock.patch('routes.rounds.add_round.validate_start_before_end', MagicMock(return_value=True))
+    @mock.patch('routes.rounds.add_round.validate_name_length', MagicMock(return_value=True))
+    @mock.patch('routes.rounds.add_round.validate_unique_name', MagicMock(return_value=False))
+    def test_add_round_unique_name_validation_flash(self, current_user):
+        current_user.is_authenticated = True
+        with self.client as client:
+            response = client.post(
+                '/rounds/add', data=dict(name="test", start_date="01/01/2001 12:00 AM", end_date="02/02/2002 12:00 PM"))
+            self.assertIn(
+                b'Failed to create new round. Round name already exists.', response.data)

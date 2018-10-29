@@ -29,7 +29,7 @@ def add_round():
                 'Failed to create new round. The maximum name length is 12 characters.', 'danger')
             return render_template('add_round.html', title='Add Round', form=form)
 
-        if not validate_unqiue_name(name):
+        if not validate_unique_name(name):
             flash(
                 'Failed to create new round. Round name already exists.', 'danger')
             return render_template('add_round.html', title='Add Round', form=form)
@@ -62,7 +62,7 @@ def add_round():
     return render_template('add_round.html', title='Add Round', form=form)
 
 
-def validate_unqiue_name(name):
+def validate_unique_name(name):
     return False if Round().get_round_by_name(name) else True
 
 
