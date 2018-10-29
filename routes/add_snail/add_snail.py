@@ -16,22 +16,23 @@ def add_snail():
     form = AddSnailForm()
     form.trainer_name.choices = [(str(t.id), t.name) for t in trainer_model.get_all_trainers()]
     if form.validate_on_submit():
+        print("validating\n\n\n\n")
         if validate_snail_not_in_db(form.snail_name.data):
-            flash('Snail already exists')
+            flash_message('Snail already exists')
             return redirect(url_for('add_snail.add_snail'))
 
         if len(form.snail_name.data) > 12:
-            flash('Snail name cannot be longer than 12 characters.')
+            flash_message('Snail name cannot be longer than 12 characters.')
             return redirect(url_for('add_snail.add_snail'))
 
         try:
             add_snail_to_db(form.snail_name.data.capitalize(), int(form.trainer_name.data))
 
         except:
-            flash('Failed to create new snail, please check provided details are correct and try again.', 'error')
+            flash_message('Failed to create new snail, please check provided details are correct and try again.', 'error')
             return redirect(url_for('add_snail.add_snail'))
 
-        flash('Snail successfully added.')
+        flash_message('Snail successfully added.')
         return redirect(url_for('rounds.rounds'))
 
     return render_template('add_snail.html', title='Add Snail', form=form)
@@ -45,3 +46,7 @@ def add_snail_to_db(snail_name, trainer_id):
     new_snail = Snail(name=snail_name, trainer_id=trainer_id)
     db.session.add(new_snail)
     db.session.commit()
+
+
+def flash_message(message):
+    flash(message)
