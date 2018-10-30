@@ -7,15 +7,18 @@
 <input type="button" class="btn btn-success btn-lg add-race-btn" value="Add Race" onclick="location.href='/rounds/{{round_id}}/races/add';">
 
 <table class="table table-hover">
+    <colgroup>
+        <col class="col-xs-2">
+        </col>
+        <col class="col-xs-2">
+        </col>
+        <col class="col-xs-2">
+        </col>
+    </colgroup>
     <thead>
-        <colgroup>
-            <col class="col-xs-2">
-            </col>
-            <col class="col-xs-2">
-            </col>
-            <col class="col-xs-2">
-            </col>
-        </colgroup>
+        <tr>
+            <th colspan="4">Round {{round_id}} Races</th>
+        </tr>
         <tr>
             <th scope="col">ID</th>
             <th scope="col">Date</th>
