@@ -31,7 +31,8 @@ def add_snail_to_race(round_id, race_id):
             commit_snail_to_race(race_id, form.snail_id.data)
 
     return render_template('add_snail_to_race.html', all_snails=all_snails,
-                        form=form)
+                           form=form)
+
 
 def commit_snail_to_race(id_race, id_snail):
     race_participant = RaceParticipants(id_race=id_race, id_snail=id_snail)
@@ -45,11 +46,11 @@ def validation(form):
 
 def validate_snail_in_same_race(race_id, snail_id):
     race_participants = RaceParticipants().get_race_participants_race_id(race_id)
+    i = False
     for snail in race_participants:
         if int(snail.id_snail) == int(snail_id):
-            return True
-        else:
-            return False
+            i = True
+    return i
 
 
 def flash_redirect(message, path, race_id, round_id):
@@ -59,24 +60,19 @@ def flash_redirect(message, path, race_id, round_id):
 
 def validate_snail_in_same_round(round_id, race_id, snail_id):
     races_in_round = Race().get_races_by_round(round_id)
+    i = False
     for race in races_in_round:
         race_participants = RaceParticipants().get_race_participants_race_id(race.id)
         for snail in race_participants:
             if int(snail.id_snail) == int(snail_id):
-                return True
-            else:
-                return False
+                i = True
+        return i
 
 
 def validate_snail_in_inflight_round(round_id):
     future_rounds = Round().get_future_round_times()
+    i = False
     for rounds in future_rounds:
-        if rounds.id == round_id:
-            return True
-        else:
-            return False
-
-
-
-    
-                
+        if int(rounds.id) == int(round_id):
+            i = True
+    return i
