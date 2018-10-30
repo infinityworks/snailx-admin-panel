@@ -10,11 +10,8 @@ from tests import test_add_round
 from tests import test_add_snail
 from tests import test_add_race
 from tests import test_results
-<<<<<<< HEAD
 from tests import test_add_snail_to_race
-=======
 from tests import test_add_trainer
->>>>>>> origin/develop
 
 # initialize the test suite
 loader = unittest.TestLoader()
