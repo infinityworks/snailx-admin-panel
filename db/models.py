@@ -108,6 +108,9 @@ class Round(db.Model):
     def get_round_by_name(self, name):
         return db.session.query(Round).filter_by(name=name).first()
 
+    def get_future_round_times(self):
+        return db.session.query(Round).filter(Round.start_date > datetime.datetime.utcnow()).all()
+
 
 class RaceResult(db.Model):
     id = db.Column(db.Integer(), primary_key=True, autoincrement=True)

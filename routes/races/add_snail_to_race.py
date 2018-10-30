@@ -1,6 +1,6 @@
 from flask import render_template, Blueprint, url_for, redirect, flash
 from flask_login import current_user
-from db.models import Snail, RaceParticipants, Race
+from db.models import Snail, RaceParticipants, Race, Round
 from forms.forms import RaceResultsForm, AddSnailToRace
 from globals.globals import db
 
@@ -23,7 +23,9 @@ def add_snail_to_race(round_id, race_id):
         if validate_snail_in_same_race(race_id, form.snail_id.data):
             flash_redirect("This snail is already in the selected race", "add_snail_to_race.add_snail_to_race", race_id, round_id)
         elif validate_snail_in_same_round(round_id, race_id, form.snail_id.data):
-            flash_redirect("This snail is already racing in the selected round", "add_snail_to_race.add_snail_to_race", race_id, round_id )
+            flash_redirect("This snail is already racing in the selected round", "add_snail_to_race.add_snail_to_race", race_id, round_id)
+        if not validate_snail_in_inflight_round(round_id):
+            flash_redirect("This round in ineligible for snails to be added, please check the times and try again", "add_snail_to_race.add_snail_to_race", race_id, round_id)
         else:
             flash("Snail has been added to this race")
             commit_snail_to_race(race_id, form.snail_id.data)
@@ -60,6 +62,16 @@ def validate_snail_in_same_round(round_id, race_id, snail_id):
                 return True
             else:
                 return False
+
+def validate_snail_in_inflight_round(round_id):
+    future_rounds = Round().get_future_round_times()
+    for rounds in future_rounds:
+        if rounds.id == round_id:
+            return True
+        else:
+            return False
+
+
 
     
                 
