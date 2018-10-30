@@ -3,7 +3,6 @@ from forms.forms import AddRoundForm
 from db.models import Round
 from globals.globals import db
 import datetime
-from dateutil import parser
 from flask_login import current_user
 
 
@@ -20,18 +19,11 @@ def add_round():
     if form.validate_on_submit():
         start = form.start_date.data
         end = form.end_date.data
-        name = form.name.data
+        cur_datetime = datetime.datetime.now()
 
-        cur_datetime = datetime.datetime.utcnow()
-
-        if not validate_name_length(name):
+        if not validate_name_length(form.name.data):
             flash(
                 'Failed to create new round. The maximum name length is 12 characters.', 'danger')
-            return render_template('add_round.html', title='Add Round', form=form)
-
-        if not validate_unique_name(name):
-            flash(
-                'Failed to create new round. Round name already exists.', 'danger')
             return render_template('add_round.html', title='Add Round', form=form)
 
         if not validate_dates(start, end, cur_datetime):
@@ -62,23 +54,18 @@ def add_round():
     return render_template('add_round.html', title='Add Round', form=form)
 
 
-def validate_unique_name(name):
-    return False if Round().get_round_by_name(name) else True
-
-
 def validate_name_length(name):
-    return len(name) <= 12
+    return len(name) < 12
 
 
 def validate_date_interval(start_date, end_date):
-    print(Round().get_num_rounds_between_dates(start_date, end_date)[0])
-    return Round().get_num_rounds_between_dates(start_date, end_date)[0] == 0
+    return not Round().get_num_rounds_between_dates(start_date, end_date)[0]
 
 
 def validate_dates(start_date, end_date, cur_datetime):
-    return (parser.parse(start_date) >= cur_datetime
-            and parser.parse(end_date) >= cur_datetime)
+    return not (datetime.datetime.strptime(start_date, '%m/%d/%Y %H:%M %p') < cur_datetime
+                or datetime.datetime.strptime(end_date, '%m/%d/%Y %H:%M %p') < cur_datetime)
 
 
 def validate_start_before_end(start_date, end_date):
-    return parser.parse(start_date) < parser.parse(end_date)
+    return datetime.datetime.strptime(start_date, '%m/%d/%Y %H:%M %p') < datetime.datetime.strptime(end_date, '%m/%d/%Y %H:%M %p')

@@ -1,0 +1,21 @@
+.row .form-group {
+    margin: auto;
+}
+
+.invalid-feedback {
+    position: absolute;
+    padding-top: 34px;
+}
+
+.input-group .add-race-field {
+    padding-bottom: 25px;
+}
+
+.add-race-field li:hover {
+    color: black;
+    background-color: #FFFFFF;
+}
+
+.add-race-field {
+    margin-bottom: 30px;
+}

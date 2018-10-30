@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<link rel="stylesheet" href="../static/rounds.css">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/rounds.css') }}">
 
 <input type="button" class="btn btn-success btn-lg add-round-btn" value="Add Round" onclick="location.href = '/rounds/add';">
 

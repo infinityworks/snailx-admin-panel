@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form action="" method="post" novalidate>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/add_race.css') }}">
+
+
+<form action="" class="needs-validation add-race-form" method="post" novalidate>
     {{ form.hidden_tag() }}
     <div>
         <h1>Add Race</h1>
@@ -9,15 +13,23 @@
         <div class="row">
             <div style="margin: 0 auto; width: 400px;">
                 <div class="" style="margin: 0 auto;">
-                    <p>
+
+                    <div class="input-group add-race-field">
                         {{ form.race_status.label }}<br>
                         {{ form.race_status(size=32, class_='form-control form-control-lg') }}
-                    </p><br>
+                        <div class="invalid-feedback">
+                            Please enter a race status.
+                        </div>
+                    </div>
+                    <br>
 
                     {{ form.race_date.label }}<br>
 
-                    <div class='input-group date' id='datetimepicker1'>
+                    <div class='input-group date add-race-field' id='datetimepicker1'>
                         {{ form.race_date(class_='form-control form-control-lg') }}
+                        <div class="invalid-feedback">
+                            Please select a date.
+                        </div>
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -33,6 +45,6 @@
             });
         </script>
     </div>
+    <script src="{{ url_for('static', filename='scripts/bootstrap_validation.js') }}"> </script>
 </form>
 {% endblock %}
-
