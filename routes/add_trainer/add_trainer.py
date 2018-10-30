@@ -8,7 +8,7 @@ from routes.login.login import redirect_to
 add_trainer_blueprint = Blueprint('add_trainer', __name__)
 
 
-@add_trainer_blueprint.route('/trainer/add', methods=["GET", "POST"])
+@add_trainer_blueprint.route('/trainers/add', methods=["GET", "POST"])
 def add_trainer():
 
     if not current_user.is_authenticated:
@@ -19,8 +19,6 @@ def add_trainer():
     if form.validate_on_submit():
         trainer_name = form.name.data
         trainer_exists_in_db = Trainer().get_trainer_by_name(trainer_name)
-        print("db exists ")
-        print(trainer_exists_in_db)
 
         if trainer_exists_in_db:
             flash("This trainer name already exists")
@@ -39,6 +37,6 @@ def add_race_to_db(trainer_name):
     try:
         db.session.add(trainer)
         db.session.commit()
-    except :
+    except:
         flash("Sorry, there was an internal error, the trainer was not added")
         return redirect(url_for('add_trainer.add_trainer'))
