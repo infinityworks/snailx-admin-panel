@@ -19,13 +19,15 @@ def add_trainer():
     if form.validate_on_submit():
         trainer_name = form.name.data
         trainer_exists_in_db = Trainer().get_trainer_by_name(trainer_name)
+        print("db exists ")
+        print(trainer_exists_in_db)
 
-        if trainer_exists_in_db >= 1:
+        if trainer_exists_in_db:
             flash("This trainer name already exists")
             return redirect(url_for('add_trainer.add_trainer'))
 
-        flash("Successfully added trainer")
         add_race_to_db(trainer_name)
+        flash("Successfully added trainer")
         return redirect(url_for('add_trainer.add_trainer'))
 
     return render_template('add_trainer.html', form=form)
@@ -34,5 +36,9 @@ def add_trainer():
 def add_race_to_db(trainer_name):
     trainer = Trainer(name=trainer_name)
 
-    db.session.add(trainer)
-    db.session.commit()
+    try:
+        db.session.add(trainer)
+        db.session.commit()
+    except :
+        flash("Sorry, there was an internal error, the trainer was not added")
+        return redirect(url_for('add_trainer.add_trainer'))
