@@ -24,7 +24,7 @@ def add_snail_to_race(round_id, race_id):
             flash_redirect("This snail is already in the selected race", "add_snail_to_race.add_snail_to_race", race_id, round_id)
         elif validate_snail_in_same_round(round_id, race_id, form.snail_id.data):
             flash_redirect("This snail is already racing in the selected round", "add_snail_to_race.add_snail_to_race", race_id, round_id)
-        if not validate_snail_in_inflight_round(round_id):
+        elif not validate_snail_in_inflight_round(round_id):
             flash_redirect("This round in ineligible for snails to be added, please check the times and try again", "add_snail_to_race.add_snail_to_race", race_id, round_id)
         else:
             flash("Snail has been added to this race")
@@ -38,8 +38,10 @@ def commit_snail_to_race(id_race, id_snail):
     db.session.add(race_participant)
     db.session.commit()
 
+
 def validation(form):
     return form.validate()
+
 
 def validate_snail_in_same_race(race_id, snail_id):
     race_participants = RaceParticipants().get_race_participants_race_id(race_id)
@@ -49,9 +51,11 @@ def validate_snail_in_same_race(race_id, snail_id):
         else:
             return False
 
-def flash_redirect(message, path, race_id, round_id ):
+
+def flash_redirect(message, path, race_id, round_id):
     flash(message)
     return redirect(url_for(path, race_id=race_id, round_id=round_id))
+
 
 def validate_snail_in_same_round(round_id, race_id, snail_id):
     races_in_round = Race().get_races_by_round(round_id)
@@ -62,6 +66,7 @@ def validate_snail_in_same_round(round_id, race_id, snail_id):
                 return True
             else:
                 return False
+
 
 def validate_snail_in_inflight_round(round_id):
     future_rounds = Round().get_future_round_times()
