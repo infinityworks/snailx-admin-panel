@@ -1,7 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import (StringField, PasswordField, BooleanField, SubmitField, 
-                     IntegerField, DateField)
-from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
+from wtforms import (StringField, PasswordField, BooleanField, SubmitField, IntegerField, SelectField)
+from wtforms.validators import DataRequired
 from wtforms.widgets import HiddenInput
 
 
@@ -32,3 +31,9 @@ class AddRoundForm(FlaskForm):
     start_date = StringField('Start Date', validators=[DataRequired()])
     end_date = StringField('End Date', validators=[DataRequired()])
     submit = SubmitField('Create Round')
+
+
+class AddSnailForm(FlaskForm):
+    snail_name = StringField('Snail Name', validators=[DataRequired()])
+    trainer_name = SelectField('Trainer Name')
+    submit = SubmitField('Add Snail')
