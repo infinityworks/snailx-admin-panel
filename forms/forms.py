@@ -37,3 +37,9 @@ class AddRoundForm(FlaskForm):
 class AddSnailToRace(FlaskForm):
     snail_id = SelectField('Name')
     submit = SubmitField('Add Snail')
+
+    
+class AddSnailForm(FlaskForm):
+    snail_name = StringField('Snail Name', validators=[DataRequired()])
+    trainer_name = SelectField('Trainer Name')
+    submit = SubmitField('Add Snail')

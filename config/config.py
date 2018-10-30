@@ -18,6 +18,7 @@ class StagingConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'postgres://fqtkemerxaamnr:a50ea567ed6f24f9bfba2bd6071729d195df57a82c3bcc0ffcf07a176916d2d7@ec2-54-217-249-103.eu-west-1.compute.amazonaws.com:5432/d83g723rkf2r2o'
     WTF_CSRF_ENABLED = False
 
+
 class DevelopmentConfig(Config):
     POSTGRES_URL = os.getenv("POSTGRES_URL")
     POSTGRES_USER = os.getenv("POSTGRES_USER")
