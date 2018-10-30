@@ -1,11 +1,7 @@
 import unittest
-<<<<<<< HEAD
-from tests import (test_login, test_session_persistence, test_rounds, test_rounds_races, test_logout, test_add_round, test_add_race, test_add_trainer)
-=======
 from tests import (test_login, test_session_persistence, test_rounds, 
                    test_rounds_races, test_logout, test_add_round, 
-                   test_add_race, test_results)
->>>>>>> develop
+                   test_add_race, test_results, test_add_trainer)
 import xmlrunner
 import sys
 
