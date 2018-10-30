@@ -39,7 +39,7 @@
                     Please select an end date.
                 </div>
                 <span class="input-group-addon">
-                <span class="glyphicon glyphicon-calendar"></span>
+                    <span class="glyphicon glyphicon-calendar"></span>
                 </span>
             </div>
 
@@ -51,7 +51,8 @@
         $(function () {
             var todaysDateTime = moment().format('MM/DD/YYYY hh:mm A');
             $('.datetime').datetimepicker({
-                format: 'MM/DD/YYYY hh:mm A'
+                format: 'MM/DD/YYYY hh:mm A',
+                minDate: "{{min_date}}"
             });
         });
     </script>

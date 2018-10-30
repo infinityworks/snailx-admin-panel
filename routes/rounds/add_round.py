@@ -59,7 +59,7 @@ def add_round():
             flash(
                 'Failed to create new round. Check that round details are valid and try again.', 'error')
 
-    return render_template('add_round.html', title='Add Round', form=form)
+    return render_template('add_round.html', title='Add Round', form=form, min_date=datetime.datetime.utcnow())
 
 
 def validate_unique_name(name):
