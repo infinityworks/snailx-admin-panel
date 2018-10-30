@@ -27,15 +27,13 @@
 
                     <div class='input-group date add-race-field' id='datetimepicker1'>
                         {{ form.race_date(class_='form-control form-control-lg') }}
-                        <div class="invalid-feedback">
-                            Please select a date.
-                        </div>
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
-                    </div><br>
+                    </div>
+                    <br>
 
-                    <p>{{ form.submit(class_='btn btn-success btn-lg') }}</p>
+                    {{ form.submit(class_='btn btn-success btn-lg') }}
                 </div>
             </div>
         </div>
