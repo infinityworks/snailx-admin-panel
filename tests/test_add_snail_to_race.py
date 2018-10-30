@@ -129,4 +129,3 @@ class TestAddSnailToRace(unittest.TestCase):
             self.assertIn(
                 b"This round in ineligible for snails to be added, please check the times and try again",
                 response.data)
-
