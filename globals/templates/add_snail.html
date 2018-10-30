@@ -2,17 +2,57 @@
 
 {% block content %}
 
-<form action="" method="post" novalidate>
+<link rel="stylesheet" href="{{ url_for('static', filename='add_snail.css') }}">
+
+<form action="" class="add-snail-form needs-validation" method="post" novalidate>
     {{ form.hidden_tag() }}
-    <p>
-        {{ form.snail_name.label }}<br>
-        {{ form.snail_name(size=36, class_='form-controls form-control-lg') }}
-    </p>
-    <p>
-        {{ form.trainer_name.label }}
-        {{ form.trainer_name(class_='form-controls form-control-lg') }}
-    </p>
-    <p>{{ form.submit(class_='finite-orange-button') }}</p>
+    <h1>Add Snail</h1>
+
+
+    <div class="row">
+        <div class="form-group">
+
+            <div class="input-group add-snail-field">
+                {{ form.snail_name.label }}
+                {{ form.snail_name(size=36, class_='form-control form-control-lg') }}
+                <div class="invalid-feedback">
+                    Please enter a name.
+                </div>
+            </div>
+            <br>
+
+            <div class="input-group add-snail-field">
+                {{ form.trainer_name.label }}
+                {{ form.trainer_name(class_='form-control form-control-lg') }}
+                <div class="invalid-feedback">
+                    Please select a trainer.
+                </div>
+            </div>
+            <br>
+
+            {{ form.submit(class_='btn btn-success btn-lg') }}
+        </div>
+
+        <script type="text/javascript">
+            (function () {
+                'use strict';
+                window.addEventListener('load', function () {
+                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                    var forms = document.getElementsByClassName('needs-validation');
+                    // Loop over them and prevent submission
+                    var validation = Array.prototype.filter.call(forms, function (form) {
+                        form.addEventListener('submit', function (event) {
+                            if (form.checkValidity() === false) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            form.classList.add('was-validated');
+                        }, false);
+                    });
+                }, false);
+            })();
+        </script>
+    </div>
 </form>
 
 {% endblock %}

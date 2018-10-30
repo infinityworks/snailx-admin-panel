@@ -1,8 +1,13 @@
 import unittest
-from tests import (test_login, test_session_persistence,
-                   test_rounds, test_rounds_races, test_logout, test_add_round, test_add_snail)
 import xmlrunner
 import sys
+from tests import test_login
+from tests import test_session_persistence
+from tests import test_rounds
+from tests import test_rounds_races
+from tests import test_logout
+from tests import test_add_round
+from tests import test_add_snail
 
 # initialize the test suite
 loader = unittest.TestLoader()
