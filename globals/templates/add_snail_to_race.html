@@ -1,36 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
+
 <form action="" method="post" novalidate>
     {{ form.hidden_tag() }}
-    <div>
-        <h1>Add Snail To Race</h1>
-
-        <div class="row">
-            <div style="margin: 0 auto; width: 400px;">
-                <div class="" style="margin: 0 auto;">
-                    <form method="POST" action="", autocomplete="off">
-                        <select name = "Snail" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {% for snail in all_snails %}
-                            <option class="dropdown-item" value="{{snail.id}}">{{snail.name}}</option>
-                        {% endfor %}
-                        </select>
-                        <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            {% for snail in all_snails %}
-                            <button class="dropdown-item" type="button">{{snail.name}}</button>
-                            {% endfor %}
-                        </div>
-                        </div>
-                    </form>
-                    <p>{{ form.submit(class_='btn btn-success btn-lg') }}</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    <p>
+        {{ form.snail_id.label }}<br>
+        {{ form.snail_id(size=36, class_='form-control form-controls-lg') }}
+    </p>
+    <p>
+        {{ form.submit(class_='finite-orange-button') }}
+    </p>
 </form>
+
 {% endblock %}
 

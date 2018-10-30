@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import (StringField, PasswordField, BooleanField, SubmitField, 
-                     IntegerField, DateField)
+                     IntegerField, DateField, SelectField)
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
 from wtforms.widgets import HiddenInput
 
@@ -35,6 +35,5 @@ class AddRoundForm(FlaskForm):
 
 
 class AddSnailToRace(FlaskForm):
-    snail_id = IntegerField('Name', validators=[DataRequired()])
-    race_id = IntegerField('race_id', validators=[DataRequired()])
+    snail_id = SelectField('Name')
     submit = SubmitField('Add Snail')
