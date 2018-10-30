@@ -8,7 +8,7 @@
     }
 </style>
 
-<div id="snailXNavi" class="noselect">
+<div id="snailXNavi" class="noselect snailx-nav">
     <div id="links">
         <ul>
             {% if current_user.is_authenticated %}
@@ -26,7 +26,7 @@
     {% endif %}
 </div>
 
-<div id="snailXSidebar" class="noselect" style="display:none;">
+<div id="snailXSidebar" class="noselect snailx-nav" style="display:none;">
     <img style="width: 80px;" src="{{ url_for('static', filename='snailx.png') }}" />
     <p style="font-family: Arial; font-size: 30px; color: #333F48; letter-spacing: 10px;">SNAIL X</p>
     <div class="XsidebarSection">
