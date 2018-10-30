@@ -46,7 +46,6 @@ class TestAddSnailToRace(unittest.TestCase):
             response = client.get("/rounds/1/races/1/add")
             self.assertEqual(200, response.status_code)
 
-
     @mock.patch('flask_login.utils._get_user')
     @mock.patch('db.models.Snail.get_all_snails', MagicMock(
         return_value=[MockSnail(id=1, name="test1", trainer_id=1),
@@ -65,7 +64,6 @@ class TestAddSnailToRace(unittest.TestCase):
             response = client.post("/rounds/1/races/1/add",
                                    data=dict(snail_id=1), follow_redirects=True)
             self.assertIn(b"Snail has been added to this race", response.data)
-
 
     @mock.patch('flask_login.utils._get_user')
     @mock.patch('db.models.Snail.get_all_snails', MagicMock(
@@ -87,7 +85,6 @@ class TestAddSnailToRace(unittest.TestCase):
             self.assertIn(b"This snail is already in the selected race",
                           response.data)
 
-
     @mock.patch('flask_login.utils._get_user')
     @mock.patch('db.models.Snail.get_all_snails', MagicMock(
         return_value=[MockSnail(id=1, name="test1", trainer_id=1),
@@ -107,7 +104,6 @@ class TestAddSnailToRace(unittest.TestCase):
                                    data=dict(snail_id=1), follow_redirects=True)
             self.assertIn(b"This snail is already racing in the selected round",
                           response.data)
-
 
     @mock.patch('flask_login.utils._get_user')
     @mock.patch('db.models.Snail.get_all_snails', MagicMock(
