@@ -14,7 +14,7 @@
             {% if current_user.is_authenticated %}
             <li onclick="displaySnailXSidebar()"><i class="fas fa-bars"></i></li>
             {% endif %}
-            <li><img style="text-align: center; width: 28px;" src="{{ url_for('static', filename='snailx.png') }}" />
+            <li><img style="text-align: center; width: 28px;" src="{{ url_for('static', filename='imgs/snailx.png') }}" />
                 <span style="font-family: Arial; font-size: 18px; letter-spacing: 5px;">SNAIL X</span></li>
         </ul>
     </div>
@@ -27,7 +27,7 @@
 </div>
 
 <div id="snailXSidebar" class="noselect snailx-nav" style="display:none;">
-    <img style="width: 80px;" src="{{ url_for('static', filename='snailx.png') }}" />
+    <img style="width: 80px;" src="{{ url_for('static', filename='imgs/snailx.png') }}" />
     <p style="font-family: Arial; font-size: 30px; color: #333F48; letter-spacing: 10px;">SNAIL X</p>
     <div class="XsidebarSection">
         <h3 padding="5px">ADMIN</h3>
