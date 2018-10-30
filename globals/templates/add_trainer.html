@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+    <div>
+        <h1>Add Trainer</h1>
+
+        <div class="row">
+            <div style="margin: 0 auto; width: 400px;">
+                <div class="" style="margin: 0 auto;">
+                    <p>
+                        {{ form.name.label }}<br>
+                        {{ form.name(size=28, class_='form-control form-control-lg') }}
+                    </p>
+
+                    <p>{{ form.submit(class_='btn btn-success btn-lg') }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}
+

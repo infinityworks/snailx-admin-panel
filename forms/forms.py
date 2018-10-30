@@ -21,3 +21,8 @@ class AddRoundForm(FlaskForm):
     start_date = StringField('Start Date', validators=[DataRequired()])
     end_date = StringField('End Date', validators=[DataRequired()])
     submit = SubmitField('Create Round')
+
+
+class AddTrainerForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
+    submit = SubmitField('Add Trainer')

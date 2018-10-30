@@ -14,6 +14,9 @@ class Trainer(db.Model):
     def get_trainer(self, id):
         return self.query.filter_by(id=id).first()
 
+    def get_trainer_by_name(self, name):
+        return self.query.filter(func.lower(Trainer.name) == func.lower(name)).count()
+
 
 class Snail(db.Model):
     id = db.Column(db.Integer, primary_key=True)
