@@ -3,7 +3,11 @@ from globals.globals import app
 from unittest import mock
 from unittest.mock import MagicMock
 import datetime
-from routes.rounds.add_round import validate_date_interval, validate_dates, validate_start_before_end, validate_name_length, validate_unique_name
+from routes.rounds.add_round import (validate_date_interval,
+                                     validate_dates,
+                                     validate_start_before_end,
+                                     validate_name_length,
+                                     validate_unique_name)
 from dateutil import parser
 
 
