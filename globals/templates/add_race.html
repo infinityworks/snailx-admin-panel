@@ -41,7 +41,10 @@
         </div>
         <script type="text/javascript">
             $(function () {
-                $('#datetimepicker1').datetimepicker();
+                $('#datetimepicker1').datetimepicker({
+                    minDate: "{{round_.start_date}}",
+                    maxDate: "{{round_.end_date}}"
+                });
             });
         </script>
     </div>
