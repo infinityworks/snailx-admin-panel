@@ -40,10 +40,6 @@ def commit_snail_to_race(id_race, id_snail):
     db.session.commit()
 
 
-def validation(form):
-    return form.validate()
-
-
 def validate_snail_in_same_race(race_id, snail_id):
     race_participants = RaceParticipants().get_race_participants_race_id(race_id)
     i = False

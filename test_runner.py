@@ -18,6 +18,7 @@ suite.addTests(loader.loadTestsFromModule(test_rounds_races))
 suite.addTests(loader.loadTestsFromModule(test_results))
 suite.addTests(loader.loadTestsFromModule(test_add_race))
 suite.addTests(loader.loadTestsFromModule(test_add_round))
+suite.addTests(loader.loadTestsFromModule(test_add_round))
 
 # initialize a runner, pass it your suite and run it
 runner = xmlrunner.XMLTestRunner(verbosity=3, output='test-reports/unittest')
