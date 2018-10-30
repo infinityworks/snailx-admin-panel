@@ -1,7 +1,7 @@
 from globals.globals import db, login_manager
 from flask_login import UserMixin
 import datetime
-from sqlalchemy.sql import func, distinct, between, or_, and_
+from sqlalchemy.sql import func, distinct, between, or_, and_, exists
 
 
 class Trainer(db.Model):
@@ -13,6 +13,9 @@ class Trainer(db.Model):
 
     def get_trainer(self, id):
         return self.query.filter_by(id=id).first()
+
+    def get_trainer_by_name(self, name):
+        return db.session.query(Trainer.name).filter(func.lower(Trainer.name) == func.lower(name)).scalar() is not None
 
     def get_all_trainers(self):
         return self.query.all()

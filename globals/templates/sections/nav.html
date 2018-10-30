@@ -12,10 +12,10 @@
     <div id="links">
         <ul>
             {% if current_user.is_authenticated %}
-            <li onclick="displaySnailXSidebar()"><i class="fas fa-bars"></i></li>
+            <li style="display: flex; height: 48.61px; justify-content: center; align-items: center;" onclick="displaySnailXSidebar()"><i style="font-size: 18px;" class="fas fa-bars"></i></li>
             {% endif %}
-            <li><img style="text-align: center; width: 28px;" src="{{ url_for('static', filename='snailx.png') }}" />
-                <span style="font-family: Arial; font-size: 18px; letter-spacing: 5px;">SNAIL X</span></li>
+            <li onclick="location.href='/';"><img style="display: block; float:left; text-align: center; width: 28px;" src="{{ url_for('static', filename='snailx.png') }}" />
+                <span style="display: flex; font-family: 'Arial', sans-serif; justify-content: center; align-items: center; float: left; margin-left: 10px; height: 28px; font-size: 18px; letter-spacing: 4.5px;">SNAIL X</span></li>
         </ul>
     </div>
     {% if current_user.is_authenticated %}

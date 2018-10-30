@@ -10,7 +10,11 @@ from tests import test_add_round
 from tests import test_add_snail
 from tests import test_add_race
 from tests import test_results
+<<<<<<< HEAD
 from tests import test_add_snail_to_race
+=======
+from tests import test_add_trainer
+>>>>>>> origin/develop
 
 # initialize the test suite
 loader = unittest.TestLoader()
@@ -28,6 +32,7 @@ suite.addTests(loader.loadTestsFromModule(test_add_round))
 suite.addTests(loader.loadTestsFromModule(test_add_round))
 suite.addTests(loader.loadTestsFromModule(test_add_snail))
 suite.addTests(loader.loadTestsFromModule(test_add_snail_to_race))
+suite.addTests(loader.loadTestsFromModule(test_add_trainer))
 
 # initialize a runner, pass it your suite and run it
 runner = xmlrunner.XMLTestRunner(verbosity=3, output='test-reports/unittest')
