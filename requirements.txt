@@ -1,7 +1,6 @@
 flask==1.0.2
 unittest-xml-reporting==2.2.0
 flask-wtf==0.14.2
-requests==2.19.1
 flask-sqlalchemy==2.3.1
 psycopg2==2.7.5
 flask-script==2.0.6

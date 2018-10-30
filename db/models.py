@@ -15,7 +15,10 @@ class Trainer(db.Model):
         return self.query.filter_by(id=id).first()
 
     def get_trainer_by_name(self, name):
-        return db.session.query(Trainer.name).filter(name.capitalize() == name.capitalize()).scalar() is not None
+        return db.session.query(Trainer.name).filter(func.lower(Trainer.name) == func.lower(name)).scalar() is not None
+
+    def get_all_trainers(self):
+        return self.query.all()
 
 
 class Snail(db.Model):
@@ -31,6 +34,9 @@ class Snail(db.Model):
 
     def get_all_snails(self):
         return self.query.all()
+
+    def get_snail_by_name(self, name):
+        return self.query.filter_by(name=name).first()
 
 
 class RaceParticipants(db.Model):
