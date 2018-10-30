@@ -1,24 +1,28 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-    <div>
-        <h1>Add Trainer</h1>
 
-        <div class="row">
-            <div style="margin: 0 auto; width: 400px;">
-                <div class="" style="margin: 0 auto;">
-                    <p>
-                        {{ form.name.label }}<br>
-                        {{ form.name(size=28, class_='form-control form-control-lg') }}
-                    </p>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/add_trainer.css') }}">
 
-                    <p>{{ form.submit(class_='btn btn-success btn-lg') }}</p>
+<form action="" class="needs-validation" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <h1>Add Trainer</h1>
+
+    <div class="row">
+        <div class="form-group">
+
+            <div class="input-group add-trainer-field">
+                {{ form.name.label }}<br>
+                {{ form.name(size=28, class_='form-control form-control-lg') }}
+                <div class="invalid-feedback">
+                    Please enter a name.
                 </div>
             </div>
+            <br>
+
+            {{ form.submit(class_='btn btn-success btn-lg') }}
         </div>
     </div>
+    <script src="{{ url_for('static', filename='scripts/bootstrap_validation.js') }}"></script>
 </form>
 {% endblock %}
-
