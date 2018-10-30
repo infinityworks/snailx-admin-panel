@@ -2,13 +2,6 @@ import unittest
 from globals.globals import app
 from unittest import mock
 from unittest.mock import MagicMock
-import datetime
-from routes.races.add_snail_to_race import (validate_snail_in_inflight_round,
-                                            validate_snail_in_same_round,
-                                            flash_redirect,
-                                            validate_snail_in_same_race,
-                                            commit_snail_to_race)
-from dateutil import parser
 
 
 class MockRace:
@@ -27,14 +20,14 @@ class MockRound:
         self.end_date = end_date
 
 
-class MockRaceParticipants():
+class MockRaceParticipants:
     def __init__(self, id, id_snail, id_race):
         self.id = id
         self.id_snail = id_snail
         self.id_race = id_race
 
 
-class MockSnail():
+class MockSnail:
     def __init__(self, id, name, trainer_id):
         self.id = id
         self.name = name
@@ -52,3 +45,60 @@ class TestAddSnailToRace(unittest.TestCase):
             current_user.is_authenticated = True
             response = client.get("/rounds/1/races/1/add")
             self.assertEqual(200, response.status_code)
+
+
+    @mock.patch('flask_login.utils._get_user')
+    @mock.patch('db.models.Snail.get_all_snails', MagicMock(return_value=[MockSnail(id=1, name="test1", trainer_id=1),
+                                                                          MockSnail(id=2, name="test2", trainer_id=1)]))
+    @mock.patch('routes.races.add_snail_to_race.validate_snail_in_same_race', MagicMock(return_value=False))
+    @mock.patch('routes.races.add_snail_to_race.validate_snail_in_same_round', MagicMock(return_value=False))
+    @mock.patch('routes.races.add_snail_to_race.validate_snail_in_inflight_round', MagicMock(return_value=True))
+    @mock.patch('routes.races.add_snail_to_race.commit_snail_to_race', MagicMock(return_value=None))
+    def test_snail_adds_snail_to_race(self, current_user):
+        with self.client as client:
+            current_user.is_authenticated = True
+            response = client.post("/rounds/1/races/1/add", data=dict(snail_id=1), follow_redirects=True)
+            self.assertIn(b"Snail has been added to this race", response.data)
+
+
+    @mock.patch('flask_login.utils._get_user')
+    @mock.patch('db.models.Snail.get_all_snails', MagicMock(return_value=[MockSnail(id=1, name="test1", trainer_id=1),
+                                                                          MockSnail(id=2, name="test2", trainer_id=1)]))
+    @mock.patch('routes.races.add_snail_to_race.validate_snail_in_same_race', MagicMock(return_value=True))
+    @mock.patch('routes.races.add_snail_to_race.validate_snail_in_same_round', MagicMock(return_value=False))
+    @mock.patch('routes.races.add_snail_to_race.validate_snail_in_inflight_round', MagicMock(return_value=True))
+    @mock.patch('routes.races.add_snail_to_race.commit_snail_to_race', MagicMock(return_value=None))
+    def test_snail_already_in_race(self, current_user):
+        with self.client as client:
+            current_user.is_authenticated = True
+            response = client.post("/rounds/1/races/1/add", data=dict(snail_id=1), follow_redirects=True)
+            self.assertIn(b"This snail is already in the selected race", response.data)
+
+
+    @mock.patch('flask_login.utils._get_user')
+    @mock.patch('db.models.Snail.get_all_snails', MagicMock(return_value=[MockSnail(id=1, name="test1", trainer_id=1),
+                                                                          MockSnail(id=2, name="test2", trainer_id=1)]))
+    @mock.patch('routes.races.add_snail_to_race.validate_snail_in_same_race', MagicMock(return_value=False))
+    @mock.patch('routes.races.add_snail_to_race.validate_snail_in_same_round', MagicMock(return_value=True))
+    @mock.patch('routes.races.add_snail_to_race.validate_snail_in_inflight_round', MagicMock(return_value=True))
+    @mock.patch('routes.races.add_snail_to_race.commit_snail_to_race', MagicMock(return_value=None))
+    def test_snail_already_in_round(self, current_user):
+        with self.client as client:
+            current_user.is_authenticated = True
+            response = client.post("/rounds/1/races/1/add", data=dict(snail_id=1), follow_redirects=True)
+            self.assertIn(b"This snail is already racing in the selected round", response.data)
+
+
+    @mock.patch('flask_login.utils._get_user')
+    @mock.patch('db.models.Snail.get_all_snails', MagicMock(return_value=[MockSnail(id=1, name="test1", trainer_id=1),
+                                                                          MockSnail(id=2, name="test2", trainer_id=1)]))
+    @mock.patch('routes.races.add_snail_to_race.validate_snail_in_same_race', MagicMock(return_value=False))
+    @mock.patch('routes.races.add_snail_to_race.validate_snail_in_same_round', MagicMock(return_value=False))
+    @mock.patch('routes.races.add_snail_to_race.validate_snail_in_inflight_round', MagicMock(return_value=False))
+    @mock.patch('routes.races.add_snail_to_race.commit_snail_to_race', MagicMock(return_value=None))
+    def test_snail_already_in_inflight_round(self, current_user):
+        with self.client as client:
+            current_user.is_authenticated = True
+            response = client.post("/rounds/1/races/1/add", data=dict(snail_id=1), follow_redirects=True)
+            self.assertIn(b"This round in ineligible for snails to be added, please check the times and try again", response.data)
+
