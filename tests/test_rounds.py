@@ -24,8 +24,8 @@ class TestRounds(unittest.TestCase):
             response = client.get("/rounds")
             self.assertEqual(200, response.status_code)
 
-    @mock.patch("db.models.Round.get_all_rounds", MagicMock(return_value=[MockRound(), MockRound()]))
     @mock.patch('flask_login.utils._get_user')
+    @mock.patch("db.models.Round.get_all_rounds", MagicMock(return_value=[MockRound(), MockRound()]))
     def test_rounds_are_displayed(self, current_user):
         with self.client as client:
             current_user.is_authenticated = True

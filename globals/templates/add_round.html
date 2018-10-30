@@ -15,7 +15,7 @@
             {{ form.name.label }}<br>
             <div class="input-group add-round-field">
 
-                {{ form.name(maxlength=12, class_='form-control form-control-lg') }}
+                {{ form.name(size=48, maxlength=12, class_='form-control form-control-lg') }}
                 <div class="invalid-feedback">
                     Please enter a name.
                 </div>
@@ -49,7 +49,10 @@
 
     <script type="text/javascript">
         $(function () {
-            $('.datetime').datetimepicker();
+            var todaysDateTime = moment().format('MM/DD/YYYY hh:mm A');
+            $('.datetime').datetimepicker({
+                format: 'MM/DD/YYYY hh:mm A'
+            });
         });
 
         (function () {
