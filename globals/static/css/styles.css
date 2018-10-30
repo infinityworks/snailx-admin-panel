@@ -181,3 +181,10 @@ th {
     border-radius: 0px;
 
 }
+
+.snailx-nav .disabled {
+    /* Make the disabled links grayish*/
+    color: gray;
+    /* And disable the pointer events */
+    pointer-events: none;
+}
