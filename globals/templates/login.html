@@ -7,7 +7,7 @@
 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 
-<form action="" method="post" novalidate>
+<form action="" class="needs-validation" method="post" novalidate>
     {{ form.csrf_token }}
     {{ form.hidden_tag() }}
 
@@ -17,12 +17,18 @@
             <div class="input-group login-field">
                 {{ form.username.label }}<br>
                 {{ form.username(size=36, class_='form-control form-control-lg') }}
+                <div class="invalid-feedback">
+                    Please enter a username.
+                </div>
             </div>
             <br>
 
             <div class="input-group login-field">
                 {{ form.password.label }}<br>
                 {{ form.password(size=36, class_='form-control form-control-lg') }}
+                <div class="invalid-feedback">
+                    Please enter a password.
+                </div>
             </div>
             <br>
 
@@ -37,5 +43,8 @@
 
         </div>
     </div>
+
+    <script src="{{ url_for('static', filename='scripts/bootstrap_validation.js') }}"> </script>
+
 </form>
 {% endblock %}
