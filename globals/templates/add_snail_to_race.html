@@ -2,16 +2,20 @@
 
 {% block content %}
 
-<form action="" method="post" novalidate>
-    {{ form.hidden_tag() }}
-    <p>
-        {{ form.snail_id.label }}<br>
-        {{ form.snail_id(size=36, class_='form-control form-controls-lg') }}
-    </p>
-    <p>
-        {{ form.submit(class_='finite-orange-button') }}
-    </p>
-</form>
+<div class="row">
+    <div style="margin: 0 auto; width: 200px;">
+        <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.snail_id.label }}<br>
+                {{ form.snail_id(size=1, class_='form-control form-controls-lg') }}
+            </p>
+            <p>
+                {{ form.submit(class_='finite-orange-button') }}
+            </p>
+        </form>
+    </div>
+</div>
 
 {% endblock %}
 
