@@ -37,7 +37,8 @@
                     <td>{{ race_results_form.time_to_finish() }}</td>
                     <td>{{ race_results_form.position() }}</td>
                     <td>{{ race_results_form.did_not_finish() }}</td>
-                    <td>{{ race_results_form.submit() }}</td>
+                    <td>{{ race_results_form.submit(class_='btn btn-success btn-lg add-race-btn finite-orange-button')
+                        }}</td>
                 </form>
             </tr>
             {% endfor %}
