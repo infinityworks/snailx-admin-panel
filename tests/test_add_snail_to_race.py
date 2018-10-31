@@ -63,12 +63,12 @@ class TestAddSnailToRace(unittest.TestCase):
         self.assertFalse(validate_snail_in_same_round(1, 2, 2))
 
     @mock.patch("db.models.Round.get_future_round_times", MagicMock(return_value=[MockRound(1, "date")]))
-    def test_validate_snail_in_inflight_round_False(self):
-        self.assertFalse(validate_snail_in_inflight_round(1))
+    def test_validate_snail_in_inflight_round_true(self):
+        self.assertTrue(validate_snail_in_inflight_round(1))
 
     @mock.patch("db.models.Round.get_future_round_times", MagicMock(return_value=[MockRound(1, "date")]))
-    def test_validate_snail_in_inflight_round_true(self):
-        self.assertTrue(validate_snail_in_inflight_round(2))
+    def test_validate_snail_in_inflight_round_false(self):
+        self.assertFalse(validate_snail_in_inflight_round(2))
 
     @mock.patch('flask_login.utils._get_user')
     def test_snail_to_race_page_response_is_200(self, current_user):
