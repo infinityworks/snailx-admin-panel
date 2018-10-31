@@ -2,7 +2,9 @@
 
 {% block content %}
 
+{% if current_round_toggle %}
 <button class="btn btn-primary" onclick="location.href='/rounds/{{round_id}}/races/add'" style="float:left; margin:10px;">Add Race</button>
+{% endif %}
 
 <table class="table table-hover">
     <thead>

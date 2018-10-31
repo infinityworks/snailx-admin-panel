@@ -15,7 +15,6 @@ def add_race(round_id):
         return redirect_to('login.login')
 
     form = AddRaceForm()
-
     if form.validate_on_submit():
         races = Race().get_races_by_round(round_id)
 
@@ -34,7 +33,7 @@ def add_race(round_id):
 
         return redirect_to('rounds.rounds')
 
-    return render_template('add_race.html', form=form)
+    return render_template('add_race.html', form=form, current_round=current_round)
 
 
 def add_race_to_db(race_date, race_status, round_id):
@@ -42,3 +41,4 @@ def add_race_to_db(race_date, race_status, round_id):
 
     db.session.add(race)
     db.session.commit()
+        
