@@ -9,15 +9,14 @@
 <table class="table table-hover">
     <colgroup>
         <col class="col-xs-2">
-        </col>
         <col class="col-xs-2">
-        </col>
         <col class="col-xs-2">
-        </col>
+        <col class="col-xs-2">
+        <col class="col-xs-2">
     </colgroup>
     <thead>
         <tr>
-            <th colspan="3">Round {{round_id}} Races</th>
+            <th colspan="5">Round {{round_id}} Races</th>
         </tr>
         <tr>
             <th scope="col">ID</th>
@@ -29,13 +28,13 @@
     </thead>
     <tbody>
         {% for race in races %}
-        <tr style="cursor: pointer;" onclick="clicked({{race.id}})">
+        <tr>
             <td>{{race.id}}</td>
             <td>{{race.date}}</td>
             <td>{{race.status}}</td>
-            <td><button class="btn btn-primary" onclick="location.href='/rounds/{{round_id}}/races/{{race.id}}/add'">Add
+            <td><button class="btn btn-primary" onclick="location.href='/rounds/{{round_id}}/races/{{race.id}}/add';">Add
                     Snail</button></td>
-            <td><button class="btn btn-primary" onclick="location.href='/rounds/{{round_id}}/races/{{race.id}}'">Add
+            <td><button class="btn btn-primary" onclick="location.href='/rounds/{{round_id}}/races/{{race.id}}';">Add
                     Results</button></td>
         </tr>
         {% endfor %}
