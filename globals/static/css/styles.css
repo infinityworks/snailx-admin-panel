@@ -190,3 +190,85 @@ th {
     /* And disable the pointer events */
     pointer-events: none;
 }
+
+.finite-orange-button {
+    color: #fff;
+    background-color: #E35205;
+    border-color: #E35205;
+}
+
+.finite-orange-button:hover {
+    color: #fff;
+    background-color: rgb(202, 71, 0);
+    border-color: rgb(202, 71, 0);
+}
+
+.finite-orange-button:focus,
+.finite-orange-button.focus {
+    box-shadow: 0 0 0 .2rem rgb(201, 70, 0);
+}
+
+.finite-orange-button.disabled,
+.finite-orange-button:disabled {
+    color: #fff;
+    background-color: #E35205;
+    border-color: #E35205
+}
+
+.finite-orange-button:not(:disabled):not(.disabled):active,
+.finite-orange-button:not(:disabled):not(.disabled).active,
+.show>.finite-orange-button.dropdown-toggle {
+    color: #fff;
+    background-color: rgb(180, 63, 0);
+}
+
+.finite-orange-button:not(:disabled):not(.disabled):active:focus,
+.finite-orange-button:not(:disabled):not(.disabled).active:focus,
+.show>.finite-orange-button.dropdown-toggle:focus {
+    box-shadow: 0 0 0 .2rem rgb(197, 69, 0);
+}
+
+.btn-outline-primary {
+    color: #E35205;
+    background-color: transparent;
+    background-image: none;
+    border-color: #E35205
+}
+
+.btn-outline-primary:hover {
+    color: #E35205;
+    background-color: rgb(255, 89, 0);
+    border-color: #E35205
+}
+
+.btn-outline-primary:focus,
+.btn-outline-primary.focus {
+    box-shadow: 0 0 0 .2rem rgb(150, 52, 0);
+}
+
+.btn-outline-primary.disabled,
+.btn-outline-primary:disabled {
+    color: #E35205;
+    background-color: transparent
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled):active,
+.btn-outline-primary:not(:disabled):not(.disabled).active,
+.show>.btn-outline-primary.dropdown-toggle {
+    color: #fff;
+    background-color: rgb(255, 89, 0);
+    border-color: #E35205
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled):active:focus,
+.btn-outline-primary:not(:disabled):not(.disabled).active:focus,
+.show>.btn-outline-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 .2rem rgb(150, 52, 0);
+}
+
+.btn-success:not(:disabled):not(.disabled).active,
+.btn-success:not(:disabled):not(.disabled):active,
+.show>.btn-success.dropdown-toggle {
+    color: #fff;
+    border-color: rgb(180, 63, 0);
+}
