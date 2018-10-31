@@ -5,18 +5,37 @@
 <img style="width: 80px;" src="{{ url_for('static', filename='imgs/finiteworks_slash.png') }}" />
 <p style="font-family: Avenir; font-size: 30px; color: #333F48; letter-spacing: 10px; margin-bottom: 22px;">FINITEWORKS</p>
 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+
 <form action="" method="post" novalidate>
     {{ form.csrf_token }}
     {{ form.hidden_tag() }}
-    <p>
-        {{ form.username.label }}<br>
-        {{ form.username(size=36, class_='form-controls form-control-lg') }}
-    </p>
-    <p>
-        {{ form.password.label }}<br>
-        {{ form.password(size=36, class_='form-controls form-control-lg') }}
-    </p>
-    <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-    <p>{{ form.submit(class_='btn btn-success btn-lg finite-orange-button') }}</p>
+
+    <div class="row">
+        <div class="form-group">
+
+            <div class="input-group login-field">
+                {{ form.username.label }}<br>
+                {{ form.username(size=36, class_='form-control form-control-lg') }}
+            </div>
+            <br>
+
+            <div class="input-group login-field">
+                {{ form.password.label }}<br>
+                {{ form.password(size=36, class_='form-control form-control-lg') }}
+            </div>
+            <br>
+
+            <div class="input-group login-field">
+                {{ form.remember_me(class_='checkbox-inline') }} <span class="remember-me-label">{{
+                    form.remember_me.label }}</span>
+            </div>
+
+            <div class="input-group login-field-btn">
+                {{ form.submit(class_='btn btn-success btn-lg finite-orange-button') }}
+            </div>
+
+        </div>
+    </div>
 </form>
 {% endblock %}
