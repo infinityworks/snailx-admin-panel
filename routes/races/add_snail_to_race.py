@@ -42,7 +42,7 @@ def add_snail_to_race(round_id, race_id):
             commit_snail_to_race(race_id, form.snail_id.data)
 
     return render_template('add_snail_to_race.html', all_snails=all_snails,
-                           form=form)
+                           form=form, race_id=race_id)
 
 
 def commit_snail_to_race(id_race, id_snail):
