@@ -86,8 +86,10 @@ class TestResult(unittest.TestCase):
                                                 1)))
     @mock.patch('flask_login.utils._get_user')
     @mock.patch("forms.forms.RaceResultsForm")
-    @mock.patch('routes.results.results.db.session.add', MagicMock(return_value=None))
-    @mock.patch('routes.results.results.db.session.commit', MagicMock(return_value=None))
+    @mock.patch('routes.results.results.db.session.add', 
+                MagicMock(return_value=None))
+    @mock.patch('routes.results.results.db.session.commit', 
+                MagicMock(return_value=None))
     def test_results_valid_data_posted(self, current_user, race_results_form):
         with self.client as client:
             current_user.is_authenticated = True

@@ -10,25 +10,22 @@
           <th scope="col">ID</th>
           <th scope="col">Date</th>
           <th scope="col">Status</th>
+          <th scope="col">Add Snail To Race</th>
+          <th scope="col">Add Result</th>
         </tr>
     </thead>
     <tbody>
     {% for race in races %}
-      <tr style="cursor: pointer;" onclick="clicked({{race.id}})">
+      <tr>
         <td>{{race.id}}</td>
         <td>{{race.date}}</td>
         <td>{{race.status}}</td>
+        <td><button class="btn btn-primary" onclick="location.href='/rounds/{{round_id}}/races/{{race.id}}/add'">Add Snail</button></td>
+        <td><button class="btn btn-primary" onclick="location.href='/rounds/{{round_id}}/races/{{race.id}}'">Add Results</button></td>
     </tr>
     {% endfor %}
     </tbody>
 </table>
-
-<script>
-function clicked(race_id) {
-console.log(race_id);
-    window.document.location = "races/" + race_id;
-}
-</script>
 
 {% endblock content %}
 
