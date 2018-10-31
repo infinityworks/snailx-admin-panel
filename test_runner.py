@@ -10,6 +10,7 @@ from tests import test_add_round
 from tests import test_add_snail
 from tests import test_add_race
 from tests import test_results
+from tests import test_add_snail_to_race
 from tests import test_add_trainer
 
 # initialize the test suite
@@ -25,7 +26,9 @@ suite.addTests(loader.loadTestsFromModule(test_rounds_races))
 suite.addTests(loader.loadTestsFromModule(test_results))
 suite.addTests(loader.loadTestsFromModule(test_add_race))
 suite.addTests(loader.loadTestsFromModule(test_add_round))
+suite.addTests(loader.loadTestsFromModule(test_add_round))
 suite.addTests(loader.loadTestsFromModule(test_add_snail))
+suite.addTests(loader.loadTestsFromModule(test_add_snail_to_race))
 suite.addTests(loader.loadTestsFromModule(test_add_trainer))
 
 # initialize a runner, pass it your suite and run it

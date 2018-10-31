@@ -23,6 +23,8 @@
             <th scope="col">ID</th>
             <th scope="col">Date</th>
             <th scope="col">Status</th>
+            <th scope="col">Add Snail To Race</th>
+            <th scope="col">Add Result</th>
         </tr>
     </thead>
     <tbody>
@@ -31,6 +33,10 @@
             <td>{{race.id}}</td>
             <td>{{race.date}}</td>
             <td>{{race.status}}</td>
+            <td><button class="btn btn-primary" onclick="location.href='/rounds/{{round_id}}/races/{{race.id}}/add'">Add
+                    Snail</button></td>
+            <td><button class="btn btn-primary" onclick="location.href='/rounds/{{round_id}}/races/{{race.id}}'">Add
+                    Results</button></td>
         </tr>
         {% endfor %}
     </tbody>
