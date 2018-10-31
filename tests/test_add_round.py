@@ -125,7 +125,7 @@ class TestAddRound(unittest.TestCase):
             response = client.post(
                 '/rounds/add', data=dict(name="test", start_date="01/01/2001 12:00 AM", end_date="02/02/2002 12:00 PM"))
             self.assertIn(
-                b'Failed to create new round. The maximum name length is 12 characters.', response.data)
+                b'Failed to create new round. The maximum name length is 30 characters.', response.data)
 
     @mock.patch('flask_login.utils._get_user')
     @mock.patch('routes.rounds.add_round.validate_date_interval', MagicMock(return_value=True))

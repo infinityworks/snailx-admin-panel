@@ -19,8 +19,8 @@ def add_snail():
         if validate_snail_not_in_db(form.snail_name.data):
             return flash_redirect('Snail already exists', 'add_snail.add_snail')
 
-        if len(form.snail_name.data) > 12:
-            return flash_redirect('Snail name cannot be longer than 12 characters.', 'add_snail.add_snail')
+        if len(form.snail_name.data) > 30:
+            return flash_redirect('Snail name cannot be longer than 30 characters.', 'add_snail.add_snail')
 
         try:
             add_snail_to_db(form.snail_name.data.capitalize(), int(form.trainer_name.data))
