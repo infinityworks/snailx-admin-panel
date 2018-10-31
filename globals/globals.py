@@ -14,7 +14,7 @@ login_manager = LoginManager(app)
 
 
 from routes.login.login import login_blueprint
-from routes.rounds.add_round import add_round_blueprint
+from routes.add_round.add_round import add_round_blueprint
 from routes.login.logout import logout_blueprint
 from routes.rounds.rounds import rounds_blueprint
 from routes.races.races import races_blueprint
