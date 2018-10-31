@@ -30,7 +30,7 @@ def add_snail_to_race(round_id, race_id):
                            "add_snail_to_race.add_snail_to_race", race_id, 
                            round_id)
 
-        elif not validate_snail_in_inflight_round(round_id):
+        elif validate_snail_in_inflight_round(round_id):
             flash_redirect("This round in ineligible for snails to be added, "
                            "please check the times and try again", 
                            "add_snail_to_race.add_snail_to_race", 
@@ -71,12 +71,12 @@ def validate_snail_in_same_round(round_id, race_id, snail_id):
         for snail in race_participants:
             if int(snail.id_snail) == int(snail_id):
                 return True
-        return False
+    return False
 
 
 def validate_snail_in_inflight_round(round_id):
     future_rounds = Round().get_future_round_times()
     for rounds in future_rounds:
-        if int(rounds.id) == int(round_id):
+        if not int(rounds.id) == int(round_id):
             return True
     return False
