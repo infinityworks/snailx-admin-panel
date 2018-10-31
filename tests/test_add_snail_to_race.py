@@ -62,13 +62,13 @@ class TestAddSnailToRace(unittest.TestCase):
     def test_validate_snail_in_same_round_false(self):
         self.assertFalse(validate_snail_in_same_round(1, 2, 2))
 
-    @mock.patch("db.models.Round.get_future_round_times",MagicMock(return_value=[MockRound(1, "date")]))
-    def test_validate_snail_in_inflight_round_true(self):
-        self.assertTrue(validate_snail_in_inflight_round(1))
+    @mock.patch("db.models.Round.get_future_round_times", MagicMock(return_value=[MockRound(1, "date")]))
+    def test_validate_snail_in_inflight_round_False(self):
+        self.assertFalse(validate_snail_in_inflight_round(1))
 
-    @mock.patch("db.models.Round.get_future_round_times",MagicMock(return_value=[MockRound(1, "date")]))
-    def test_validate_snail_in_inflight_round_false(self):
-        self.assertFalse(validate_snail_in_inflight_round(2))
+    @mock.patch("db.models.Round.get_future_round_times", MagicMock(return_value=[MockRound(1, "date")]))
+    def test_validate_snail_in_inflight_round_true(self):
+        self.assertTrue(validate_snail_in_inflight_round(2))
 
     @mock.patch('flask_login.utils._get_user')
     def test_snail_to_race_page_response_is_200(self, current_user):
@@ -86,7 +86,7 @@ class TestAddSnailToRace(unittest.TestCase):
     @mock.patch('routes.races.add_snail_to_race.validate_snail_in_same_round',
                 MagicMock(return_value=False))
     @mock.patch('routes.races.add_snail_to_race.validate_snail_in_inflight_round',
-                MagicMock(return_value=True))
+                MagicMock(return_value=False))
     @mock.patch('routes.races.add_snail_to_race.commit_snail_to_race',
                 MagicMock(return_value=None))
     def test_snail_adds_snail_to_race(self, current_user):
@@ -145,7 +145,7 @@ class TestAddSnailToRace(unittest.TestCase):
     @mock.patch('routes.races.add_snail_to_race.validate_snail_in_same_round',
                 MagicMock(return_value=False))
     @mock.patch('routes.races.add_snail_to_race.validate_snail_in_inflight_round',
-                MagicMock(return_value=False))
+                MagicMock(return_value=True))
     @mock.patch('routes.races.add_snail_to_race.commit_snail_to_race',
                 MagicMock(return_value=None))
     def test_snail_already_in_inflight_round(self, current_user):
