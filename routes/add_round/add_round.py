@@ -22,32 +22,29 @@ def add_round():
         end = form.end_date.data
         name = form.name.data
 
-        cur_datetime = datetime.datetime.utcnow()
-
         if not validate_name_length(name):
-            flash(
-                'Failed to create new round. The maximum name length is 30 characters.', 'danger')
-            return render_template('add_round.html', title='Add Round', form=form)
+            flash('Failed to create new round. The maximum name length is 30 characters.', 'danger')
+            return render_template('add_round.html', title='Add Round', form=form, min_date=datetime.datetime.utcnow())
 
         if not validate_unique_name(name):
             flash(
                 'Failed to create new round. Round name already exists.', 'danger')
-            return render_template('add_round.html', title='Add Round', form=form)
+            return render_template('add_round.html', title='Add Round', form=form, min_date=datetime.datetime.utcnow())
 
-        if not validate_dates(start, end, cur_datetime):
+        if not validate_dates(start, end, datetime.datetime.utcnow()):
             flash(
                 'Failed to create new round. One or more of the supplied dates are in the past, please enter valid dates.', 'danger')
-            return render_template('add_round.html', title='Add Round', form=form)
+            return render_template('add_round.html', title='Add Round', form=form, min_date=datetime.datetime.utcnow())
 
         if not validate_start_before_end(start, end):
             flash(
                 'Failed to create new round. A round cannot be created with an end date before the start date, please enter valid dates.', 'danger')
-            return render_template('add_round.html', title='Add Round', form=form)
+            return render_template('add_round.html', title='Add Round', form=form, min_date=datetime.datetime.utcnow())
 
         if not validate_date_interval(start, end):
             flash(
                 'Failed to create new round. A round already exists between the given dates, please enter valid dates.', 'danger')
-            return render_template('add_round.html', title='Add Round', form=form)
+            return render_template('add_round.html', title='Add Round', form=form, min_date=datetime.datetime.utcnow())
 
         try:
             new_round = Round(
@@ -59,7 +56,7 @@ def add_round():
             flash(
                 'Failed to create new round. Check that round details are valid and try again.', 'error')
 
-    return render_template('add_round.html', title='Add Round', form=form)
+    return render_template('add_round.html', title='Add Round', form=form, min_date=datetime.datetime.utcnow())
 
 
 def validate_unique_name(name):
@@ -71,13 +68,12 @@ def validate_name_length(name):
 
 
 def validate_date_interval(start_date, end_date):
-    print(Round().get_num_rounds_between_dates(start_date, end_date)[0])
     return Round().get_num_rounds_between_dates(start_date, end_date)[0] == 0
 
 
 def validate_dates(start_date, end_date, cur_datetime):
-    return (parser.parse(start_date) >= cur_datetime
-            and parser.parse(end_date) >= cur_datetime)
+    return (parser.parse(start_date) >= cur_datetime and
+            parser.parse(end_date) >= cur_datetime)
 
 
 def validate_start_before_end(start_date, end_date):
