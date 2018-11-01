@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<link rel="stylesheet" href="../static/add_round.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/add_round.css') }}">
 
 <form action="" class="add-round-form needs-validation" method="post" novalidate>
     {{ form.csrf_token }}
@@ -20,30 +20,27 @@
                     Please enter a name.
                 </div>
             </div>
+            <br>
 
             {{ form.start_date.label }}<br>
             <div class='input-group date datetime add-round-field'>
                 {{ form.start_date(class_='form-control form-control-lg') }}
-                <div class="invalid-feedback">
-                    Please select a start date.
-                </div>
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                 </span>
             </div>
+            <br>
 
             {{ form.end_date.label }}<br>
             <div class='input-group date datetime add-round-field'>
                 {{ form.end_date(class_='form-control form-control-lg') }}
-                <div class="invalid-feedback">
-                    Please select an end date.
-                </div>
                 <span class="input-group-addon">
-                <span class="glyphicon glyphicon-calendar"></span>
+                    <span class="glyphicon glyphicon-calendar"></span>
                 </span>
             </div>
+            <br>
 
-            <p>{{ form.submit(class_='btn btn-success btn-lg') }}</p>
+            {{ form.submit(class_='btn btn-success btn-lg finite-orange-button') }}
         </div>
     </div>
 
@@ -51,28 +48,13 @@
         $(function () {
             var todaysDateTime = moment().format('MM/DD/YYYY hh:mm A');
             $('.datetime').datetimepicker({
-                format: 'MM/DD/YYYY hh:mm A'
+                format: 'MM/DD/YYYY hh:mm A',
+                minDate: "{{min_date}}"
             });
         });
-
-        (function () {
-            'use strict';
-            window.addEventListener('load', function () {
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                var forms = document.getElementsByClassName('needs-validation');
-                // Loop over them and prevent submission
-                var validation = Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
-        })();
     </script>
+
+    <script src="{{ url_for('static', filename='scripts/bootstrap_validation.js') }}"> </script>
 
     </div>
 </form>

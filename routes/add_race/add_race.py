@@ -16,6 +16,8 @@ def add_race(round_id):
 
     form = AddRaceForm()
 
+    round_ = Round().get_round(round_id)
+
     if form.validate_on_submit():
         races = Race().get_races_by_round(round_id)
 
@@ -34,7 +36,7 @@ def add_race(round_id):
 
         return redirect_to('rounds.rounds')
 
-    return render_template('add_race.html', form=form)
+    return render_template('add_race.html', form=form, round_=round_)
 
 
 def add_race_to_db(race_date, race_status, round_id):

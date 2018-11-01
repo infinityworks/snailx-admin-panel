@@ -2,33 +2,48 @@
 
 {% block content %}
 
-<table class="table table-hover">
-    <thead>
-        <tr>
-          <th scope="col">Participant ID</th>
-          <th scope="col">Time to Finish</th>
-          <th scope="col">Position</th>
-          <th scope="col">Did Not Finish</th>
-          <th scope="col">Submit</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for participant in participants %}
-    <tr>
-        <form method="POST" action="", autocomplete="off">
-            {{ race_results_form.csrf_token }}  
-            <td>{{participant.id}} {{race_results_form.id_race_participants(value=participant.id)}}</td>
-            <td>{{ race_results_form.time_to_finish() }}</td>
-            <td>{{ race_results_form.position() }}</td>
-            <td>{{ race_results_form.did_not_finish() }}</td>
-            <td>{{ race_results_form.submit() }}</td>
-        </form>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
+<div class="table-responsive">
+    <table class="table table-hover">
+        <colgroup>
+            <col class="col-xs-2">
+            </col>
+            <col class="col-xs-2">
+            </col>
+            <col class="col-xs-2">
+            </col>
+            <col class="col-xs-2">
+            </col>
+            <col class="col-xs-2">
+            </col>
+        </colgroup>
+        <thead>
+            <tr>
+                <th colspan="5">Race Results</th>
+            </tr>
+            <tr>
+                <th scope="col">Participant ID</th>
+                <th scope="col">Time to Finish</th>
+                <th scope="col">Position</th>
+                <th scope="col">Did Not Finish</th>
+                <th scope="col">Submit</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for participant in participants %}
+            <tr>
+                <form method="POST" action="" , autocomplete="off">
+                    {{ race_results_form.csrf_token }}
+                    <td>{{participant.id}} {{race_results_form.id_race_participants(value=participant.id)}}</td>
+                    <td>{{ race_results_form.time_to_finish() }}</td>
+                    <td>{{ race_results_form.position() }}</td>
+                    <td>{{ race_results_form.did_not_finish() }}</td>
+                    <td>{{ race_results_form.submit(class_='btn btn-success finite-orange-button')
+                        }}</td>
+                </form>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
 {% endblock content %}
-
-
-

@@ -1,0 +1,8 @@
+.row .form-group {
+    margin: auto;
+}
+
+.add-race-field li:hover {
+    color: black;
+    background-color: #FFFFFF;
+}
