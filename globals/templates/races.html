@@ -4,10 +4,10 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/races.css') }}">
 
 {% if current_round_toggle %}
-<input id="add-race-enabled" type="button" class="btn btn-success btn-lg add-race-btn finite-orange-button" value="Add Race" onclick="location.href='/rounds/{{round_id}}/races/add';">
+    <input id="add-race-enabled" type="button" class="btn btn-success btn-lg add-race-btn finite-orange-button" value="Add Race" onclick="location.href='/rounds/{{round_id}}/races/add';">
 {% endif %}
 {% if not current_round_toggle %}
-<input id="add-race-disabled" type="button" class="disabled btn btn-lg add-race-btn finite-orange-button" value="Add Race">
+    <input id="add-race-disabled" type="button" class="disabled btn btn-lg add-race-btn finite-orange-button" value="Add Race">
 {% endif %}
 
 <table class="table table-hover">
