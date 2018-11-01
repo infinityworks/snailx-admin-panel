@@ -24,8 +24,8 @@ def add_round():
 
         if not validate_name_length(name):
             flash(
-                'Failed to create new round. The maximum name length is 12 characters.', 'danger')
-            return render_template('add_round.html', title='Add Round', form=form, min_date=datetime.datetime.utcnow())
+                'Failed to create new round. The maximum name length is 30 characters.', 'danger')
+            return render_template('add_round.html', title='Add Round', form=form)
 
         if not validate_unique_name(name):
             flash(
@@ -65,7 +65,7 @@ def validate_unique_name(name):
 
 
 def validate_name_length(name):
-    return len(name) <= 12
+    return len(name) <= 30
 
 
 def validate_date_interval(start_date, end_date):

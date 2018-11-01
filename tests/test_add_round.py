@@ -41,7 +41,7 @@ class TestAddRound(unittest.TestCase):
             "01/01/2003 12:00 PM", "02/02/2002 12:00 PM"))
 
     def test_add_round_name_length_greater_than_max_validation(self):
-        self.assertFalse(validate_name_length("12345678910111213"))
+        self.assertFalse(validate_name_length("123456789101112138923894239889132977912395802349020394"))
 
     @mock.patch("db.models.Round.get_round_by_name", MagicMock(return_value=True))
     def test_add_round_name_unique_validation(self):
@@ -127,9 +127,9 @@ class TestAddRound(unittest.TestCase):
         current_user.is_authenticated = True
         with self.client as client:
             response = client.post(
-                '/rounds/add', data=dict(name="test", start_date="01/01/2001 12:00 AM", end_date="02/02/2002 12:00 PM"))
+                '/rounds/add', data=dict(name="01234567891234567891234567891234", start_date="01/01/2001 12:00 AM", end_date="02/02/2002 12:00 PM"))
             self.assertIn(
-                b'Failed to create new round. The maximum name length is 12 characters.', response.data)
+                b'Failed to create new round. The maximum name length is 30 characters.', response.data)
 
     @mock.patch('flask_login.utils._get_user')
     @mock.patch('routes.add_round.add_round.validate_date_interval', MagicMock(return_value=True))
