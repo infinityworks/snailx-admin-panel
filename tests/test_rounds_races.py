@@ -53,7 +53,7 @@ class TestRoundsRaces(unittest.TestCase):
         with self.client as client:
             current_user.is_authenticated = True
             response = client.get('/round/1/races')
-            self.assertNotIn(b"Add Race", response.data)
+            self.assertIn(b"add-race-disabled", response.data)
 
     @mock.patch("routes.races.races.validate_current_round_not_started", MagicMock(return_value=True))
     @mock.patch("db.models.Race.get_races_by_round", MagicMock(return_value=[
@@ -65,4 +65,4 @@ class TestRoundsRaces(unittest.TestCase):
         with self.client as client:
             current_user.is_authenticated = True
             response = client.get("/rounds/1/races")
-            self.assertIn(b"Add Race", response.data)
+            self.assertIn(b"add-race-enabled", response.data)

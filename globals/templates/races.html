@@ -3,7 +3,10 @@
 {% block content %}
 
 {% if current_round_toggle %}
-<button class="btn btn-primary" onclick="location.href='/rounds/{{round_id}}/races/add'" style="float:left; margin:10px;">Add Race</button>
+<button id="add-race-enabled" class="btn btn-primary" onclick="location.href='/rounds/{{round_id}}/races/add'" style="float:left; margin:10px;">Add Race</button>
+{% endif %}
+{% if not current_round_toggle %}
+<button id="add-race-disabled" class="disabled btn btn-primary" style="float:left; margin:10px;">Add Race</button>
 {% endif %}
 
 <table class="table table-hover">
@@ -22,8 +25,14 @@
         <td>{{race.id}}</td>
         <td>{{race.date}}</td>
         <td>{{race.status}}</td>
-        <td><button class="btn btn-primary" onclick="location.href='/rounds/{{round_id}}/races/{{race.id}}/add'">Add Snail</button></td>
-        <td><button class="btn btn-primary" onclick="location.href='/rounds/{{round_id}}/races/{{race.id}}'">Add Results</button></td>
+        {% if current_round_toggle %}
+        <td><button id="add-snail-enabled" class="btn btn-primary" onclick="location.href='/rounds/{{round_id}}/races/{{race.id}}/add'">Add Snail</button></td>
+        <td><button id="add-results-disable" class="disabled btn btn-primary">Add Results</button></td>
+        {% endif %}
+        {% if not current_round_toggle %}
+        <td><button id="add-snail-disabled" class="disabled btn btn-primary">Add Snail</button></td>
+        <td><button id="add-results-enabled" class="btn btn-primary" onclick="location.href='/rounds/{{round_id}}/races/{{race.id}}'">Add Results</button></td>
+        {% endif %}
     </tr>
     {% endfor %}
     </tbody>
