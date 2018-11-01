@@ -33,7 +33,7 @@ def add_race(round_id):
 
         return redirect_to('rounds.rounds')
 
-    return render_template('add_race.html', form=form, current_round=current_round)
+    return render_template('add_race.html', form=form)
 
 
 def add_race_to_db(race_date, race_status, round_id):

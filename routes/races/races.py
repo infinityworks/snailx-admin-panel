@@ -13,12 +13,12 @@ def races(round_id):
         return redirect(url_for('login.login'))
 
     races = Race().get_races_by_round(round_id)
-    current_round_toggle = validate_current_round_started(round_id)
+    current_round_toggle = validate_current_round_not_started(round_id)
 
     return render_template('races.html', races=races, round_id=round_id, current_round_toggle=current_round_toggle)
 
 
-def validate_current_round_started(round_id):
+def validate_current_round_not_started(round_id):
     current_round = Round().get_round(round_id)
     if current_round.start_date >= datetime.datetime.utcnow():
         return True
