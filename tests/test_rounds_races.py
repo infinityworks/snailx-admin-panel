@@ -95,6 +95,7 @@ class TestRoundsRaces(unittest.TestCase):
             current_user.is_authenticated = True
             response = self.client.get("/rounds/1/races")
             self.assertIn(b"add-snail-enabled", response.data)
+            self.assertIn(b"add-results-disabled", response.data)
 
     @mock.patch("routes.races.races.time_now",
                 MagicMock(return_value=datetime.datetime(2018, 10, 1, 14, 10,
