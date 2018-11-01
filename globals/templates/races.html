@@ -3,11 +3,9 @@
 {% block content %}
 
 {% if current_round_toggle %}
-<button class="btn btn-primary" onclick="location.href='/rounds/{{round_id}}/races/add'" style="float:left; margin:10px;">Add Race</button>
+<input type="button" class="btn btn-success btn-lg add-race-btn finite-orange-button" value="Add Race" onclick="location.href='/rounds/{{round_id}}/races/add';">
 {% endif %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/races.css') }}">
-
-<input type="button" class="btn btn-success btn-lg add-race-btn finite-orange-button" value="Add Race" onclick="location.href='/rounds/{{round_id}}/races/add';">
 
 <div class="table-responsive">
     <table class="table table-hover">

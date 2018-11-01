@@ -15,6 +15,8 @@ def add_race(round_id):
         return redirect_to('login.login')
 
     form = AddRaceForm()
+    round_ = Round().get_round(round_id)
+
     if form.validate_on_submit():
         races = Race().get_races_by_round(round_id)
 
