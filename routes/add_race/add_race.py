@@ -15,7 +15,6 @@ def add_race(round_id):
         return redirect_to('login.login')
 
     form = AddRaceForm()
-
     round_ = Round().get_round(round_id)
 
     if form.validate_on_submit():
@@ -31,6 +30,11 @@ def add_race(round_id):
         if parser.parse(race_date) < current_round.start_date or parser.parse(race_date) > current_round.end_date:
             flash("Can't add race that doesn't take place within round dates.")
             return redirect_to('rounds.rounds')
+
+        for race in races:
+            if race.date == parser.parse(race_date):
+                flash("Two races cannot start at the same time.")
+                return redirect_to('rounds.rounds')
 
         add_race_to_db(race_date, race_status, round_id)
 
