@@ -7,7 +7,7 @@
 <input id="add-race-enabled" type="button" class="btn btn-success btn-lg add-race-btn finite-orange-button" value="Add Race" onclick="location.href='/rounds/{{round_id}}/races/add';">
 {% endif %}
 {% if not current_round_toggle %}
-<input id="add-race-disabled" type="button" class="disabled btn btn-success btn-lg add-race-btn finite-orange-button" value="Add Race">
+<input id="add-race-disabled" type="button" class="disabled btn btn-lg add-race-btn finite-orange-button" value="Add Race">
 {% endif %}
 
 <table class="table table-hover">
@@ -26,13 +26,17 @@
         <td>{{race.id}}</td>
         <td>{{race.date}}</td>
         <td>{{race.status}}</td>
-        {% if current_round_toggle %}
+        {% if current_round_toggle %}        
         <td><button id="add-snail-enabled" class="btn btn-success finite-orange-button" onclick="location.href='/rounds/{{round_id}}/races/{{race.id}}/add'">Add Snail</button></td>
-        <td><button id="add-results-disable" class="disabled btn btn-success finite-orange-button">Add Results</button></td>
         {% endif %}
         {% if not current_round_toggle %}
-        <td><button id="add-snail-disabled" class="disabled btn btn-success finite-orange-button">Add Snail</button></td>
+        <td><button id="add-snail-disabled" class="disabled btn finite-orange-button">Add Snail</button></td>
+        {% if race.date < now %}
         <td><button id="add-results-enabled" class="btn btn-success finite-orange-button" onclick="location.href='/rounds/{{round_id}}/races/{{race.id}}'">Add Results</button></td>
+        {% endif %}
+        {% if race.date > now %}
+        <td><button id="add-results-disable" class="disabled btn finite-orange-button">Add Results</button></td>
+        {% endif %}
         {% endif %}
     </tr>
     {% endfor %}
