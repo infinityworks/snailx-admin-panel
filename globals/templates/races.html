@@ -2,54 +2,53 @@
 
 {% block content %}
 
-<table class="table table-hover">
-    <thead>
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Date</th>
-          <th scope="col">Status</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for race in races %}
-    <tr>
-        <td>{{race.id}}</td>
-        <td>{{race.date}}</td>
-        <td>{{race.status}}</td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
+{% if current_round_toggle %}
+<input type="button" class="btn btn-success btn-lg add-race-btn finite-orange-button" value="Add Race" onclick="location.href='/rounds/{{round_id}}/races/add';">
+{% endif %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/races.css') }}">
 
-{% endblock content %}
+<div class="table-responsive">
+    <table class="table table-hover">
+        <colgroup>
+            <col class="col-xs-2">
+            <col class="col-xs-2">
+            <col class="col-xs-2">
+            <col class="col-xs-2">
+            <col class="col-xs-2">
+        </colgroup>
+        <thead>
+            <tr>
+                <th colspan="5">Round {{round_id}} Races</th>
+            </tr>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Date</th>
+                <th scope="col">Status</th>
+                <th scope="col">Add Snail To Race</th>
+                <th scope="col">Add Result</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for race in races %}
+            <tr>
+                <td>{{race.id}}</td>
+                <td>{{race.date}}</td>
+                <td>{{race.status}}</td>
+                <td><button class="btn btn-success finite-orange-button" onclick="location.href='/rounds/{{round_id}}/races/{{race.id}}/add';">Add
+                        Snail</button></td>
+                <td><button class="btn btn-success finite-orange-button" onclick="location.href='/rounds/{{round_id}}/races/{{race.id}}';">Add
+                        Results</button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
+<script>
+    function clicked(race_id) {
+        console.log(race_id);
+        window.document.location = "races/" + race_id;
+    }
+</script>
 
-
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">Start Date</th>
-      <th scope="col">End Date</th>
-    </tr>
-  </thead>
-    <tbody>
-    {% if active_round %}
-    <tr class="table-primary">
-      <td>{{active_round.id}}</td>
-      <td>{{active_round.name}}</td>
-      <td>{{active_round.start_date}}</td>
-      <td>{{active_round.end_date}}</td>
-    </tr>
-    {% endif %}
-    {% for round in rounds %}
-      <tr>
-        <td>{{round.id}}</td>
-        <td>{{round.name}}</td>
-        <td>{{round.start_date}}</td>
-        <td>{{round.end_date}}</td>
-      </tr>
-    {% endfor %}
-  </tbody>
-</table>
+{% endblock %}

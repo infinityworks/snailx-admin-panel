@@ -2,22 +2,49 @@
 
 {% block content %}
 
+<img style="width: 80px;" src="{{ url_for('static', filename='imgs/finiteworks_slash.png') }}" />
+<p style="font-family: Avenir; font-size: 30px; color: #333F48; letter-spacing: 10px; margin-bottom: 22px;">FINITEWORKS</p>
 
-        <img style="width: 80px;" src= "{{ url_for('static', filename='finiteworks_slash.png') }}"/>
-        <p style="font-family: Avenir; font-size: 30px; color: #333F48; letter-spacing: 10px;">FINITEWORKS</p>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 
-    <h1>Sign In</h1>
-    <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.username.label }}<br>
-            {{ form.username(size=38) }}
-        </p>
-        <p>
-            {{ form.password.label }}<br>
-            {{ form.password(size=38) }}
-        </p>
-        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-        <p>{{ form.submit() }}</p>
-    </form>
+<form action="" class="needs-validation" method="post" novalidate>
+    {{ form.csrf_token }}
+    {{ form.hidden_tag() }}
+
+    <div class="row">
+        <div class="form-group">
+
+            <div class="input-group login-field">
+                {{ form.username.label }}<br>
+                {{ form.username(size=36, class_='form-control form-control-lg') }}
+                <div class="invalid-feedback">
+                    Please enter a username.
+                </div>
+            </div>
+            <br>
+
+            <div class="input-group login-field">
+                {{ form.password.label }}<br>
+                {{ form.password(size=36, class_='form-control form-control-lg') }}
+                <div class="invalid-feedback">
+                    Please enter a password.
+                </div>
+            </div>
+            <br>
+
+            <div class="input-group login-field">
+                {{ form.remember_me(class_='checkbox-inline') }} <span class="remember-me-label">{{
+                    form.remember_me.label }}</span>
+            </div>
+
+            <div class="input-group login-field-btn">
+                {{ form.submit(class_='btn btn-success btn-lg finite-orange-button') }}
+            </div>
+
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='scripts/bootstrap_validation.js') }}"> </script>
+
+</form>
 {% endblock %}

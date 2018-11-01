@@ -1,0 +1,28 @@
+.row .form-group {
+    margin: auto;
+}
+
+#remember_me {
+    margin: 0px;
+}
+
+input[type=checkbox] {
+    /* Double-sized Checkboxes */
+    -ms-transform: scale(1.5);
+    /* IE */
+    -moz-transform: scale(1.5);
+    /* FF */
+    -webkit-transform: scale(1.5);
+    /* Safari and Chrome */
+    -o-transform: scale(1.5);
+    /* Opera */
+    padding: 10px;
+}
+
+.remember-me-label>label:nth-child(1) {
+    margin-left: 20px;
+}
+
+.login-field-btn {
+    margin-top: 10px;
+}

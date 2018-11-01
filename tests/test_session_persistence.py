@@ -1,15 +1,7 @@
 import unittest
-from unittest import TestCase
 from unittest import mock 
 from unittest.mock import MagicMock
-from globals.globals import app, login_manager
-
-from flask import url_for
-from flask_login import login_user, current_user
-
-from db.models import User
-from routes.login.login import login, is_authenticated
-
+from globals.globals import app
 
 
 class TestSessionPersistence(unittest.TestCase):

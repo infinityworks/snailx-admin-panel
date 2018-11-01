@@ -28,7 +28,7 @@ class TestLogin(unittest.TestCase):
     @mock.patch("routes.login.login.login_user", MagicMock(return_value=False))
     def test_successful_login(self):  
         with self.client as client:
-            response = self.client.post("/", data=dict(username="Bob", password="bob"), follow_redirects=False)
+            response = client.post("/", data=dict(username="Bob", password="bob"), follow_redirects=False)
             self.assertEqual(urlparse(response.location).path, url_for('rounds.rounds'))
 
     @mock.patch("routes.login.login.get_username", MagicMock(return_value=MockUser(1, "Bob", "bob@bob.com", "bob")))
@@ -42,7 +42,7 @@ class TestLogin(unittest.TestCase):
     @mock.patch("routes.login.login.login_user", MagicMock(return_value=False))    
     def test_check_login_with_password(self):
         with self.client as client:
-            response = self.client.post("/", data=dict(username="Bob", password="bob"), follow_redirects=False)
+            response = client.post("/", data=dict(username="Bob", password="bob"), follow_redirects=False)
             self.assertEqual(urlparse(response.location).path, url_for('rounds.rounds'))
 
     @mock.patch("routes.login.login.get_username", MagicMock(return_value=MockUser(1, "Bob", "bob@bob.com", bcrypt.generate_password_hash("fish").decode("utf-8"))))
