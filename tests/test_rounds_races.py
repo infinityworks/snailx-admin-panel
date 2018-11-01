@@ -42,3 +42,27 @@ class TestRoundsRaces(unittest.TestCase):
             current_user.is_authenticated = True
             response = client.get('/round/5/races')
             self.assertNotIn(b"TEST_STATUS", response.data)
+    
+    @mock.patch("routes.races.races.validate_current_round_not_started", MagicMock(return_value=False))
+    @mock.patch("db.models.Race.get_races_by_round", MagicMock(return_value=[
+        MockRace(1, datetime.datetime.now(), 'TEST_STATUS', 1),
+        MockRace(2, datetime.datetime.now(), 'TEST_STATUS', 1),
+        MockRace(3, datetime.datetime.now(), 'TEST_STATUS', 1)]))
+    @mock.patch('flask_login.utils._get_user')
+    def test_add_race_button_started_round(self, current_user):
+        with self.client as client:
+            current_user.is_authenticated = True
+            response = client.get('/round/1/races')
+            self.assertNotIn(b"Add Race", response.data)
+
+    @mock.patch("routes.races.races.validate_current_round_not_started", MagicMock(return_value=True))
+    @mock.patch("db.models.Race.get_races_by_round", MagicMock(return_value=[
+        MockRace(1, datetime.datetime.now(), 'TEST_STATUS', 1),
+        MockRace(2, datetime.datetime.now(), 'TEST_STATUS', 1),
+        MockRace(3, datetime.datetime.now(), 'TEST_STATUS', 1)]))
+    @mock.patch('flask_login.utils._get_user')
+    def test_add_race_button_future_round(self, current_user):
+        with self.client as client:
+            current_user.is_authenticated = True
+            response = client.get("/rounds/1/races")
+            self.assertIn(b"Add Race", response.data)

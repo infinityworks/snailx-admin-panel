@@ -48,3 +48,4 @@ def add_race_to_db(race_date, race_status, round_id):
 
     db.session.add(race)
     db.session.commit()
+        
