@@ -64,5 +64,5 @@ class TestRoundsRaces(unittest.TestCase):
     def test_add_race_button_future_round(self, current_user):
         with self.client as client:
             current_user.is_authenticated = True
-            response = client.get("/rounds/1/races")
+            response = self.client.get("/rounds/1/races")
             self.assertIn(b"add-race-enabled", response.data)
