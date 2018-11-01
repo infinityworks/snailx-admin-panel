@@ -27,16 +27,16 @@
         <td>{{race.date}}</td>
         <td>{{race.status}}</td>
         {% if current_round_toggle %}        
-        <td><button id="add-snail-enabled" class="btn btn-success finite-orange-button" onclick="location.href='/rounds/{{round_id}}/races/{{race.id}}/add'">Add Snail</button></td>
+            <td><button id="add-snail-enabled" class="btn btn-success finite-orange-button" onclick="location.href='/rounds/{{round_id}}/races/{{race.id}}/add'">Add Snail</button></td>
         {% endif %}
         {% if not current_round_toggle %}
-        <td><button id="add-snail-disabled" class="disabled btn finite-orange-button">Add Snail</button></td>
-        {% if race.date < now %}
-        <td><button id="add-results-enabled" class="btn btn-success finite-orange-button" onclick="location.href='/rounds/{{round_id}}/races/{{race.id}}'">Add Results</button></td>
-        {% endif %}
-        {% if race.date > now %}
-        <td><button id="add-results-disable" class="disabled btn finite-orange-button">Add Results</button></td>
-        {% endif %}
+            <td><button id="add-snail-disabled" class="disabled btn finite-orange-button">Add Snail</button></td>
+            {% if race.date < now %}
+                <td><button id="add-results-enabled" class="btn btn-success finite-orange-button" onclick="location.href='/rounds/{{round_id}}/races/{{race.id}}'">Add Results</button></td>
+            {% endif %}
+            {% if race.date > now %}
+                <td><button id="add-results-disabled" class="disabled btn finite-orange-button">Add Results</button></td>
+            {% endif %}
         {% endif %}
     </tr>
     {% endfor %}

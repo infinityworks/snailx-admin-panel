@@ -68,3 +68,50 @@ class TestRoundsRaces(unittest.TestCase):
             current_user.is_authenticated = True
             response = self.client.get("/rounds/1/races")
             self.assertIn(b"add-race-enabled", response.data)
+
+    @mock.patch("routes.races.races.validate_current_round_not_started", 
+                MagicMock(return_value=False))
+    @mock.patch("db.models.Race.get_races_by_round", MagicMock(return_value=[
+        MockRace(1, datetime.datetime.now(), 'TEST_STATUS', 1),
+        MockRace(2, datetime.datetime.now(), 'TEST_STATUS', 1),
+        MockRace(3, datetime.datetime.now(), 'TEST_STATUS', 1)]))
+    @mock.patch('flask_login.utils._get_user')
+    def test_add_snail_button_started_round(self, current_user):
+        with self.client as client:
+            current_user.is_authenticated = True
+            response = self.client.get("/rounds/1/races")
+            self.assertIn(b"add-snail-disabled", response.data)
+
+    @mock.patch("routes.races.races.validate_current_round_not_started", 
+                MagicMock(return_value=True))
+    @mock.patch("db.models.Race.get_races_by_round", MagicMock(return_value=[
+        MockRace(1, datetime.datetime.now(), 'TEST_STATUS', 1),
+        MockRace(2, datetime.datetime.now(), 'TEST_STATUS', 1),
+        MockRace(3, datetime.datetime.now(), 'TEST_STATUS', 1)]))
+    @mock.patch('flask_login.utils._get_user')
+    def test_add_snail_button_future_round(self, current_user):
+        with self.client as client:
+            current_user.is_authenticated = True
+            response = self.client.get("/rounds/1/races")
+            self.assertIn(b"add-snail-enabled", response.data)
+
+    @mock.patch("routes.races.races.time_now", MagicMock(return_value=datetime.datetime(2018, 10, 1, 14, 10, 58, 00000)))
+    @mock.patch("db.models.Race.get_races_by_round", MagicMock(return_value=[
+        MockRace(1, datetime.datetime(2018, 11, 1, 14, 10, 58, 00000), 'TEST_STATUS', 1)]))
+    @mock.patch('flask_login.utils._get_user')
+    def test_add_results_button_disabled(self, current_user):
+        with self.client as client:
+            current_user.is_authenticated = True
+            response = self.client.get("/rounds/1/races")
+            self.assertIn(b"add-results-disabled", response.data)
+
+    @mock.patch("routes.races.races.time_now", MagicMock(return_value=datetime.datetime(2018, 11, 1, 14, 10, 58, 00000)))
+    @mock.patch("db.models.Race.get_races_by_round", MagicMock(return_value=[
+        MockRace(1, datetime.datetime(2018, 10, 1, 14, 10, 58, 00000), 'TEST_STATUS', 1)]))
+    @mock.patch('flask_login.utils._get_user')
+    def test_add_results_button_enabled(self, current_user):
+        with self.client as client:
+            current_user.is_authenticated = True
+            response = self.client.get("/rounds/1/races")
+            self.assertIn(b"add-results-enabled", response.data)
+            
