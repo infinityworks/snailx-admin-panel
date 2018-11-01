@@ -12,10 +12,13 @@
     <div id="links">
         <ul>
             {% if current_user.is_authenticated %}
-            <li style="display: flex; height: 48.61px; justify-content: center; align-items: center;" onclick="displaySnailXSidebar()"><i style="font-size: 18px;" class="fas fa-bars"></i></li>
+            <li style="display: flex; height: 48.61px; justify-content: center; align-items: center;" onclick="displaySnailXSidebar()"><i
+                    style="font-size: 18px;" class="fas fa-bars"></i></li>
             {% endif %}
-            <li onclick="location.href='/';"><img style="display: block; float:left; text-align: center; width: 28px;" src="{{ url_for('static', filename='snailx.png') }}" />
-                <span style="display: flex; font-family: 'Arial', sans-serif; justify-content: center; align-items: center; float: left; margin-left: 10px; height: 28px; font-size: 18px; letter-spacing: 4.5px;">SNAIL X</span></li>
+            <li onclick="location.href='/';"><img style="display: block; float:left; text-align: center; width: 28px;"
+                    src="{{ url_for('static', filename='imgs/snailx.png') }}" />
+                <span style="display: flex; font-family: 'Arial', sans-serif; justify-content: center; align-items: center; float: left; margin-left: 10px; height: 28px; font-size: 18px; letter-spacing: 4.5px;">SNAIL
+                    X</span></li>
         </ul>
     </div>
     {% if current_user.is_authenticated %}
@@ -27,16 +30,18 @@
 </div>
 
 <div id="snailXSidebar" class="noselect snailx-nav" style="display:none;">
-    <img style="width: 80px;" src="{{ url_for('static', filename='snailx.png') }}" />
+    <img style="width: 80px;" src="{{ url_for('static', filename='imgs/snailx.png') }}" />
     <p style="font-family: Arial; font-size: 30px; color: #333F48; letter-spacing: 10px;">SNAIL X</p>
     <div class="XsidebarSection">
         <h3 padding="5px">ADMIN</h3>
         <div class="separator"></div>
         <ul>
-            <li onclick="location.href='races';">Race</li>
-            <li onclick="location.href='rounds';">Round</li>
+            <li onclick="location.href='/rounds';">Rounds</li>
+            <!-- <li class="disabled" onclick="location.href='/snails';">Snails</li>
+            <li class="disabled" onclick="location.href='/trainers';">Trainers</li> -->
+            <li onclick="location.href='/rounds/add';">Add Round</li>
             <li onclick="location.href='/snails/add';">Add Snail</li>
-            <li onclick="location.href='results';">Race Results</li>
+            <li onclick="location.href='/trainers/add';">Add Trainer</li>
         </ul>
     </div>
 

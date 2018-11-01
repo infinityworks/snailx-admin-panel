@@ -93,3 +93,18 @@ class TestAddRace(unittest.TestCase):
             with client.session_transaction() as session:
                 flash_message = session['_flashes'][0][1]
                 self.assertEqual(flash_message, "Can't add race that doesn't take place within round dates.")
+
+    @mock.patch('flask_login.utils._get_user')
+    @mock.patch('db.models.Race.get_races_by_round',
+                MagicMock(return_value=[MockRace(1, datetime.datetime(2018, 5, 5, 00, 00))]))
+    @mock.patch('db.models.Round.get_round', MagicMock(return_value=MockRound(datetime.datetime(2017, 10, 5, 18, 00),
+                                                                              datetime.datetime(2020, 5, 5, 18, 00))))
+    @mock.patch('routes.add_race.add_race.add_race_to_db', MagicMock(return_value=None))
+    def test_add_race_same_time(self, username):
+        with self.client as client:
+            username.is_authenticated = True
+            client.post('/rounds/1/races/add', data=dict(race_status="TEST STATUS", race_date="05/05/2018 12:00 AM"))
+
+            with client.session_transaction() as session:
+                flash_message = session['_flashes'][0][1]
+                self.assertEqual(flash_message, "Two races cannot start at the same time.")

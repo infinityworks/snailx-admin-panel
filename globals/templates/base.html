@@ -8,6 +8,9 @@
         crossorigin="anonymous">
     <title>SnailX | Admin</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='imgs/favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='imgs/favicon.ico') }}" type="image/x-icon">
 </head>
 
 {% block scripts %}
@@ -22,7 +25,8 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 
-<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
 {% endblock %}
 
 
@@ -49,6 +53,6 @@
 
 </body>
 
-<script src="{{ url_for('static', filename='scripts.js') }}"> </script>
+<script src="{{ url_for('static', filename='scripts/scripts.js') }}"> </script>
 
 </html>

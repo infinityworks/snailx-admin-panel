@@ -3,79 +3,83 @@
 
 {% block content %}
 
-<link rel="stylesheet" href="../static/rounds.css">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/rounds.css') }}">
 
-<input type="button" class="btn btn-success btn-lg add-round-btn" value="Add Round" onclick="location.href = '/rounds/add';">
+<input type="button" class="btn btn-success btn-lg add-round-btn finite-orange-button" value="Add Round" onclick="location.href = '/rounds/add';">
 
 {% if active_round %}
-<table class="table table-hover">
-  <colgroup>
-    <col class="col-xs-2">
-    </col>
-    <col class="col-xs-2">
-    </col>
-    <col class="col-xs-2">
-    </col>
-    <col class="col-xs-2">
-    </col>
-  </colgroup>
-  <thead>
-    <tr>
-      <th colspan="4">Current Active Round</th>
-    </tr>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">Start Date</th>
-      <th scope="col">End Date</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr class="table-primary" style="cursor: pointer;" onclick="clicked({{active_round.id}})">
-      <td>{{active_round.id}}</td>
-      <td>{{active_round.name}}</td>
-      <td>{{active_round.start_date}}</td>
-      <td>{{active_round.end_date}}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <colgroup>
+      <col class="col-xs-2">
+      </col>
+      <col class="col-xs-2">
+      </col>
+      <col class="col-xs-2">
+      </col>
+      <col class="col-xs-2">
+      </col>
+    </colgroup>
+    <thead>
+      <tr>
+        <th colspan="4">Current Active Round</th>
+      </tr>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">End Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table-primary" style="cursor: pointer;" onclick="clicked({{active_round.id}})">
+        <td>{{active_round.id}}</td>
+        <td>{{active_round.name}}</td>
+        <td>{{active_round.start_date}}</td>
+        <td>{{active_round.end_date}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 {% endif %}
 
 <br>
 
-<table class="table table-hover">
-  <colgroup>
-    <col class="col-xs-2">
-    </col>
-    <col class="col-xs-2">
-    </col>
-    <col class="col-xs-2">
-    </col>
-    <col class="col-xs-2">
-    </col>
-  </colgroup>
-  <thead>
-    <tr>
-      <th colspan="4">All Rounds</th>
-    </tr>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">Start Date</th>
-      <th scope="col">End Date</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for round in rounds %}
-    <tr style="cursor: pointer;" onclick="clicked({{round.id}})">
-      <td>{{round.id}}</td>
-      <td>{{round.name}}</td>
-      <td>{{round.start_date}}</td>
-      <td>{{round.end_date}}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <colgroup>
+      <col class="col-xs-2">
+      </col>
+      <col class="col-xs-2">
+      </col>
+      <col class="col-xs-2">
+      </col>
+      <col class="col-xs-2">
+      </col>
+    </colgroup>
+    <thead>
+      <tr>
+        <th colspan="4">All Rounds</th>
+      </tr>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">End Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for round in rounds %}
+      <tr style="cursor: pointer;" onclick="clicked({{round.id}})">
+        <td>{{round.id}}</td>
+        <td>{{round.name}}</td>
+        <td>{{round.start_date}}</td>
+        <td>{{round.end_date}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 
 <script>
   function clicked(round_id) {

@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/races.css') }}">
 
 {% if current_round_toggle %}
-<button id="add-race-enabled" class="btn btn-primary" onclick="location.href='/rounds/{{round_id}}/races/add'" style="float:left; margin:10px;">Add Race</button>
+<input id="add-race-enabled" type="button" class="btn btn-success btn-lg add-race-btn finite-orange-button" value="Add Race" onclick="location.href='/rounds/{{round_id}}/races/add';">
 {% endif %}
 {% if not current_round_toggle %}
-<button id="add-race-disabled" class="disabled btn btn-primary" style="float:left; margin:10px;">Add Race</button>
+<input id="add-race-disabled" type="button" class="disabled btn btn-success btn-lg add-race-btn finite-orange-button" value="Add Race">
 {% endif %}
 
 <table class="table table-hover">
@@ -26,12 +27,12 @@
         <td>{{race.date}}</td>
         <td>{{race.status}}</td>
         {% if current_round_toggle %}
-        <td><button id="add-snail-enabled" class="btn btn-primary" onclick="location.href='/rounds/{{round_id}}/races/{{race.id}}/add'">Add Snail</button></td>
-        <td><button id="add-results-disable" class="disabled btn btn-primary">Add Results</button></td>
+        <td><button id="add-snail-enabled" class="btn btn-success finite-orange-button" onclick="location.href='/rounds/{{round_id}}/races/{{race.id}}/add'">Add Snail</button></td>
+        <td><button id="add-results-disable" class="disabled btn btn-success finite-orange-button">Add Results</button></td>
         {% endif %}
         {% if not current_round_toggle %}
-        <td><button id="add-snail-disabled" class="disabled btn btn-primary">Add Snail</button></td>
-        <td><button id="add-results-enabled" class="btn btn-primary" onclick="location.href='/rounds/{{round_id}}/races/{{race.id}}'">Add Results</button></td>
+        <td><button id="add-snail-disabled" class="disabled btn btn-success finite-orange-button">Add Snail</button></td>
+        <td><button id="add-results-enabled" class="btn btn-success finite-orange-button" onclick="location.href='/rounds/{{round_id}}/races/{{race.id}}'">Add Results</button></td>
         {% endif %}
     </tr>
     {% endfor %}
@@ -39,6 +40,3 @@
 </table>
 
 {% endblock content %}
-
-
-
