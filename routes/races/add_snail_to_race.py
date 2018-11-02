@@ -78,5 +78,5 @@ def validate_snail_in_inflight_round(round_id):
     future_rounds = Round().get_future_round_times()
     for rounds in future_rounds:
         if not int(rounds.id) == int(round_id):
-            return False
-    return True
+            return True
+    return False
