@@ -140,6 +140,9 @@ class RaceResult(db.Model):
     def get_all_race_results(self):
         return self.query.all()
 
+    def get_time_to_finish(self, id):
+        return db.session.query(RaceResult.time_to_finish).filter_by(id_race_participants=id).first()
+
 
 @login_manager.user_loader
 def load_user(user_id):
