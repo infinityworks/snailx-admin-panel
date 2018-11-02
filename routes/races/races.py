@@ -14,8 +14,9 @@ def races(round_id):
 
     races = Race().get_races_by_round(round_id)
     current_round_toggle = validate_current_round_not_started(round_id)
-
-    return render_template('races.html', races=races, round_id=round_id, current_round_toggle=current_round_toggle)
+    return render_template('races.html', races=races, round_id=round_id, 
+                           current_round_toggle=current_round_toggle, 
+                           now=time_now())
 
 
 def validate_current_round_not_started(round_id):
@@ -24,3 +25,7 @@ def validate_current_round_not_started(round_id):
         return True
     else:
         return False
+
+
+def time_now():
+    return datetime.datetime.utcnow()
