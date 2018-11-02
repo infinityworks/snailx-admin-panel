@@ -56,14 +56,14 @@ class RaceParticipants(db.Model):
     def get_race_participants_race_id(self, id_race):
         return self.query.filter_by(id_race=id_race).all()
 
-    def get_race_results(self):
-        return db.session.query(RaceParticipants, RaceResult).join(
+    def get_participants_snails_race_id(self, id_race):
+        return db.session.query(RaceParticipants, Snail, RaceResult).join(
+            Snail,
+            RaceParticipants.id_snail == Snail.id
+        ).outerjoin(
             RaceResult,
             RaceParticipants.id == RaceResult.id_race_participants
-        ).join(
-            Race,
-            Race.id == RaceParticipants.id_race
-        ).all()
+        ).filter(RaceParticipants.id_race == id_race).all()
 
 
 class Race(db.Model):
@@ -139,6 +139,9 @@ class RaceResult(db.Model):
 
     def get_all_race_results(self):
         return self.query.all()
+
+    def get_time_to_finish(self, id):
+        return db.session.query(RaceResult.time_to_finish).filter_by(id_race_participants=id).first()
 
 
 @login_manager.user_loader
