@@ -1,6 +1,6 @@
 from flask import render_template, Blueprint, url_for, redirect, flash
 from flask_login import current_user
-from db.models import RaceResult, Race, RaceParticipants
+from db.models import RaceResult, Race, RaceParticipants, Snail
 from forms.forms import RaceResultsForm
 from globals.globals import db
 
@@ -16,7 +16,10 @@ def race(round_id, race_id):
 
     race_results_form = RaceResultsForm()
     race = Race().get_race(race_id)
-    participants = RaceParticipants().get_race_participants_race_id(race_id)
+    participants = RaceParticipants().get_participants_snails_race_id(race_id)
+
+    unresulted_participants = [
+        participant for participant, snail, result in participants if not result]
 
     if race_results_form.validate_on_submit():
         result_row = RaceResult().get_race_result(
@@ -25,7 +28,7 @@ def race(round_id, race_id):
         if not result_row:
 
             times = []
-            for participant in participants:
+            for participant, snail, result in participants:
                 time = RaceResult().get_time_to_finish(participant.id)
                 if time:
                     times.append(time[0])
@@ -65,6 +68,7 @@ def race(round_id, race_id):
     return render_template('results.html',
                            race=race,
                            participants=participants,
+                           unresulted_participants=unresulted_participants,
                            race_results_form=race_results_form)
 
 
@@ -78,7 +82,7 @@ def calc_new_positions(times, time_to_finish):
 
 
 def update_existing_positions(participants, new_times, new_time_to_finish):
-    for participant in participants:
+    for participant, snail, result in participants:
         result = RaceResult().get_race_result(participant.id)
         if result:
             result.position = new_times.index(result.time_to_finish) + 1
