@@ -51,8 +51,7 @@ class TestResult(unittest.TestCase):
         with self.client as client:
             current_user.is_authenticated = True
             response = client.get("/rounds/1/races/1")
-            self.assertIn(b"\"id_race_participants\" type=\"hidden\""
-                          b" value=\"2\"", response.data)
+            self.assertNotIn(b"value=\"2\"", response.data)
 
     @mock.patch("db.models.RaceParticipants.get_race_participants_race_id",
                 MagicMock(return_value=[
