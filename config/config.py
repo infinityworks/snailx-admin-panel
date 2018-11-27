@@ -1,4 +1,5 @@
 import os
+from globals.globals import db, app
 
 
 class Config(object):
@@ -35,4 +36,9 @@ class DevelopmentConfig(Config):
 class CIConfig(Config):
     WTF_CSRF_ENABLED = False
     TESTING = True
-    DB_URL = 'sqlite:///' + os.path.join('/', 'test.db')
+
+    path = os.path.dirname(os.path.realpath(__file__))
+    database_path = os.path.join(path, '../snailx_db.sqlite')
+    DB_URL = 'sqlite:///' + database_path
+    db.init_app(app)
+    db.create_all()
