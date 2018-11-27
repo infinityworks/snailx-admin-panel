@@ -3,6 +3,7 @@ from globals.globals import app
 from unittest import mock
 from unittest.mock import MagicMock
 import datetime
+from test import Test
 
 
 class MockRace:
@@ -13,7 +14,7 @@ class MockRace:
         self.id_round = id_round
 
 
-class TestRoundsRaces(unittest.TestCase):
+class TestRoundsRaces(Test):
     def setUp(self):
         self.client = app.test_client()
 

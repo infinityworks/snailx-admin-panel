@@ -2,9 +2,10 @@ import unittest
 from unittest import mock 
 from unittest.mock import MagicMock
 from globals.globals import app
+from test import Test
 
 
-class TestSessionPersistence(unittest.TestCase):
+class TestSessionPersistence(Test):
 
     def setUp(self):
         self.client = app.test_client()

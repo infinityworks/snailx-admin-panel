@@ -3,9 +3,10 @@ from globals.globals import app
 from unittest import mock
 from unittest.mock import MagicMock
 from flask_login import current_user
+from test import Test
 
 
-class TestLogout(unittest.TestCase):
+class TestLogout(Test):
 
     def setUp(self):
         self.client = app.test_client()

@@ -7,6 +7,7 @@ from routes.races.add_snail_to_race import (validate_snail_in_same_race,
                                             flash_redirect,
                                             validate_snail_in_same_round,
                                             validate_snail_in_inflight_round)
+from test import Test
 
 
 class MockRace:
@@ -39,7 +40,7 @@ class MockSnail:
         self.trainer_id = trainer_id
 
 
-class TestAddSnailToRace(unittest.TestCase):
+class TestAddSnailToRace(Test):
 
     def setUp(self):
         self.client = app.test_client()

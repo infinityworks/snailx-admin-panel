@@ -1,5 +1,6 @@
 import os
 
+
 class Config(object):
     DEBUG = False
     TESTING = False
@@ -14,7 +15,7 @@ class ProductionConfig(Config):
 class StagingConfig(Config):
     DEVELOPMENT = True
     DEBUG = True
-    WTF_CSRF_ENABLED = False
+    # WTF_CSRF_ENABLED = False
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL') or 'not-set'
 
 
@@ -29,4 +30,3 @@ class DevelopmentConfig(Config):
     DEVELOPMENT = True
     DEBUG = True
     WTF_CSRF_ENABLED = False
-

@@ -2,6 +2,7 @@ import unittest
 from globals.globals import app
 from unittest import mock
 from unittest.mock import MagicMock
+from test import Test
 
 
 class MockTrainer:
@@ -10,7 +11,7 @@ class MockTrainer:
         self.name = name
 
 
-class TestAddSnail(unittest.TestCase):
+class TestAddSnail(Test):
     def setUp(self):
         self.client = app.test_client()
 

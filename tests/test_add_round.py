@@ -9,9 +9,10 @@ from routes.add_round.add_round import (validate_date_interval,
                                         validate_name_length,
                                         validate_unique_name)
 from dateutil import parser
+from test import Test
 
 
-class TestAddRound(unittest.TestCase):
+class TestAddRound(Test):
 
     def setUp(self):
         self.client = app.test_client()

@@ -5,6 +5,7 @@ from unittest.mock import MagicMock
 from globals.globals import bcrypt
 from flask import url_for
 from urllib.parse import urlparse
+from test import Test
 
 class MockUser:
     def __init__(self, id, username, email, password):
@@ -13,7 +14,7 @@ class MockUser:
         self.email = email
         self.password = password
 
-class TestLogin(unittest.TestCase):
+class TestLogin(Test):
 
     def setUp(self):
         self.client = app.test_client()
