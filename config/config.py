@@ -1,5 +1,4 @@
 import os
-from globals.globals import db, app
 
 
 class Config(object):
