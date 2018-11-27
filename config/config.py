@@ -40,5 +40,3 @@ class CIConfig(Config):
     path = os.path.dirname(os.path.realpath(__file__))
     database_path = os.path.join(path, '../snailx_db.sqlite')
     DB_URL = 'sqlite:///' + database_path
-    db.init_app(app)
-    db.create_all()

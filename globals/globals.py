@@ -9,6 +9,11 @@ app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
+if app.config['TESTING']:
+    db.init_app(app)
+    db.create_all()
+
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 
