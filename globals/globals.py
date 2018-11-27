@@ -10,14 +10,12 @@ app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
-
-if app.config['TESTING']:
-    db.init_app(app)
-    db.create_all()
-    migrate = Migrate(app, db)
-
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
+
+from db.models import User, Race, RaceParticipants, RaceResult, Round, Snail, Trainer
+if app.config['TESTING']:
+    db.create_all()
 
 
 from routes.login.login import login_blueprint
