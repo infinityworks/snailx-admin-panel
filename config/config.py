@@ -35,4 +35,4 @@ class DevelopmentConfig(Config):
 class CIConfig(Config):
     WTF_CSRF_ENABLED = False
     TESTING = True
-    DB_URL = 'sqlite:///' + os.path.join(basedir, 'test.db')
+    DB_URL = 'sqlite:///' + os.path.join('/', 'test.db')
