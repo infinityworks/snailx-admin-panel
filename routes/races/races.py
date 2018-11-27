@@ -21,7 +21,7 @@ def races(round_id):
 
 def validate_current_round_not_started(round_id):
     current_round = Round().get_round(round_id)
-    if current_round.start_date >= datetime.datetime.utcnow():
+    if current_round and current_round.start_date >= datetime.datetime.utcnow():
         return True
     else:
         return False

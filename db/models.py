@@ -65,6 +65,15 @@ class RaceParticipants(db.Model):
             RaceParticipants.id == RaceResult.id_race_participants
         ).filter(RaceParticipants.id_race == id_race).all()
 
+    def get_race_results(self):
+        return db.session.query(RaceParticipants, RaceResult).join(
+            RaceResult,
+            RaceParticipants.id == RaceResult.id_race_participants
+        ).join(
+            Race,
+            Race.id == RaceParticipants.id_race
+        ).all()
+
 
 class Race(db.Model):
     id = db.Column(db.Integer(), primary_key=True, autoincrement=True)

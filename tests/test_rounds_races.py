@@ -115,7 +115,7 @@ class TestRoundsRaces(unittest.TestCase):
                                                          58, 00000)))
     @mock.patch("db.models.Race.get_races_by_round", MagicMock(return_value=[
         MockRace(1, datetime.datetime(2018, 10, 1, 14, 10, 58, 00000),
-                'TEST_STATUS', 1)]))
+                 'TEST_STATUS', 1)]))
     @mock.patch('flask_login.utils._get_user')
     def test_add_results_button_enabled(self, current_user):
         with self.client as client:

@@ -1,6 +1,5 @@
 import os
 
-
 class Config(object):
     DEBUG = False
     TESTING = False
@@ -9,14 +8,14 @@ class Config(object):
 
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'postgres://wifosdkondwers:c4d03ddd8e3c2d404d828c1fbd6fea57fbc86700efc716ba7fd566a023044083@ec2-46-137-75-170.eu-west-1.compute.amazonaws.com:5432/d5ajcc7bafdnq3'
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL') or 'not-set'
 
 
 class StagingConfig(Config):
     DEVELOPMENT = True
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'postgres://fqtkemerxaamnr:a50ea567ed6f24f9bfba2bd6071729d195df57a82c3bcc0ffcf07a176916d2d7@ec2-54-217-249-103.eu-west-1.compute.amazonaws.com:5432/d83g723rkf2r2o'
-    WTF_CSRF_ENABLED = False
+    # WTF_CSRF_ENABLED = False
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL') or 'not-set'
 
 
 class DevelopmentConfig(Config):
@@ -31,3 +30,11 @@ class DevelopmentConfig(Config):
     DEBUG = True
     WTF_CSRF_ENABLED = False
 
+
+class CIConfig(Config):
+    WTF_CSRF_ENABLED = False
+    TESTING = True
+
+    path = os.path.dirname(os.path.realpath(__file__))
+    database_path = os.path.join(path, '../snailx_db.sqlite')
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + database_path

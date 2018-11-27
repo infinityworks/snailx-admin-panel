@@ -41,7 +41,8 @@ class TestAddRound(unittest.TestCase):
             "01/01/2003 12:00 PM", "02/02/2002 12:00 PM"))
 
     def test_add_round_name_length_greater_than_max_validation(self):
-        self.assertFalse(validate_name_length("123456789101112138923894239889132977912395802349020394"))
+        self.assertFalse(validate_name_length(
+            "123456789101112138923894239889132977912395802349020394"))
 
     @mock.patch("db.models.Round.get_round_by_name", MagicMock(return_value=True))
     def test_add_round_name_unique_validation(self):

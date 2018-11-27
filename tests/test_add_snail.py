@@ -31,7 +31,8 @@ class TestAddSnail(unittest.TestCase):
         current_user.is_authenticated = True
         with self.client as client:
             response = client.post('/snails/add',
-                                   data=dict(snail_name="test snail", trainer_name=1),
+                                   data=dict(snail_name="test snail",
+                                             trainer_name=1),
                                    follow_redirects=True)
 
             self.assertEqual(b'Snail Created', response.data)

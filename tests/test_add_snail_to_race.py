@@ -44,21 +44,21 @@ class TestAddSnailToRace(unittest.TestCase):
     def setUp(self):
         self.client = app.test_client()
 
-    @mock.patch('db.models.RaceParticipants.get_race_participants_race_id', MagicMock(return_value=[MockRaceParticipants(1,1,1)]))
+    @mock.patch('db.models.RaceParticipants.get_race_participants_race_id', MagicMock(return_value=[MockRaceParticipants(1, 1, 1)]))
     def test_validate_snail_in_same_race_true(self):
         self.assertTrue(validate_snail_in_same_race(1, 1))
 
-    @mock.patch('db.models.RaceParticipants.get_race_participants_race_id', MagicMock(return_value=[MockRaceParticipants(1,1,1)]))
+    @mock.patch('db.models.RaceParticipants.get_race_participants_race_id', MagicMock(return_value=[MockRaceParticipants(1, 1, 1)]))
     def test_validate_snail_in_same_race_false(self):
         self.assertFalse(validate_snail_in_same_race(1, 2))
 
     @mock.patch('db.models.Race.get_races_by_round', MagicMock(return_value=[MockRace(1)]))
-    @mock.patch('db.models.RaceParticipants.get_race_participants_race_id', MagicMock(return_value=[MockRaceParticipants(1,1,1)]))
+    @mock.patch('db.models.RaceParticipants.get_race_participants_race_id', MagicMock(return_value=[MockRaceParticipants(1, 1, 1)]))
     def test_validate_snail_in_same_round_true(self):
         self.assertTrue(validate_snail_in_same_round(1, 1, 1))
 
     @mock.patch('db.models.Race.get_races_by_round', MagicMock(return_value=[MockRace(1)]))
-    @mock.patch('db.models.RaceParticipants.get_race_participants_race_id', MagicMock(return_value=[MockRaceParticipants(1,1,1)]))
+    @mock.patch('db.models.RaceParticipants.get_race_participants_race_id', MagicMock(return_value=[MockRaceParticipants(1, 1, 1)]))
     def test_validate_snail_in_same_round_false(self):
         self.assertFalse(validate_snail_in_same_round(1, 2, 2))
 
