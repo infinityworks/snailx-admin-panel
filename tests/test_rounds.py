@@ -3,7 +3,7 @@ from globals.globals import app
 from unittest import mock
 from unittest.mock import MagicMock
 import datetime
-from tests.test import Test
+
 
 class MockRound():
     def __init__(self):
@@ -13,7 +13,7 @@ class MockRound():
         self.end_date = datetime.datetime.now()
 
 
-class TestRounds(Test):
+class TestRounds(unittest.TestCase):
     def setUp(self):
         self.client = app.test_client()
 

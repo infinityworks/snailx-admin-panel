@@ -2,10 +2,9 @@ import unittest
 from globals.globals import app
 from unittest import mock
 from unittest.mock import MagicMock
-from tests.test import Test
 
 
-class TestAddTrainer(Test):
+class TestAddTrainer(unittest.TestCase):
     def setUp(self):
         self.client = app.test_client()
 

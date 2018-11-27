@@ -2,7 +2,6 @@ import unittest
 from globals.globals import app
 from unittest import mock
 from unittest.mock import MagicMock
-from tests.test import Test
 
 
 class MockTrainer:
@@ -11,7 +10,7 @@ class MockTrainer:
         self.name = name
 
 
-class TestAddSnail(Test):
+class TestAddSnail(unittest.TestCase):
     def setUp(self):
         self.client = app.test_client()
 
@@ -32,7 +31,8 @@ class TestAddSnail(Test):
         current_user.is_authenticated = True
         with self.client as client:
             response = client.post('/snails/add',
-                                   data=dict(snail_name="test snail", trainer_name=1),
+                                   data=dict(snail_name="test snail",
+                                             trainer_name=1),
                                    follow_redirects=True)
 
             self.assertEqual(b'Snail Created', response.data)

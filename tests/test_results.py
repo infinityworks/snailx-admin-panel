@@ -3,7 +3,6 @@ from globals.globals import app
 from unittest import mock
 from unittest.mock import MagicMock
 import datetime
-from tests.test import Test
 
 
 class MockRaceParticipants():
@@ -21,7 +20,7 @@ class MockRace:
         self.id_round = id_round
 
 
-class TestResult(Test):
+class TestResult(unittest.TestCase):
     def setUp(self):
         self.client = app.test_client()
 
@@ -86,9 +85,9 @@ class TestResult(Test):
                                                 1)))
     @mock.patch('flask_login.utils._get_user')
     @mock.patch("forms.forms.RaceResultsForm")
-    @mock.patch('routes.results.results.db.session.add', 
+    @mock.patch('routes.results.results.db.session.add',
                 MagicMock(return_value=None))
-    @mock.patch('routes.results.results.db.session.commit', 
+    @mock.patch('routes.results.results.db.session.commit',
                 MagicMock(return_value=None))
     def test_results_valid_data_posted(self, current_user, race_results_form):
         with self.client as client:
