@@ -2,7 +2,7 @@ import unittest
 from globals.globals import app
 from unittest import mock
 from unittest.mock import MagicMock
-from test import Test
+from tests.test import Test
 
 
 class MockTrainer:

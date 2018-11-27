@@ -2,7 +2,7 @@ import unittest
 from unittest import mock 
 from unittest.mock import MagicMock
 from globals.globals import app
-from test import Test
+from tests.test import Test
 
 
 class TestSessionPersistence(Test):

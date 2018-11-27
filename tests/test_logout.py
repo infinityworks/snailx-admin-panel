@@ -3,7 +3,7 @@ from globals.globals import app
 from unittest import mock
 from unittest.mock import MagicMock
 from flask_login import current_user
-from test import Test
+from tests.test import Test
 
 
 class TestLogout(Test):

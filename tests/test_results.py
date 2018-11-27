@@ -3,7 +3,7 @@ from globals.globals import app
 from unittest import mock
 from unittest.mock import MagicMock
 import datetime
-from test import Test
+from tests.test import Test
 
 
 class MockRaceParticipants():

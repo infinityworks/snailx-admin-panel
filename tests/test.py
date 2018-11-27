@@ -1,4 +1,5 @@
 import unittest
+from globals.globals import app
 
 
 class Test(unittest.TestCase):

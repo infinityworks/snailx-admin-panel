@@ -9,7 +9,7 @@ from routes.add_round.add_round import (validate_date_interval,
                                         validate_name_length,
                                         validate_unique_name)
 from dateutil import parser
-from test import Test
+from tests.test import Test
 
 
 class TestAddRound(Test):
