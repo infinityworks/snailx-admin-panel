@@ -1,4 +1,7 @@
-from globals.globals import db
+from globals.globals import db, login_manager
+from flask_login import UserMixin
+import datetime
+from sqlalchemy.sql import func, distinct, between, or_, and_, exists
 
 
 class Trainer(db.Model):
@@ -10,6 +13,12 @@ class Trainer(db.Model):
 
     def get_trainer(self, id):
         return self.query.filter_by(id=id).first()
+
+    def get_trainer_by_name(self, name):
+        return db.session.query(Trainer.name).filter(func.lower(Trainer.name) == func.lower(name)).scalar() is not None
+
+    def get_all_trainers(self):
+        return self.query.all()
 
 
 class Snail(db.Model):
@@ -25,6 +34,9 @@ class Snail(db.Model):
 
     def get_all_snails(self):
         return self.query.all()
+
+    def get_snail_by_name(self, name):
+        return self.query.filter_by(name=name).first()
 
 
 class RaceParticipants(db.Model):
@@ -44,14 +56,14 @@ class RaceParticipants(db.Model):
     def get_race_participants_race_id(self, id_race):
         return self.query.filter_by(id_race=id_race).all()
 
-    def get_race_results(self):
-        return db.session.query(RaceParticipants, RaceResult).join(
+    def get_participants_snails_race_id(self, id_race):
+        return db.session.query(RaceParticipants, Snail, RaceResult).join(
+            Snail,
+            RaceParticipants.id_snail == Snail.id
+        ).outerjoin(
             RaceResult,
             RaceParticipants.id == RaceResult.id_race_participants
-        ).join(
-            Race,
-            Race.id == RaceParticipants.id_race
-        ).all()
+        ).filter(RaceParticipants.id_race == id_race).all()
 
 
 class Race(db.Model):
@@ -73,6 +85,9 @@ class Race(db.Model):
     def get_round_race_ids(self, id_round):
         return db.session.query(Race.id).filter_by(id_round=id_round).all()
 
+    def get_races_by_round(self, id_round):
+        return self.query.filter_by(id_round=id_round).all()
+
 
 class Round(db.Model):
     id = db.Column(db.Integer(), primary_key=True, autoincrement=True)
@@ -88,6 +103,22 @@ class Round(db.Model):
 
     def get_all_rounds(self):
         return self.query.all()
+
+    def get_num_rounds_between_dates(self, start_date, end_date):
+        return db.session.query(func.count(distinct(Round.id))).filter(
+            or_(
+                and_(start_date > Round.start_date,
+                     start_date < Round.end_date),
+                and_(end_date > Round.start_date, end_date < Round.end_date))).first()
+
+    def get_active_round(self):
+        return db.session.query(Round).filter(between(datetime.datetime.utcnow(), Round.start_date, Round.end_date)).first()
+
+    def get_round_by_name(self, name):
+        return db.session.query(Round).filter_by(name=name).first()
+
+    def get_future_round_times(self):
+        return db.session.query(Round).filter(Round.start_date > datetime.datetime.utcnow()).all()
 
 
 class RaceResult(db.Model):
@@ -109,8 +140,16 @@ class RaceResult(db.Model):
     def get_all_race_results(self):
         return self.query.all()
 
+    def get_time_to_finish(self, id):
+        return db.session.query(RaceResult.time_to_finish).filter_by(id_race_participants=id).first()
 
-class User(db.Model):
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer(), primary_key=True, autoincrement=True)
     username = db.Column(db.String(20), nullable=False)
     email = db.Column(db.String(120), nullable=False)
